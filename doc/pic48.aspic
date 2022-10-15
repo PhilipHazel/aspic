@@ -1,0 +1,5 @@
+   hlinelength 36;
+   box "input" "file"; arrow;
+A: box "SGCAL"; arrow;
+   box "GCODE" "file";
+   arrow both down from A; box "ASPIC";

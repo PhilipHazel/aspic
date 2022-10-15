@@ -1,0 +1,7 @@
+set date "<dummy date>";
+resolution 0.1;
+boundingbox 40;
+box;
+line from left "ABCD"/+45 "XYZ" "PQ"/+0 "RS" "Red"/-100/1,0,0/l
+"abc"/0.8; 
+

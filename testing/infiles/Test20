@@ -1,0 +1,89 @@
+# This input tests most error messages. See also Test21.
+
+arc to start;                         #12 no previous item (must be first)
+
+include /non-existent superfluous;    #1, 3
+unknown command;                      #2
+include /dev/null superfluous;        #3
+set variable "value" superfluous;     #3
+box "unknown font"/23;                #4
+bindfont 0 "Fontname" 16;             #5
+box $unknownvar;                      #6
+box unknown option;                   #7
+line thickness down;                  #8
+LABEL: set x "value";                 #9
+LABEL2: text "abc";                   #9
+goto NONEXIST;                        #10
+bindfont 11 "missing closing quote    #11
+;  # terminate command
+text at (start);                      #11 number
+text at (10);                         #11 comma
+text at (10,11;                       #11 closing parens
+text "abc"/z;                         #11 invalid option
+box; box join;                        #11 word
+box; box join front;                  #11 top, bottom, etc
+line; arc to 2/x start;               #11 number
+line; arc to start of B;              #11 label
+line; arc to start plus;              #11 vector
+arc angle rhubarb;                    #11 angle
+line greyness rhubarb;                #11 grey level
+line colour rhubarb;                  #11 colour
+line colour 0.5;                      #11 green and blue
+line colour 0.5,0.5;                  #11 blue
+box filled;                           #11 colour or grey
+box filled 0.5,0.5;                   #11 blue
+box level;                            #11 integer
+bindfont 2 ShouldBeQuoted 10;         #11 name in quotes
+bindfont 2 "Times-Bold" -14;          #11 non-neg font size
+set abc;                              #11 quoted string
+line to nowhere;                      #11 top, bottom, etc.
+# For 12 see at top
+box; arc to start;                    #13 inappropriate for box
+arc; line from top;                   #13 ... for arc
+curve to (10,10); line from top;      #13 ... for arc
+line; line from bottom;               #13 ... for line
+arc; line from 2/3 centre;            #14 inappropriate fraction
+# 15 is internal error (oversize memory request)
+# For 16 see at end
+set /notname "ab""quoted""c";         #17
+box ${} ;                             #17
+box $ ;                               #17
+pop;                                  #18
+line; arc to start radius 20 via (10,10);  #19
+line; arc to start angle 20 depth 10;      #19
+line; arc to start depth 10 via (20,20);   #19, 24
+line colour 1.2,0,0;                  #20
+box filled 2.3;                       #20
+line "a"/1.2;                         #20
+text "Unterminated string             #21
+;   # Terminate command to avoid other error when it looks for next string
+set abc "Unterminated string          #21 this will expect a semicolon
+# For 22 see Test21 - needs to be first (no previous item)
+arc radius 10 depth 30;               #23
+# For 24 see above
+# For 25 see Test21
+# For 26 ... (another hard error)
+box "${abc" ;                         #27
+# 28 is a command line error
+include;                              #29
+macro macname { include /dev/null;    #30 };
+macname;                              #30
+macro macname2 include /dev/null;     #30 no ; in body of macro
+macname2;                             #30
+# 31 is a malloc() failure
+# 32 is call to atexit() failure
+line; curve;                          #33
+line; curve to end;                   #34
+# 35 is input line too long (hard)
+# 36 is word is too long (hard)
+LABEL: box; LABEL: line;              #37 duplicate label
+A: box;
+B: box;
+line from centre of A to center of B up 20;  #38
+macro linecolor xxx;                  #39
+# 40 is EOF while reading macro
+# 41 is recursive macro call
+line up left align center of A;       #42
+
+"command word expected";              #16 must be last because it is hard
+# End

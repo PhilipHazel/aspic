@@ -1,0 +1,6 @@
+Aspic: Closing quote missing; string terminated at end of line
+macro B { box "B&$; A; };
+                          ^
+Aspic: End of file while reading macro "B" - processing abandoned
+box;
+     ^

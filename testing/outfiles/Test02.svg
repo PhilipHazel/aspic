@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="600.4" height="350.4" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Philip Hazel on <dummy date>, using Aspic  -->
+<title>Testing, testing</title>
+
+<g transform="translate(0,350.4)" font-family="Times" font-size="12">
+<ellipse cx="300.2" cy="-175.2" rx="300" ry="175" fill="#00CCE5" stroke="#000000" stroke-width="0.4"/>
+<text x="300.2" y="-211.2" text-anchor="middle" font-family="Times" font-size="16" font-weight="bold">The Exim Mail Transfer Agent</text>
+<text x="300.2" y="-179.2" text-anchor="middle" font-family="Times" font-size="16" font-weight="bold">(A brief introduction)</text>
+<text x="300.2" y="-151.2" text-anchor="middle">http://www.exim.org</text>
+</g></svg>

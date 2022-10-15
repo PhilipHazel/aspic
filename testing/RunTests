@@ -1,0 +1,103 @@
+#! /bin/sh
+
+cf="diff -u"
+valgrind=""
+
+/bin/rm -f test.*
+/bin/rm -f test-*
+
+if [ "$1" = "valgrind" ] ; then
+  valgrind="valgrind -q"
+  shift
+fi    
+
+# Before running the test files, run some isolated tests that exercise command
+# line options and test things the main tests don't.
+
+../src/aspic -testing -help >test.stderr 2>&1
+echo "" >>test.stderr
+../src/aspic -testing -svg -nv <<END >>test.stderr 2>&1
+set date "<Dummy date>";
+box "Dollar \$abc not special";
+END
+echo "" >>test.stderr
+../src/aspic -testing -v >>test.stderr 2>&1
+echo "" >>test.stderr
+../src/aspic -testing -badoption >>test.stderr 2<&1
+echo "" >>test.stderr
+../src/aspic -testing /non-existing-file >>test.stderr 2>&1
+echo "" >>test.stderr
+../src/aspic -testing <<END >>test.stderr 2>&1
+Unknown command should to test no output generated.
+END
+echo "" >>test.stderr
+echo "set date \"<Dummy date>\"; box;" >test.in
+../src/aspic -testing -eps test.in
+../src/aspic -testing -svg test.in
+cat test.svg test.eps >>test.stderr
+/bin/rm test.svg test.eps
+echo "" >>test.stderr
+../src/aspic -testing /dev/null /non-exist-file >>test.stderr 2>&1
+
+# Check the output from the above tests.
+
+$cf outfiles/Testxx.stderr test.stderr >test.diff
+if [ $? != 0 ]; then
+  echo "***"
+  echo "*** Testxx.stderr compare failed - see test.diff ***"
+  echo "***"
+  exit 1
+fi      
+
+# Now run all the main test files
+
+if [ "$1" = "" ] ; then
+  list=infiles/Test*
+else
+  list=infiles/$1
+fi  
+
+modes='eps svg'
+
+for m in $modes ; do
+
+  for x in $list ; do
+    file=`basename $x`
+    
+    if [ ! -e infiles/$file ] ; then
+      echo "***"
+      echo "*** infiles/$file does not exist"
+      echo "***"
+      exit 1
+    fi       
+     
+    $valgrind ../src/aspic -$m -tr -testing infiles/$file test.out 2>test.stderr
+  
+    if [ -s test.stderr -o -s outfiles/$file.stderr ] ; then
+      $cf outfiles/$file.stderr test.stderr >test.diff
+      if [ $? != 0 ] ; then
+        echo "***"
+        echo "*** $file.stderr compare failed - see test.diff ***"
+        echo "***"
+        exit 1
+      fi
+       
+    else   
+      $cf outfiles/$file.$m test.out >test.diff
+      if [ $? != 0 ] ; then
+        echo "***"
+        echo "*** $file.$m compare failed - see test.diff ***"
+        echo "***"
+        exit 1
+      fi
+    fi   
+  
+    echo "$file -$m OK"
+     
+  done
+  
+done 
+
+/bin/rm test.*
+
+# End

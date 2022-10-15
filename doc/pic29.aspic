@@ -1,0 +1,3 @@
+A: circle filled 0.5;
+line right from centre of A level 1;
+line left from centre of A level -1;

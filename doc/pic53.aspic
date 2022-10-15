@@ -1,0 +1,3 @@
+bindfont 1 "Times-Roman" 30;
+bindfont 2 "Times-Italic" 30;
+text "One"/1,0,0/+45/1 "Two"/2 "Three"/1/0,1,0;

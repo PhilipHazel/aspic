@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="152.9" height="117.94" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,117.94)" font-family="Times" font-size="12">
+<rect x="0.2" y="-117.7" width="152.5" height="117.54" fill="none" stroke="#000000" stroke-width="0.4"/>
+<rect x="40.2" y="-77.3" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 40.2 -59.3
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="76.2" y="-86.3" transform="rotate(-45,76.2,-86.3)" text-anchor="middle">ABCD</text>
+<text x="84.7" y="-77.8" transform="rotate(-45,84.7,-77.8)" text-anchor="middle">XYZ</text>
+<text x="84.7" y="-65.8" text-anchor="middle">PQ</text>
+<text x="84.7" y="-53.8" text-anchor="middle">RS</text>
+<text x="72.9" y="-55.9" transform="rotate(100,72.9,-55.9)" text-anchor="start" fill="#FF0000">Red</text>
+<text x="61.1" y="-58" transform="rotate(100,61.1,-58)" text-anchor="middle" fill="#CCCCCC">abc</text>
+</g></svg>

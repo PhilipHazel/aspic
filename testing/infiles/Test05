@@ -1,0 +1,8 @@
+set date "<dummy date>";
+boundingbox 20 dashed filled 0.5,0.5,0 thickness 6 colour 1,0,0;
+box filled 1,0,0 "first box";
+line;
+circle filled 0,1,0 "circle 100%";
+linethickness 3;
+line right 20;
+arrow filled 0,0,1 down 20 right 20;

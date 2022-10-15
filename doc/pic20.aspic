@@ -1,0 +1,3 @@
+AA: line right 100;
+arrow up from 0.2 start of AA;
+arrow down from 0.3 end of AA;

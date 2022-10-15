@@ -1,0 +1,4 @@
+set date "<dummy date>";
+ibox "A"; ibox "B"/1,0,0; ibox "C"; 
+textcolour 0,0,1;
+ibox "X"; ibox "Y"/1,0,0; ibox "Z";

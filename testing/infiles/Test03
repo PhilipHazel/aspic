@@ -1,0 +1,80 @@
+set date "<dummy date>";
+
+set Black       "0,0,0";
+set Denim       "0.5,0.3,1";
+set MuddyGreen  "0.5,0.6,0.2";
+set Red         "1,0,0";
+set SalmonPink  "1,0.7,0.6";
+set Turquoise   "0.1,0.4,0.5";
+
+boxwidth 130; boxdepth 68; arrowfill ${Black};
+boxfill $SalmonPink;
+
+SM:  circle radius 64 filled $MuddyGreen "SMTP" "connection";
+DA:  arrow left; 
+DAE: box "Daemon";
+     arrow down;
+RE1: box "Reception" "process";
+     arrow down right thickness 3;
+SP:  ellipse filled $Denim width 140 depth 50 "Spool files";            
+     arrow back up right thickness 3;
+RE2: box "Reception" "process";
+     arrow back up thickness 3;
+     box "User" "process"; 
+     
+     arrow both down from SP thickness 3;
+DEL: box "Delivery" "process"; 
+     arrow back left;
+QR:  box "Queue" "runner";      
+
+     push;
+     arrow both right from DEL;
+     ellipse filled $Denim width 130 depth 50 "Hints data";
+     
+     linethickness 3; 
+     line down 20 from bottom of DEL plus (-10,0);
+     line left 100;
+     arrow down 20;
+     box "Local" "delivery";    
+     arrow left 32;
+     circle radius 44 filled $MuddyGreen "File or" "pipe";  
+     
+     line down 20 from bottom of DEL plus (10,0);
+     line right 100;
+     arrow down 20;
+     box "Remote" "delivery";
+     arrow right 32;
+     circle radius 44 filled $MuddyGreen "SMTP";      
+     
+     line left thickness 9 colour $Turquoise from bottom of SP plus (0,8)
+       align left of DAE plus (-50,0) level -1;  
+     
+     line right thickness 9 colour $Turquoise from bottom of SP plus (0,8)
+       align right of RE2 plus (50,0) level -1;  
+       
+SA:  line from centre of SM to top of RE1 plus (40,20) level -1;
+     arrow down align top of RE1 level -1;
+ 
+     arrowwidth 6;
+     arrowlength 8; 
+     arrowfill $Red; 
+     arcarrow thickness 0 colour $Red 
+       from middle of DA plus(0,-2) to 1/3 end of SA plus (0,2);
+     pop;
+ 
+     line down from bottom of SP plus (-20,10) align top of QR plus (0,20)
+       level -1;
+     line left align top of QR;
+     arrow to top of QR;    
+     
+     linecolour $Red;
+     arrowfill $Red; 
+     line left 20 from DAE;
+     line down align left of QR;
+     arrow to left of QR;
+     
+     line from bottom of RE1 to left of DEL plus (-20,20);
+     arrow right align left of DEL;
+     
+     line from bottom of RE2 to right of DEL plus (20,20);
+     arrow left align right of DEL;         

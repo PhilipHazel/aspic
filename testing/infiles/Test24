@@ -1,0 +1,9 @@
+# This tests what happens when a macro definition is not terminated because of
+# a missing quote in a one-line macro.
+
+set date "<dummy date>";
+
+macro A { box "A&$"; };
+macro B { box "B&$; A; };
+
+box;

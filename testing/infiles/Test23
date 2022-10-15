@@ -1,0 +1,26 @@
+set date "<dummy date>";
+
+boxgreyness 0.5; boxthickness 2; boxwidth 20; boxdepth 10;
+A: box "A"; box grey 0.2 thickness 4 width 30 depth 20 "B"; 
+boxcolour 0,1,0; box colour 1,0,0 "C"; box "D";
+
+iline down 20 from bottom of A;
+
+circlegray 0.5; circlethickness 2; circleradius 10;
+E: circle "E"; circle gray 0.2 thickness 4 radius 12 "F";
+circlecolor 0,1,0; circle color 1,0,0 "G"; circle "H";
+
+iline down 20 from bottom of E;
+
+ellipsegray 0.5; ellipsethickness 2; ellipsedepth 10; ellipsewidth 30;
+E2: ellipse "E"; ellipse gray 0.2 thickness 4 depth 12 width 20 "F";
+ellipsecolor 0,1,0; ellipse color 1,0,0 "G"; ellipse "H";
+
+iline down 20 from bottom of E2;
+
+linegrayness 0.5; linethickness 2; hlinelength 20; vlinelength 15;
+line "I"; line grey 0.2 thickness 4 right 10 "J"; line down "K";
+linecolour 1,0,0; line up 15 right 15 color 0,1,0 "L"; line "M";
+
+textcolor 0,0,1; text at end "N"/l;
+

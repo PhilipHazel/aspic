@@ -1,0 +1,3 @@
+macro dashbox { box dashed &1 &2; arrow };
+dashbox "first" "second";
+dashbox "third" | "fourth";

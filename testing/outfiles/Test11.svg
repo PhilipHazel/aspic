@@ -1,0 +1,77 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="300.25" height="348.65" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,348.65)" font-family="Times" font-size="12">
+<rect x="0.25" y="-348.4" width="72" height="24" fill="none" stroke="none"/>
+<text x="36.25" y="-333.4" text-anchor="middle">&lt;table&gt;</text>
+<path d="M 36.25 -324.4
+l 0 26
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 36.25 -298.4
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<rect x="0.25" y="-288.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="36.25" y="-273.4" text-anchor="middle">#TDATA</text>
+<rect x="0.25" y="-264.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 36.25 -252.4
+l 50 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 86.25 -252.4
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<rect x="96.25" y="-264.4" width="72" height="24" fill="none" stroke="none"/>
+<text x="132.25" y="-249.4" text-anchor="middle">tdatastr</text>
+<rect x="96.25" y="-240.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="132.25" y="-225.4" text-anchor="middle">twidth</text>
+<rect x="96.25" y="-216.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="132.25" y="-201.4" text-anchor="middle">top rowsize</text>
+<rect x="96.25" y="-192.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="132.25" y="-177.4" text-anchor="middle">colcount</text>
+<rect x="96.25" y="-168.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 132.25 -156.4
+l 50 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 182.25 -156.4
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="198.25" y="-153.4" text-anchor="start">layout parameters</text>
+<rect x="96.25" y="-144.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="96.25" y="-120.4" width="72" height="24" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="198.25" y="-105.4" text-anchor="start">vector of tcolstr</text>
+<path d="M 192.25 -108.4
+l 0 36
+l 0 36
+c 9 -9 9 -27 0 -36
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 192.25 -36.4
+l 0 36
+c -9 -9 -9 -27 0 -36
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 192.25 -0.4
+c 18 -18 -18 -54 0 -72
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 192.25 -36.4
+l 0 -10
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 197.312 -16.712
+l 0 5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 187.188 -56.087
+l 0 -5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+</g></svg>

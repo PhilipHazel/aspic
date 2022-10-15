@@ -1,0 +1,6 @@
+A: box "A";
+L: line right;
+B: box "B";
+   line down from bottom of A;
+   line right align middle of L;
+   line up align right of A;

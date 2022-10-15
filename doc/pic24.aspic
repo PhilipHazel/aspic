@@ -1,0 +1,2 @@
+box "A"; iline right 30 down 10; box "B";
+ibox width 150 "iboxes are helpful" "for centring text";

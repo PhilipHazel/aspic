@@ -1,0 +1,24 @@
+set date "<dummy date>";
+
+box "A"; 
+box join top to right "B";
+box join top to bottom left "C";
+box join top to top "  D"/l;
+box join top to centre "E";
+box join top to bottom plus (0,-10) "F";
+box join top to top right "G";
+
+box join top right to right "H";
+
+box join right to bottom "I";
+box join right to bottom left "J";
+
+box join bottom right to top "K";
+
+box join bottom to top right "L";
+box join bottom to left "M";
+
+box join bottom left to top "N";
+
+box join left to top "O";
+

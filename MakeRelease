@@ -1,0 +1,42 @@
+#! /bin/sh
+
+if [ ! "$1" ]; then
+  echo "*** Version number missing ***"
+  exit 1
+fi
+
+case $1 in *-*) echo "*** Just give the version number ***" ;; esac
+
+dir=Releases/aspic-$1
+mkdir $dir
+ 
+echo "Created directory $dir"
+
+# Single files
+
+cp INSTALL LICENCE NOTICE README Makefile.in configure install-sh mkinstalldirs $dir
+
+# Source
+
+mkdir $dir/src
+cp src/Makefile src/*.c src/*.h $dir/src
+
+# Documentation
+
+mkdir $dir/doc
+cp doc/ChangeLog doc/Build doc/*.1 doc/*.aspic doc/aspic.xfpt doc/aspic.pdf $dir/doc
+
+# Testing
+
+mkdir $dir/testing
+cp -r testing/* $dir/testing
+
+# Tar and compress
+
+cd Releases
+tar cf aspic-$1.tar aspic-$1
+gzip -v --best aspic-$1.tar
+
+echo Releases/aspic-$1.tar.gz created
+
+####

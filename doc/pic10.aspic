@@ -1,0 +1,4 @@
+BOXA: box "A";
+BOXB: box "B";
+      circle radius 10 join centre to centre of BOXA;
+      box width 20 depth 20 join centre to centre of BOXB;

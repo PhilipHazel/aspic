@@ -1,0 +1,76 @@
+set date "<Dummy date>";
+
+arc to (40,40);
+A: box width 80; 
+left; arc to (40,40);
+goto A;
+up; arc to (40,40);
+goto A;
+down; arc to (80,0);
+
+right; arc from right of A;
+left; arc from left of A;
+up; arc from top of A;
+down; 
+B: arc from bottom right of A;
+
+goto *;
+arc right colour 1,0,0;
+goto *;
+arc left colour 0, 1, 0;
+goto *;
+arc down colour 0,0,1;
+goto *;
+arc up colour 0,0,1;
+
+goto B;
+arc right colour 1,0,0;
+goto B;
+arc left colour 0, 1, 0;
+goto B;
+arc down colour 0,0,1;
+goto B;
+arc up colour 0,0,1;
+
+C: line up right;
+arc right colour 1,0,0;
+goto C;
+arc left colour 0, 1, 0;
+goto C;
+arc down colour 0,0,1;
+goto C;
+arc up colour 0,0,1;
+goto C;
+arc colour 1,0,1;
+
+line down 100 from bottom of A;
+D: box width 80;
+arc right colour 1,0,0;
+goto D;
+arc left colour 0, 1, 0;
+goto D;
+arc down colour 0,0,1;
+goto D;
+arc up colour 0,0,1;
+
+line down 50 from bottom of D;
+E: circle radius 10;
+arcarrow right colour 1,0,0;
+goto E;
+arcarrow left back colour 0, 1, 0;
+goto E;
+arcarrow back down colour 0,0,1;
+goto E;
+arcarrow up both colour 0,0,1;
+
+F: curve from right of D to right of D plus (60,-80);
+arc right colour 1,0,0;
+goto F;
+arc left colour 0, 1, 0;
+goto F;
+arc down colour 0,0,1;
+goto F;
+arc up colour 0,0,1;
+goto F;
+arc colour 1,0,1;
+

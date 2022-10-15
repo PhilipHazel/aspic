@@ -1,0 +1,3 @@
+linethickness 6; linegrey 0.5;
+boxthickness 4; boxgrey 0.8;
+arc left; line; box; line; arc up;

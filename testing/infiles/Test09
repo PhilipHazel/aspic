@@ -1,0 +1,7 @@
+set date "<dummy date>";
+A: line; curve to start;
+iline; line; curve to start clockwise;
+B: curve from start to start of A wavy;
+line up 10 from middle of B;
+line down 5 from 0.25 start of B;
+line up 5 from 0.25 end of B;

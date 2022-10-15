@@ -1,0 +1,2 @@
+box "A"; box "B"; box "C"; line;
+down; circle "D"; circle "E"; line left;

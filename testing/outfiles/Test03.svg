@@ -1,0 +1,239 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="644" height="451.4" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,451.4)" font-family="Times" font-size="12">
+<path d="M 322 -230.2
+l -322 0
+" fill="none" stroke="#19667F" stroke-width="9"/>
+<path d="M 322 -230.2
+l 322 0
+" fill="none" stroke="#19667F" stroke-width="9"/>
+<path d="M 316 -387.2
+l -161 50
+l 0 10
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 155 -327.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 302 -232.2
+l 0 26
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<circle cx="316" cy="-387.2" r="64" fill="#7F9933" stroke="#000000" stroke-width="0.4"/>
+<text x="316" y="-390.2" text-anchor="middle">SMTP</text>
+<text x="316" y="-378.2" text-anchor="middle">connection</text>
+<path d="M 252 -387.2
+l -62 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 190 -387.2
+l 0 -5
+l -10 5
+l 10 5
+l 0 -5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="50" y="-421.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="115" y="-384.2" text-anchor="middle">Daemon</text>
+<path d="M 115 -353.2
+l 0 26
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 115 -327.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="50" y="-317.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="115" y="-286.2" text-anchor="middle">Reception</text>
+<text x="115" y="-274.2" text-anchor="middle">process</text>
+<path d="M 180 -283.2
+l 63.056 31.528
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 243.056 -251.672
+l -2.236 4.472
+l 11.18 0
+l -6.708 -8.944
+l -2.236 4.472
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<ellipse cx="322" cy="-247.2" rx="70" ry="25" fill="#7F4CFF" stroke="#000000" stroke-width="0.4"/>
+<text x="322" y="-244.2" text-anchor="middle">Spool files</text>
+<path d="M 400.944 -251.672
+l 63.056 -31.528
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 400.944 -251.672
+l -2.236 -4.472
+l -6.708 8.944
+l 11.18 0
+l -2.236 -4.472
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="464" y="-317.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="529" y="-286.2" text-anchor="middle">Reception</text>
+<text x="529" y="-274.2" text-anchor="middle">process</text>
+<path d="M 529 -327.2
+l 0 -26
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 529 -327.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="464" y="-421.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="529" y="-390.2" text-anchor="middle">User</text>
+<text x="529" y="-378.2" text-anchor="middle">process</text>
+<path d="M 322 -212.2
+l 0 16
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 322 -212.2
+l 5 0
+l -5 -10
+l -5 10
+l 5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 322 -196.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="257" y="-186.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="322" y="-155.2" text-anchor="middle">Delivery</text>
+<text x="322" y="-143.2" text-anchor="middle">process</text>
+<path d="M 247 -152.2
+l -62 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 247 -152.2
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="55" y="-186.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="120" y="-155.2" text-anchor="middle">Queue</text>
+<text x="120" y="-143.2" text-anchor="middle">runner</text>
+<path d="M 397 -152.2
+l 52 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 397 -152.2
+l 0 -5
+l -10 5
+l 10 5
+l 0 -5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 449 -152.2
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<ellipse cx="524" cy="-152.2" rx="65" ry="25" fill="#7F4CFF" stroke="#000000" stroke-width="0.4"/>
+<text x="524" y="-149.2" text-anchor="middle">Hints data</text>
+<path d="M 312 -118.2
+l 0 20
+l -100 0
+l 0 10
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 212 -88.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="147" y="-78.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="212" y="-47.2" text-anchor="middle">Local</text>
+<text x="212" y="-35.2" text-anchor="middle">delivery</text>
+<path d="M 147 -44.2
+l -22 0
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 125 -44.2
+l 0 -5
+l -10 5
+l 10 5
+l 0 -5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<circle cx="71" cy="-44.2" r="44" fill="#7F9933" stroke="#000000" stroke-width="0.4"/>
+<text x="71" y="-47.2" text-anchor="middle">File or</text>
+<text x="71" y="-35.2" text-anchor="middle">pipe</text>
+<path d="M 332 -118.2
+l 0 20
+l 100 0
+l 0 10
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 432 -88.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<rect x="367" y="-78.2" width="130" height="68" fill="#FFB299" stroke="#000000" stroke-width="0.5"/>
+<text x="432" y="-47.2" text-anchor="middle">Remote</text>
+<text x="432" y="-35.2" text-anchor="middle">delivery</text>
+<path d="M 497 -44.2
+l 22 0
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 519 -44.2
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<circle cx="573" cy="-44.2" r="44" fill="#7F9933" stroke="#000000" stroke-width="0.4"/>
+<text x="573" y="-41.2" text-anchor="middle">SMTP</text>
+<path d="M 216.001 -385.199
+c -7.425 4.3 -11.643 13.389 -10.135 21.836
+" fill="none" stroke="#FF0000" stroke-width="0.2"/>
+<path d="M 205.866 -363.364
+l -2.817 1.031
+l 5.566 6.481
+l 0.068 -8.543
+l -2.817 1.031
+" fill="#FF0000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 302 -206.2
+l -182 0
+l 0 10
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 120 -196.2
+l -5 0
+l 5 10
+l 5 -10
+l -5 0
+" fill="#000000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 50 -387.2
+l -20 0
+l 0 235
+l 15 0
+" fill="none" stroke="#FF0000" stroke-width="0.4"/>
+<path d="M 45 -152.2
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="#FF0000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 115 -249.2
+l 122 77
+l 10 0
+" fill="none" stroke="#FF0000" stroke-width="0.4"/>
+<path d="M 247 -172.2
+l 0 5
+l 10 -5
+l -10 -5
+l 0 5
+" fill="#FF0000" stroke="#000000" stroke-width="0.4"/>
+<path d="M 529 -249.2
+l -122 77
+l -10 0
+" fill="none" stroke="#FF0000" stroke-width="0.4"/>
+<path d="M 397 -172.2
+l 0 -5
+l -10 5
+l 10 5
+l 0 -5
+" fill="#FF0000" stroke="#000000" stroke-width="0.4"/>
+</g></svg>

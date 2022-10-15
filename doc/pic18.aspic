@@ -1,0 +1,6 @@
+AA: line;
+arc from end to start "1";
+arc from end of AA to start of AA angle 180 "2";
+arc clockwise from end of AA to start of AA radius 100 "3";
+BB: arc to start depth 24 "4";
+arc clockwise to start via middle of BB plus (10,-10) "5";

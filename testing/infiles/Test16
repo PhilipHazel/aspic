@@ -1,0 +1,39 @@
+set date "<dummy date>";
+bindfont 1 "Times-Roman" 24;
+text "A&#123;B open curly"
+     "A&#123;B open curly"/l
+     "A&#123;B open curly"/r
+     "A&#x123;B gcommaaccent"
+     "A&#x123;B gcommaaccent"/l
+     "A&#x123;B gcommaaccent"/r
+     "A&check;B check"
+     "A&check;B check"/l
+     "A&check;B check"/r
+     "M&S ampersand"
+     "M&S ampersand"/l
+     "M&S ampersand"/r
+     "<AB> in angles"
+     "<AB> in angles"/l
+     "<AB> in angles"/r
+     "A�B copyright 8859"
+     "A�B copyright 8859"/l
+     "A�B copyright 8859"/r
+     "A©B copyright UTF-8"
+     "A©B copyright UTF-8"/l
+     "A©B copyright UTF-8"/r
+     "A“B left double quote"
+     "A“B left double quote"/l
+     "A“B left double quote"/r
+     "Little"
+     "Large"/1
+     "Little"
+     "Little"
+     "Large"/1
+     "Large"/1
+     "finish fish"
+     "single quotes `quoted'"
+     "double quotes ``quoted''"
+     "dash -- dash"
+     "grave accent &#x60;"
+     "single quote &#x27;"
+     "two hyphens -&#x2d;";

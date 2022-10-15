@@ -1,0 +1,111 @@
+set date "<dummy date>";
+
+# These settings improve coverage in the tree functions, making sure all the
+# paths through the tree-balancing code get exercised.
+
+set Z "z";
+set Y "y";
+set X "x";
+
+set w "w";
+set c "c";
+set b "b";
+set a "a";
+
+# End of tree climbing.
+
+A: box "first box";
+line;
+circle "circle 100%";
+linethickness 3;
+line right 20;
+arrow down 20 right 20;
+
+line down from A;
+B: box dashed; 
+circle at centre radius 10 dashed;
+ellipse at centre of B depth 25 width 40 dashed;
+
+boxwidth 20; boxdepth 20;
+down; goto B; box "1";
+left; box "2";
+box join top right "3";
+box join left "4";
+down; box "5";
+box join bottom left "6";
+right; box "7";
+box join bottom "8";
+iline; box "9";
+up; box "10";
+box join bottom right "11";
+
+box join top left to top right "12";
+box join top left "13";
+box join center to bottom right plus (10,10) thickness 2 "14";
+box join centre colour 1,0,0;
+
+linethickness 0.5;
+C: line down 20; arc left;
+box "15";
+arc down from end of C;
+box "16";
+
+curve to top plus (0,40);
+box "17";
+
+D: iline left 140 down 70;
+box join top left; circle radius 3 at top left;
+goto D; box join top;
+goto D; box join top right;
+goto D; box join right;
+goto D; box join bottom right;
+goto D; box join bottom;
+goto D; box join bottom left;
+goto D; box join left;
+goto D; box join centre colour 0,1,0;
+
+line down 20;
+E: F: arc down clockwise;
+box join top left to centre "18";
+
+macro mamp { box "&&"; };
+goto E; down; line;
+left; line;
+up; line;
+right; line; line; mamp; 
+line to right plus (40,0) "© ¿ êÄÄ";
+
+G: circle;
+line from centre to top right;
+goto G;
+line from centre to bottom right;
+goto G;
+line from centre to bottom left;
+goto G;
+line from centre to top left;
+
+line up 30 from top of G;
+curve to 0.25 start;
+
+text " curve"/l;
+line right from start;
+box; text "box";
+arc up from top; text "arc";
+
+linedash 10 10; line up 30 dashed; 
+linedash 5,5; line up 30 dashed;
+
+line right 10;
+push;
+magnify 2;
+line right 10 colour 1,0,0;
+pop;
+line up 10;
+push; pop;  # tests re-use of saved block
+
+line up 40 colour 0,1,0;
+arc angle 150 "abc";
+
+iarc "iarc"(-6,0);
+icurve to end plus (10,0) "&#x2192; icurve";
+

@@ -1,0 +1,3 @@
+line; text at end "ABC";
+iline right 20;
+line; text at end "ABC"/l;

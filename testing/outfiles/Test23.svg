@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="112" height="122" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,122)" font-family="Times" font-size="12">
+<rect x="6" y="-115" width="20" height="10" fill="none" stroke="#7F7F7F" stroke-width="2"/>
+<text x="16" y="-107" text-anchor="middle">A</text>
+<rect x="26" y="-120" width="30" height="20" fill="none" stroke="#333333" stroke-width="4"/>
+<text x="41" y="-107" text-anchor="middle">B</text>
+<rect x="56" y="-115" width="20" height="10" fill="none" stroke="#FF0000" stroke-width="2"/>
+<text x="66" y="-107" text-anchor="middle">C</text>
+<rect x="76" y="-115" width="20" height="10" fill="none" stroke="#00FF00" stroke-width="2"/>
+<text x="86" y="-107" text-anchor="middle">D</text>
+<circle cx="16" cy="-75" r="10" fill="none" stroke="#7F7F7F" stroke-width="2"/>
+<text x="16" y="-72" text-anchor="middle">E</text>
+<circle cx="38" cy="-75" r="12" fill="none" stroke="#333333" stroke-width="4"/>
+<text x="38" y="-72" text-anchor="middle">F</text>
+<circle cx="60" cy="-75" r="10" fill="none" stroke="#FF0000" stroke-width="2"/>
+<text x="60" y="-72" text-anchor="middle">G</text>
+<circle cx="80" cy="-75" r="10" fill="none" stroke="#00FF00" stroke-width="2"/>
+<text x="80" y="-72" text-anchor="middle">H</text>
+<ellipse cx="16" cy="-40" rx="15" ry="5" fill="none" stroke="#7F7F7F" stroke-width="2"/>
+<text x="16" y="-37" text-anchor="middle">E</text>
+<ellipse cx="41" cy="-40" rx="10" ry="6" fill="none" stroke="#333333" stroke-width="4"/>
+<text x="41" y="-37" text-anchor="middle">F</text>
+<ellipse cx="66" cy="-40" rx="15" ry="5" fill="none" stroke="#FF0000" stroke-width="2"/>
+<text x="66" y="-37" text-anchor="middle">G</text>
+<ellipse cx="96" cy="-40" rx="15" ry="5" fill="none" stroke="#00FF00" stroke-width="2"/>
+<text x="96" y="-37" text-anchor="middle">H</text>
+<path d="M 16 -15
+l 20 0
+" fill="none" stroke="#7F7F7F" stroke-width="2"/>
+<text x="26" y="-17" text-anchor="middle">I</text>
+<path d="M 36 -15
+l 10 0
+" fill="none" stroke="#333333" stroke-width="4"/>
+<text x="41" y="-17" text-anchor="middle">J</text>
+<path d="M 46 -15
+l 0 15
+" fill="none" stroke="#7F7F7F" stroke-width="2"/>
+<text x="49" y="-4.5" text-anchor="start">K</text>
+<path d="M 46 0
+l 15 -15
+" fill="none" stroke="#00FF00" stroke-width="2"/>
+<text x="56.5" y="-4.5" text-anchor="start">L</text>
+<path d="M 61 -15
+l 20 0
+" fill="none" stroke="#FF0000" stroke-width="2"/>
+<text x="71" y="-17" text-anchor="middle">M</text>
+<text x="81" y="-12" text-anchor="start" fill="#0000FF">N</text>
+</g></svg>

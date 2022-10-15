@@ -1,0 +1,7 @@
+macro diag {
+A&$: box;
+line from top right to bottom left;
+line from top left of A&$ to bottom right of A&$;
+goto A&$; };
+
+diag; arrow; diag;

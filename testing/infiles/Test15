@@ -1,0 +1,7 @@
+set date "<dummy date>";
+iline up; 
+text "ABC";
+iline down 144 "XYZ"/r;
+iline right "123" "DEF" "HIJ";
+iline down;
+ibox filled 0.9 0.9 0.9 "1234";

@@ -1,0 +1,9 @@
+macro item {
+  B&$: box &1 &2; line down;
+  line right 20 from right of B&$;
+  };
+
+item "first" "second";
+MID: item "third";
+item "fourth" "fifth";
+arrow up 20 from MID;

@@ -1,0 +1,2 @@
+BOXA: box "A"; line; ellipse "E";
+arcarrow from top to top of BOXA;

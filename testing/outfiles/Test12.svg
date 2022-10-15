@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="432.5" height="36.5" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,36.5)" font-family="Times" font-size="12">
+<rect x="0.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="36.25" y="-15.25" text-anchor="middle">A</text>
+<rect x="72.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="108.25" y="-15.25" text-anchor="middle" fill="#FF0000">B</text>
+<rect x="144.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="180.25" y="-15.25" text-anchor="middle">C</text>
+<rect x="216.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="252.25" y="-15.25" text-anchor="middle" fill="#0000FF">X</text>
+<rect x="288.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="324.25" y="-15.25" text-anchor="middle" fill="#FF0000">Y</text>
+<rect x="360.25" y="-36.25" width="72" height="36" fill="none" stroke="none"/>
+<text x="396.25" y="-15.25" text-anchor="middle" fill="#0000FF">Z</text>
+</g></svg>

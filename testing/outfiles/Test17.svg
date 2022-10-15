@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="148.4" height="189.775" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,189.775)" font-family="Times" font-size="12">
+<path d="M 4 -189.775
+l 0 36
+l 0 36
+l 0 36
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 4 -153.775
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 4 -153.775
+c 18 18 54 18 72 0
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="40" y="-153.775" text-anchor="start">abc</text>
+<path d="M 76 -153.775
+c 18 -28 54 -28 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="112" y="-153.775" text-anchor="middle">xyz</text>
+<path d="M 4 -117.775
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 4 -117.775
+c 18 18 54 18 72 0
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="40" y="-117.775" text-anchor="end" fill="#FF0000">def</text>
+<path d="M 76 -117.775
+c 18 28 54 -28 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="112" y="-117.775" text-anchor="start">ghi</text>
+<text x="112" y="-105.775" text-anchor="start">klm</text>
+<path d="M 4 -81.775
+c 12.5 12.5 37.5 12.5 50 0
+" fill="none" stroke="#FF0000" stroke-width="4"/>
+<path d="M 54 -81.775
+c 12.5 -12.5 37.5 -12.5 50 0
+" fill="#00FF00" stroke="#7F7F7F" stroke-width="2"/>
+<path d="M 104 -81.775
+l 0 36
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<rect x="68" y="-81.775" width="72" height="36" fill="#FFFFE5" stroke="#000000" stroke-width="0.5"/>
+<path d="M 54 -9.775
+c 12.5 12.5 37.5 12.5 50 0
+" fill="#0000FF" stroke="none"/>
+<path d="M 104 -9.775
+c 18 0 36 -18 36 -36
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 104 -45.775
+c -12.499 -12.5 -37.5 -12.5 -50 0
+l 0 36
+" fill="#00FF00" stroke="#000000" stroke-width="0.4" stroke-dasharray="7,5"/>
+</g></svg>

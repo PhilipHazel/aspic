@@ -1,0 +1,2 @@
+down; box "A"; line; circle "B";
+line right 40; line left 20 up 20; line;

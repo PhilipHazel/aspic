@@ -1,0 +1,30 @@
+set date "<dummy date>";
+A: line down; 
+B: line down;
+C: line down;
+
+line right from start of B;
+curve from start to end "abc";
+
+line right;
+curve from start to end cs (0,10) clockwise "xyz"/c;
+
+line right from start of C;
+curve from start to end "def"/r/1,0,0;
+
+line right;
+curve wavy from start to end c1 (0,10) c2 (0, 10) "ghi" "klm";
+
+curve from end of C to end of C plus (50,0) thickness 4 colour 1,0,0;
+curve to end plus (50,0) clockwise thickness 2 greyness 0.5 shapefilled 0,1,0;
+
+D: line down;
+E: box filled 1,1,0.9 join bottom;
+
+curve from end of D to end of D plus (-50,0) dashed level 1 shapefilled 0,1,0;
+line down dashed level 1 shapefilled 0,1,0;
+
+icurve to end plus (50,0) shapefilled 0,0,1;
+curve to bottom right of E;
+
+

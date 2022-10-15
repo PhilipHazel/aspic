@@ -1,0 +1,2 @@
+box "A"; box join top left "B";
+circle join centre; box join left "C";

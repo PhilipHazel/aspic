@@ -1,0 +1,1 @@
+box "A"; box depth 50 join left "B";

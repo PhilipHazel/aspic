@@ -1,0 +1,6 @@
+Aspic: No previous item to join to
+box join left;                        #22 no previous item (must be first)
+             ^
+Aspic: Line too long while substituting "x" - processing abandoned
+$x $x $x $x $x $x;                    #25 must be last because its hard
+              ^

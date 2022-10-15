@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="144.8" height="27.8" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,27.8)" font-family="Times" font-size="12">
+<path d="M 0.4 -13.9
+l 72 0
+c -17.999 -18 -54 -18 -72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 72.4 -13.9
+l 72 0
+c -18 18 -54 18 -72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 144.4 -13.9
+c -35.999 -36 -108 36 -144 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 72.401 -13.9
+l 0 -10
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 111.776 -24.025
+l 0 5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 33.026 -3.775
+l 0 -5
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+</g></svg>

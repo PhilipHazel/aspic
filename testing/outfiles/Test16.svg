@@ -1,0 +1,48 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="252" height="480" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,480)" font-family="Times" font-size="12">
+<text x="126" y="-471" text-anchor="middle">A{B open curly</text>
+<text x="126" y="-459" text-anchor="start">A{B open curly</text>
+<text x="126" y="-447" text-anchor="end">A{B open curly</text>
+<text x="126" y="-435" text-anchor="middle">A&#x123;B gcommaaccent</text>
+<text x="126" y="-423" text-anchor="start">A&#x123;B gcommaaccent</text>
+<text x="126" y="-411" text-anchor="end">A&#x123;B gcommaaccent</text>
+<text x="126" y="-399" text-anchor="middle">A&#x2713;B check</text>
+<text x="126" y="-387" text-anchor="start">A&#x2713;B check</text>
+<text x="126" y="-375" text-anchor="end">A&#x2713;B check</text>
+<text x="126" y="-363" text-anchor="middle">M&amp;S ampersand</text>
+<text x="126" y="-351" text-anchor="start">M&amp;S ampersand</text>
+<text x="126" y="-339" text-anchor="end">M&amp;S ampersand</text>
+<text x="126" y="-327" text-anchor="middle">&lt;AB&gt; in angles</text>
+<text x="126" y="-315" text-anchor="start">&lt;AB&gt; in angles</text>
+<text x="126" y="-303" text-anchor="end">&lt;AB&gt; in angles</text>
+<text x="126" y="-291" text-anchor="middle">A&#xa9;B copyright 8859</text>
+<text x="126" y="-279" text-anchor="start">A&#xa9;B copyright 8859</text>
+<text x="126" y="-267" text-anchor="end">A&#xa9;B copyright 8859</text>
+<text x="126" y="-255" text-anchor="middle">A&#xa9;B copyright UTF-8</text>
+<text x="126" y="-243" text-anchor="start">A&#xa9;B copyright UTF-8</text>
+<text x="126" y="-231" text-anchor="end">A&#xa9;B copyright UTF-8</text>
+<text x="126" y="-219" text-anchor="middle">A&#x201c;B left double quote</text>
+<text x="126" y="-207" text-anchor="start">A&#x201c;B left double quote</text>
+<text x="126" y="-195" text-anchor="end">A&#x201c;B left double quote</text>
+<text x="126" y="-183" text-anchor="middle">Little</text>
+<text x="126" y="-159" text-anchor="middle" font-family="Times" font-size="24">Large</text>
+<text x="126" y="-147" text-anchor="middle">Little</text>
+<text x="126" y="-135" text-anchor="middle">Little</text>
+<text x="126" y="-111" text-anchor="middle" font-family="Times" font-size="24">Large</text>
+<text x="126" y="-87" text-anchor="middle" font-family="Times" font-size="24">Large</text>
+<text x="126" y="-75" text-anchor="middle">finish fish</text>
+<text x="126" y="-63" text-anchor="middle">single quotes &#x2018;quoted&#x2019;</text>
+<text x="126" y="-51" text-anchor="middle">double quotes &#x201c;quoted&#x201d;</text>
+<text x="126" y="-39" text-anchor="middle">dash &#x2013; dash</text>
+<text x="126" y="-27" text-anchor="middle">grave accent `</text>
+<text x="126" y="-15" text-anchor="middle">single quote '</text>
+<text x="126" y="-3" text-anchor="middle">two hyphens --</text>
+</g></svg>

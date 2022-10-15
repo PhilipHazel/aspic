@@ -1,0 +1,160 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="332.5" height="304.45" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,304.45)" font-family="Times" font-size="12">
+<rect x="24.25" y="-286.25" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="60.25" y="-265.25" text-anchor="middle">first box</text>
+<path d="M 96.25 -268.25
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<circle cx="204.25" cy="-268.25" r="36" fill="none" stroke="#000000" stroke-width="0.4"/>
+<text x="204.25" y="-265.25" text-anchor="middle">circle 100%</text>
+<path d="M 240.25 -268.25
+l 20 0
+l 12.929 12.929
+" fill="none" stroke="#000000" stroke-width="3"/>
+<path d="M 273.179 -255.321
+l -3.535 3.535
+l 10.606 3.536
+l -3.536 -10.606
+l -3.535 3.535
+" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 60.25 -250.25
+l 0 36
+" fill="none" stroke="#000000" stroke-width="3"/>
+<rect x="24.25" y="-214.25" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5" stroke-dasharray="7,5"/>
+<circle cx="60.25" cy="-196.25" r="10" fill="none" stroke="#000000" stroke-width="0.4" stroke-dasharray="7,5"/>
+<ellipse cx="60.25" cy="-196.25" rx="20" ry="12.5" fill="none" stroke="#000000" stroke-width="0.4" stroke-dasharray="7,5"/>
+<rect x="50.25" y="-178.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="60.25" y="-165.25" text-anchor="middle">1</text>
+<rect x="30.25" y="-178.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="40.25" y="-165.25" text-anchor="middle">2</text>
+<rect x="10.25" y="-158.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="20.25" y="-145.25" text-anchor="middle">3</text>
+<rect x="30.25" y="-158.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="40.25" y="-145.25" text-anchor="middle">4</text>
+<rect x="30.25" y="-138.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="40.25" y="-125.25" text-anchor="middle">5</text>
+<rect x="50.25" y="-158.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="60.25" y="-145.25" text-anchor="middle">6</text>
+<rect x="70.25" y="-158.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="80.25" y="-145.25" text-anchor="middle">7</text>
+<rect x="70.25" y="-178.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="80.25" y="-165.25" text-anchor="middle">8</text>
+<rect x="162.25" y="-178.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="172.25" y="-165.25" text-anchor="middle">9</text>
+<rect x="162.25" y="-198.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="172.25" y="-185.25" text-anchor="middle">10</text>
+<rect x="142.25" y="-218.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="152.25" y="-205.25" text-anchor="middle">11</text>
+<rect x="162.25" y="-218.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="172.25" y="-205.25" text-anchor="middle">12</text>
+<rect x="182.25" y="-198.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="192.25" y="-185.25" text-anchor="middle">13</text>
+<rect x="202.25" y="-198.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="2"/>
+<text x="212.25" y="-185.25" text-anchor="middle">14</text>
+<rect x="202.25" y="-198.25" width="20" height="20" fill="none" stroke="#FF0000" stroke-width="0.5"/>
+<path d="M 212.25 -178.25
+l 0 20
+c -19.228 -0.536 -36.536 16.771 -36 35.999
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="166.25" y="-122.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="176.25" y="-109.25" text-anchor="middle">15</text>
+<path d="M 212.25 -158.25
+c -0.536 19.228 16.771 36.536 36 35.999
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="248.25" y="-132.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="258.25" y="-119.25" text-anchor="middle">16</text>
+<path d="M 258.25 -132.25
+c 10 -10 10 -30 0 -40
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="248.25" y="-182.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="258.25" y="-169.25" text-anchor="middle">17</text>
+<rect x="108.25" y="-102.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<circle cx="108.25" cy="-102.25" r="3" fill="none" stroke="#000000" stroke-width="0.4"/>
+<rect x="98.25" y="-102.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="88.25" y="-102.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="88.25" y="-112.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="88.25" y="-122.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="98.25" y="-122.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="108.25" y="-122.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="108.25" y="-112.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="98.25" y="-112.25" width="20" height="20" fill="none" stroke="#00FF00" stroke-width="0.5"/>
+<path d="M 108.25 -92.25
+l 0 20
+c 0.536 19.228 -16.771 36.536 -36 36
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="72.25" y="-72.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="82.25" y="-59.25" text-anchor="middle">18</text>
+<path d="M 72.25 -36.25
+l 0 36
+l -72 0
+l 0 -36
+l 72 0
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="144.25" y="-46.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="154.25" y="-33.25" text-anchor="middle">&amp;</text>
+<path d="M 164.25 -36.25
+l 40 0
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="184.25" y="-38.25" text-anchor="middle">&#xa9; &#xc0; &#x10000;</text>
+<circle cx="240.25" cy="-36.25" r="36" fill="none" stroke="#000000" stroke-width="0.4"/>
+<path d="M 240.25 -36.25
+l 25.455 -25.455
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 240.25 -36.25
+l 25.455 25.455
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 240.25 -36.25
+l -25.455 25.455
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 240.25 -36.25
+l -25.455 -25.455
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 240.25 -72.25
+l 0 -30
+c -5.625 5.624 -5.625 16.875 0 22.5
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="240.25" y="-88" text-anchor="start"> curve</text>
+<path d="M 240.25 -102.25
+l 72 0
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="312.25" y="-112.25" width="20" height="20" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="322.25" y="-99.25" text-anchor="middle">box</text>
+<path d="M 322.25 -112.25
+c 0.536 -19.228 -16.771 -36.536 -36 -36
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="286.25" y="-109.25" text-anchor="middle">arc</text>
+<path d="M 286.25 -148.25
+l 0 -30
+" fill="none" stroke="#000000" stroke-width="0.5" stroke-dasharray="10,10"/>
+<path d="M 286.25 -178.25
+l 0 -30
+" fill="none" stroke="#000000" stroke-width="0.5" stroke-dasharray="5,5"/>
+<path d="M 286.25 -208.25
+l 10 0
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 296.25 -208.25
+l 20 0
+" fill="none" stroke="#FF0000" stroke-width="1"/>
+<path d="M 316.25 -208.25
+l 0 -10
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<path d="M 316.25 -218.25
+l 0 -40
+" fill="none" stroke="#00FF00" stroke-width="0.5"/>
+<path d="M 316.25 -258.25
+c 0.499 -18.815 -16.047 -35.89 -34.869 -35.982
+c -12.989 -0.545 -25.926 6.655 -32.307 17.982
+" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="295.567" y="-295.023" text-anchor="start">abc</text>
+<text x="245.478" y="-245.933" text-anchor="start">iarc</text>
+<text x="267.252" y="-227.073" text-anchor="start">&#x2192; icurve</text>
+</g></svg>

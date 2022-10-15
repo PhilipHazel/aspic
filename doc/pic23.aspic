@@ -1,0 +1,4 @@
+BOXA: box "A";
+line down 5; arc; arrow right 10; box "B";
+line up align centre of BOXA;
+arrow to right of BOXA;

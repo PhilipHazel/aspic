@@ -1,0 +1,3 @@
+circlefill 0.5; circle; circlefill 0.8 0.2 0.1; 
+C: circle; line right 36; 
+circlefill -1; circle join left to right of C; 

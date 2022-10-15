@@ -1,0 +1,15 @@
+set date "<dummy date>";
+set creator "Philip Hazel";
+set title "Testing, testing";
+
+bindfont 1 "Times-Bold" 16;
+
+setfont 1;
+
+ellipse width 600 depth 350 filled 0 0.8 0.9
+  "The Exim Mail Transfer Agent"/1
+  ""/1
+  "(A brief introduction)" 
+  ""/1 
+  "http://www.exim.org"/0
+  "";

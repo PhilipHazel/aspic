@@ -1,0 +1,3 @@
+box filled 0.5; box at centre plus (10,10) filled 0.5;
+iline right 10;
+box filled 0.5; box at centre plus (10,10) filled 0.5 level -1;

@@ -1,0 +1,95 @@
+Aspic 
+Usage: aspic [<options>] [<input> [<output>]]
+
+Options:
+  -[-]help       show usage information and exit
+  -nv            disable variable substitutions
+  -[e]ps         generate Encapsulated PostScript
+  -svg           generate SVG
+  -testing       used by 'make test'
+  -tr            translate quotes and double-hyphens
+  -v             show version and exit
+  -[-]version    show version and exit
+
+The default output format is Encapsulated PostScript.
+Only one of -[e]ps or -svg is permitted.
+Default output file is base <input> with .eps or .svg extension.
+Omit file names or use "-" for stdin and stdout.
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="138" height="36.5" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <Dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,36.5)" font-family="Times" font-size="12">
+<rect x="33" y="-36.25" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
+<text x="69" y="-15.25" text-anchor="middle">Dollar $abc not special</text>
+</g></svg>
+
+Aspic 
+
+Aspic: Unrecognized command line option "-badoption"
+Usage: aspic [<options>] [<input> [<output>]]
+
+Options:
+  -[-]help       show usage information and exit
+  -nv            disable variable substitutions
+  -[e]ps         generate Encapsulated PostScript
+  -svg           generate SVG
+  -testing       used by 'make test'
+  -tr            translate quotes and double-hyphens
+  -v             show version and exit
+  -[-]version    show version and exit
+
+The default output format is Encapsulated PostScript.
+Only one of -[e]ps or -svg is permitted.
+Default output file is base <input> with .eps or .svg extension.
+Omit file names or use "-" for stdin and stdout.
+
+Aspic: Failed to open /non-existing-file for input: No such file or directory
+
+Aspic: Unknown aspic command "Unknown"
+Unknown command should to test no output generated.
+        ^
+Aspic: No output generated
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="72.5" height="36.5" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+<!-- created by Unknown on <Dummy date>, using Aspic  -->
+<title>Unknown</title>
+
+<g transform="translate(0,36.5)" font-family="Times" font-size="12">
+<rect x="0.25" y="-36.25" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
+</g></svg>
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: Unknown
+%%Creator: Unknown, using Aspic 
+%%CreationDate: <Dummy date>
+%%BoundingBox: 0 0 72.5 36.5
+%%EndComments
+
+/mymove{
+{currentpoint} stopped {moveto}{
+  exch 4 1 roll sub 3 1 roll exch sub
+  dup abs 0.01 lt 3 -1 roll dup abs 0.01 lt
+  3 -1 roll and {pop pop}{rmoveto} ifelse
+  } ifelse
+}def
+0.24 0.24 mymove
+72 0 rlineto
+0 36 rlineto
+-72 0 rlineto
+closepath
+0.5 setlinewidth
+stroke
+showpage
+
+Aspic: Failed to open /non-exist-file for output: Permission denied

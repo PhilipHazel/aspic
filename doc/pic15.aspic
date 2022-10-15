@@ -1,0 +1,2 @@
+arc "A"; arc angle 180 radius 20 "B";
+arc clockwise angle 270 radius 40 "C";

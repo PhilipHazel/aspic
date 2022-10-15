@@ -1,0 +1,3 @@
+boundingbox 5 dashed filled 0.8, 0.8, 0 thickness 1 colour 1,0,0;
+circleradius 15; circle "A";
+iline right 5; circle filled 1,1,1 "B";

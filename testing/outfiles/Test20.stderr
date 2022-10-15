@@ -1,0 +1,204 @@
+Aspic: No previous item
+arc to start;                         #12 no previous item (must be first)
+            ^
+Aspic: Semicolon expected (unexpected text follows command)
+include /non-existent superfluous;    #1, 3
+                      ^
+Aspic: Failed to open /non-existent for input: No such file or directory
+include /non-existent superfluous;    #1, 3
+                                 ^
+Aspic: Unknown aspic command "unknown"
+unknown command;                      #2
+        ^
+Aspic: Semicolon expected (unexpected text follows command)
+include /dev/null superfluous;        #3
+                  ^
+Aspic: Semicolon expected (unexpected text follows command)
+set variable "value" superfluous;     #3
+                     ^
+Aspic: Font 23 has not been bound
+box "unknown font"/23;                #4
+                     ^
+Aspic: Font number must be greater than 0
+bindfont 0 "Fontname" 16;             #5
+           ^
+Aspic: Unknown variable "unknownvar"
+box $unknownvar;                      #6
+               ^
+Aspic: Unknown option word "unknown"
+box unknown option;                   #7
+            ^
+Aspic: Dimension expected
+line thickness down;                  #8
+               ^
+Aspic: Label "LABEL" incorrectly placed (may only precede drawing command)
+LABEL: set x "value";                 #9
+                     ^
+Aspic: Label "LABEL2" incorrectly placed (may only precede drawing command)
+LABEL2: text "abc";                   #9
+                   ^
+Aspic: Can't find item labelled "NONEXIST"
+goto NONEXIST;                        #10
+             ^
+Aspic: closing quote expected
+bindfont 11 "missing closing quote    #11
+                                          ^
+Aspic: non-negative font size expected
+bindfont 11 "missing closing quote    #11
+                                          ^
+Aspic: Number expected
+text at (start);                      #11 number
+         ^
+Aspic: Comma expected
+text at (10);                         #11 comma
+           ^
+Aspic: Closing parenthesis expected
+text at (10,11;                       #11 closing parens
+              ^
+Aspic: /l, /r, /c, /<font>, /{+-}<rotate>, or /<r>,<g>,<b> expected
+text "abc"/z;                         #11 invalid option
+           ^
+Aspic: word expected
+box; box join;                        #11 word
+             ^
+Aspic: top, bottom, left, right, centre, start, end, or middle expected
+box; box join front;                  #11 top, bottom, etc
+                   ^
+Aspic: number expected
+line; arc to 2/x start;               #11 number
+               ^
+Aspic: Can't find item labelled "B"
+line; arc to start of B;              #11 label
+                       ^
+Aspic: Parenthesized vector (x,y) expected
+line; arc to start plus;              #11 vector
+                       ^
+Aspic: unsigned angle expected
+arc angle rhubarb;                    #11 angle
+          ^
+Aspic: grey level expected
+line greyness rhubarb;                #11 grey level
+              ^
+Aspic: colour values expected
+line colour rhubarb;                  #11 colour
+            ^
+Aspic: green and blue values expected
+line colour 0.5;                      #11 green and blue
+               ^
+Aspic: blue value expected
+line colour 0.5,0.5;                  #11 blue
+                   ^
+Aspic: grey level or colour values expected
+box filled;                           #11 colour or grey
+          ^
+Aspic: blue value expected
+box filled 0.5,0.5;                   #11 blue
+                  ^
+Aspic: integer expected
+box level;                            #11 integer
+         ^
+Aspic: font name in quotes expected
+bindfont 2 ShouldBeQuoted 10;         #11 name in quotes
+           ^
+Aspic: non-negative font size expected
+bindfont 2 "Times-Bold" -14;          #11 non-neg font size
+                           ^
+Aspic: quoted string expected
+set abc;                              #11 quoted string
+       ^
+Aspic: top, bottom, left, right, centre, start, end, middle, or label expected
+line to nowhere;                      #11 top, bottom, etc.
+               ^
+Aspic: Inappropriate position descriptor applied to a box
+box; arc to start;                    #13 inappropriate for box
+                 ^
+Aspic: Inappropriate position descriptor applied to a arc
+arc; line from top;                   #13 ... for arc
+                  ^
+Aspic: Inappropriate position descriptor applied to a curve
+curve to (10,10); line from top;      #13 ... for arc
+                               ^
+Aspic: Inappropriate position descriptor applied to a line
+line; line from bottom;               #13 ... for line
+                      ^
+Aspic: Inappropriate fraction encountered
+arc; line from 2/3 centre;            #14 inappropriate fraction
+                         ^
+Aspic: Empty variable name
+set /notname "ab""quoted""c";         #17
+    ^
+Aspic: Empty variable name
+box ${} ;                             #17
+      ^
+Aspic: Empty variable name
+box $ ;                               #17
+     ^
+Aspic: No stacked environment to restore
+pop;                                  #18
+   ^
+Aspic: Too many constraints for arc
+line; arc to start radius 20 via (10,10);  #19
+                                        ^
+Aspic: Too many constraints for arc
+line; arc to start angle 20 depth 10;      #19
+                                    ^
+Aspic: Too many constraints for arc
+line; arc to start depth 10 via (20,20);   #19, 24
+                                       ^
+Aspic: An arc cannot be constructed using the given via point
+line; arc to start depth 10 via (20,20);   #19, 24
+                                       ^
+Aspic: Grey level or RGB value must not be greater than 1.0
+line colour 1.2,0,0;                  #20
+                   ^
+Aspic: Grey level or RGB value must not be greater than 1.0
+box filled 2.3;                       #20
+              ^
+Aspic: Grey level or RGB value must not be greater than 1.0
+line "a"/1.2;                         #20
+            ^
+Aspic: Closing quote missing; string terminated at end of line
+text "Unterminated string             #21
+                                         ^
+Aspic: Closing quote missing; string terminated at end of line
+set abc "Unterminated string          #21 this will expect a semicolon
+                                                                      ^
+Aspic: Semicolon expected (unexpected text follows command)
+set abc "Unterminated string          #21 this will expect a semicolon
+                                                                       ^
+Aspic: "depth" or "via" for arc given without end point
+arc radius 10 depth 30;               #23
+                      ^
+Aspic: Missing } after "${abc"
+box "${abc" ;                         #27
+          ^
+Aspic: File name expected
+include;                              #29
+       ^
+Aspic: "include" is not allowed in a macro
+ include /dev/null;    #30  
+                  ^
+Aspic: "include" is not allowed in a macro
+macname2;                             #30
+        ^
+Aspic: Missing "to" parameter for curve
+line; curve;                          #33
+           ^
+Aspic: Curve length 0 is too short
+line; curve to end;                   #34
+                  ^
+Aspic: Duplicate label "LABEL"
+LABEL: box; LABEL: line;              #37 duplicate label
+                  ^
+Aspic: Width/depth and an endpoint are mutually exclusive
+line from centre of A to center of B up 20;  #38
+                                          ^
+Aspic: Macro name "linecolor" is not allowed - matches a command name
+macro linecolor xxx;                  #39
+                   ^
+Aspic: The "align" option is not valid for a sloping line
+line up left align center of A;       #42
+                              ^
+Aspic: Command word expected - processing abandoned
+"command word expected";              #16 must be last because it is hard
+ ^

@@ -1,0 +1,6 @@
+set date "<dummy date>";
+set Green       "0,0.7,0";
+FR:  box;
+     iline down 100; 
+     arrow up " passes"/$Green; 
+     line down 16 from bottom of FR plus (-20,0);

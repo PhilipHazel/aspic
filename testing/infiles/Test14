@@ -1,0 +1,4 @@
+set date "<dummy date>";
+line right;
+ibox filled 1 0 0;
+line right;

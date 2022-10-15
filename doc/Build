@@ -1,0 +1,10 @@
+#! /bin/sh
+
+for pic in `ls pic*.aspic` ; do
+  base=`expr match $pic '\([^.]\+\)'`
+  ../src/aspic $pic $base.eps
+done 
+
+xfpt aspic.xfpt
+sdop aspic.xml
+ps2pdf aspic.ps

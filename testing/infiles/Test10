@@ -1,0 +1,28 @@
+set date "<dummy date>";
+boxdepth 24;
+
+macro arbox {
+  A&$: box; arrow right 60 from centre; text at end plus (6,0) &1/l;
+       goto A&$; 
+  }; 
+  
+macro cbox {
+  B&$: box &1; iline right 60 from centre; text at end plus (6,0) &2/l;
+       goto B&$;
+  };        
+
+
+  down;
+  ibox "<table>";
+  arrow down;
+  box "#TDATA";
+  box; arrow right 60 from centre;
+  
+  ibox "tdatastr";
+  box "twidth";
+  box "top rowsize";
+  box "colcount";
+  arbox "layout parameters";
+  box;
+  box; iline right 60 from centre; 
+    text at end plus (6,0) "vector of tcolstr"/l;

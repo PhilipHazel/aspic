@@ -1,0 +1,2 @@
+box width 40 depth 40; text at top "N"; text at bottom "S";
+text at left "W"; text at right "E";

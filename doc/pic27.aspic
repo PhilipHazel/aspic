@@ -1,0 +1,5 @@
+iline right shapefilled 0.5;
+iline down shapefilled 0.5;
+line left 0;
+iline down left shapefilled 0.5;
+iline right shapefilled 0.5;

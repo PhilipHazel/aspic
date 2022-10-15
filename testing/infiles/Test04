@@ -1,0 +1,12 @@
+set date "<dummy date>";
+box width 120 """abc"" <a> &c <b> $$34";
+
+bindfont 2 "Times-Bold" 14;
+bindfont 3 "Times-Italic" 14;
+bindfont 4 "Times-BoldItalic" 14;
+bindfont 5 "Symbol" 14;
+
+box "bold"/2;
+box "italic"/3;
+box "bolditalic"/4;
+box "symbol"/5;

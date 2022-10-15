@@ -1,0 +1,6 @@
+A: arc "A";
+B: arc clockwise radius 20 angle 180 "B";
+C: arc dashed from start of A to end of B angle 190 "C";
+arc clockwise dashed from start of A to end of A radius 75 "D";
+arc to start depth 30 "E";
+arc clockwise to middle of C via middle of A "F";

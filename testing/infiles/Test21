@@ -1,0 +1,8 @@
+# This input tests some error messages that don't fit easily into Test 20
+
+box join left;                        #22 no previous item (must be first)
+
+set x "This is going to be used to create an overlong line";
+$x $x $x $x $x $x;                    #25 must be last because its hard
+
+# End

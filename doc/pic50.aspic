@@ -1,0 +1,6 @@
+A: line down 20 left; B: line down 20 right; 
+curve to start of A cs (-5,30);
+line dashed down 5 right 40 from start of A;
+circle filled 0 radius 1;
+line dashed up 5 right 40 from end of B;
+circle filled 0 radius 1;
