@@ -15,7 +15,7 @@ include /dev/null superfluous;        #3
                   ^
 Aspic: Semicolon expected (unexpected text follows command)
 set variable "value" superfluous;     #3
-                     ^
+                      ^
 Aspic: Font 23 has not been bound
 box "unknown font"/23;                #4
                      ^
@@ -42,7 +42,7 @@ goto NONEXIST;                        #10
              ^
 Aspic: closing quote expected
 bindfont 11 "missing closing quote    #11
-                                          ^
+                                         ^
 Aspic: non-negative font size expected
 bindfont 11 "missing closing quote    #11
                                           ^
@@ -163,9 +163,6 @@ text "Unterminated string             #21
 Aspic: Closing quote missing; string terminated at end of line
 set abc "Unterminated string          #21 this will expect a semicolon
                                                                       ^
-Aspic: Semicolon expected (unexpected text follows command)
-set abc "Unterminated string          #21 this will expect a semicolon
-                                                                       ^
 Aspic: "depth" or "via" for arc given without end point
 arc radius 10 depth 30;               #23
                       ^
@@ -199,6 +196,9 @@ macro linecolor xxx;                  #39
 Aspic: The "align" option is not valid for a sloping line
 line up left align center of A;       #42
                               ^
+Aspic: Variable name is too long in substitution
+$SubstituteAveryLongVariableNameThatWillNotFitInTheRelevantBuffer
+                                                                 ^
 Aspic: Command word expected - processing abandoned
 "command word expected";              #16 must be last because it is hard
  ^

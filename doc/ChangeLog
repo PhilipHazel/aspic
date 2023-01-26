@@ -1,6 +1,14 @@
 Change Log for Aspic
 --------------------
 
+Version 2.01  xx January 2023
+-----------------------------
+
+1. Fix memory overrun when processing unterminated string.
+
+2. Detects and give error for overlong variable name in substitution.
+
+
 Version 2.00  15 October 2022
 -----------------------------
 

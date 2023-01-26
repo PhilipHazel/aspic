@@ -9,4 +9,6 @@ config.cache
 config.log
 config.status
 
+src/aspic
+
 # End

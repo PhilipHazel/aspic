@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2023 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: January 2023 */
 
 /* This module contains miscellaneous functions that are called while the input
 is being read. */
@@ -133,7 +133,7 @@ static void
 subs_vars(uschar *raw, uschar *cooked)
 {
 int left = INPUT_LINESIZE;
-BOOL bracketed;
+BOOL bracketed, toolong;
 uschar *p, *s, *t;
 uschar name[64];
 
@@ -174,8 +174,17 @@ for (s = raw, t = cooked; *s != 0; )
     }
   else bracketed = FALSE;
 
+  toolong = FALSE;
   p = name;
-  while (isalpha(*s) || isdigit(*s)) *p++ = *s++;
+  while (isalpha(*s) || isdigit(*s)) 
+    {
+    if (!toolong)
+      {  
+      if ((size_t)(p - name) >= sizeof(name) - 1) toolong = TRUE;
+        else *p++ = *s;
+      } 
+    s++;   
+    } 
   *p = 0;
 
   subs_ptr = s - raw;   /* Offset for errors */
@@ -185,7 +194,9 @@ for (s = raw, t = cooked; *s != 0; )
     if (*s == '}') s++; else error_moan(27, name);
     }
 
-  if (*name == 0) error_moan(17); else
+  if (*name == 0) error_moan(17); 
+  else if (toolong) error_moan(43); 
+  else
     {
     tree_node *tn = tree_search(varroot, name);
     if (tn == NULL)

@@ -58,6 +58,7 @@ line "a"/1.2;                         #20
 text "Unterminated string             #21
 ;   # Terminate command to avoid other error when it looks for next string
 set abc "Unterminated string          #21 this will expect a semicolon
+;   # Terminate command to avoid other error when it looks for next string
 # For 22 see Test21 - needs to be first (no previous item)
 arc radius 10 depth 30;               #23
 # For 24 see above
@@ -84,6 +85,7 @@ macro linecolor xxx;                  #39
 # 40 is EOF while reading macro
 # 41 is recursive macro call
 line up left align center of A;       #42
+$SubstituteAveryLongVariableNameThatWillNotFitInTheRelevantBuffer
 
 "command word expected";              #16 must be last because it is hard
 # End

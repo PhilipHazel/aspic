@@ -23,7 +23,7 @@
 
 /* Miscellaneous defines */
 
-#define Version_String "2.00 (11-October-2022)"
+#define Version_String "2.01-DEV (25-January-2023)"
 
 #define UNSET INT_MAX          /* For unset parameters */
 #define MEMORY_CHUNKSIZE 4096

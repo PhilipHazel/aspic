@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2023 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: January 2023 */
 
 /* This module contains the code for reading the input, with the exception of
 commands for drawing objects (see rditem.c) and a number of common subroutines
@@ -89,7 +89,7 @@ if (in_line[chptr] != '"') { error_moan(11, "font name in quotes"); return; }
 
 for (;;)
   {
-  if (in_line[++chptr] == 0)
+  if (in_line[++chptr] == 0 || in_line[chptr] == '\n')
     {
     error_moan(11, "closing quote");
     break;
@@ -208,6 +208,7 @@ for (;;)
   s[n++] = in_line[chptr];
   }
 s[n] = 0;
+nextsigch();
 
 tn = tree_search(varroot, word);
 

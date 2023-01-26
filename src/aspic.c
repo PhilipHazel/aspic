@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2023 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: January 2023 */
 
 /* ASPIC is an Amazingly Simple PICture composing program. It reads a
 description of a line-art picture, and outputs commands for another program to
@@ -130,8 +130,9 @@ static uschar *error_messages[] = {
   US"Width/depth and an endpoint are mutually exclusive",   /* 38 */
   US"Macro name \"%s\" is not allowed - matches a command name",  /* 39 */
   US"End of file while reading macro \"%s\" - processing abandoned", /* 40 */
-  US"Recursive macro call not allowed - processing abandoned",  /* 41 */
-  US"The \"align\" option is not valid for a sloping line"  /* 42 */
+  US"Recursive macro call not allowed - processing abandoned", /* 41 */
+  US"The \"align\" option is not valid for a sloping line", /* 42 */
+  US"Variable name is too long in substitution",            /* 43 */ 
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))
@@ -155,7 +156,6 @@ Returns:       nothing
 void
 error_moan(int n, ...)
 {
-BOOL instring = FALSE;
 int  ptr;
 va_list ap;
 va_start(ap, n);
@@ -199,8 +199,9 @@ if (reading)
 
   if (!substituting)
     {
+    BOOL instring = FALSE;
     for (int ch = in_line[chptr];
-         ch != '\n' && (instring || ch != ';');
+         ch != '\n' && ch != 0 && (instring || ch != ';');
          ch = in_line[++chptr])
       {
       if (ch == '"')
@@ -338,6 +339,31 @@ spare_macros = p;
 
 
 /*************************************************
+*             Close all input files              *
+*************************************************/
+
+/* Called after reading is complete, or on premature exit. Close any currently
+open included files and the original input unless it is stdin. */
+
+static void
+close_all_input(void)
+{
+while (included_from != NULL)
+  {
+  fclose(main_input);
+  main_input = included_from->prevfile;
+  included_from = included_from->prev;
+  }
+if (main_input != NULL && main_input != stdin)
+  {
+  fclose(main_input);
+  main_input = NULL;
+  }
+}
+
+
+
+/*************************************************
 *              Exit tidy-up function             *
 *************************************************/
 
@@ -347,6 +373,7 @@ static void
 tidy_up(void)
 {
 void *p = mem_anchor;
+close_all_input();
 while (p != NULL)
   {
   void *q = p;
@@ -568,7 +595,7 @@ switch (outstyle)
 reading = TRUE;
 read_inputfile();
 reading = FALSE;
-if (!input_is_stdin) fclose(main_input);
+close_all_input();
 
 if (had_error)
   {
