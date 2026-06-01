@@ -13,6 +13,7 @@ LFLAGS=@LFLAGS@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 
+DESTDIR=
 BINDIR=@prefix@/bin
 MANDIR=@prefix@/man
 
@@ -49,9 +50,9 @@ test:           build
 check:          test
 
 install:        build
-		$(mkinstalldirs) $(BINDIR)
-		$(mkinstalldirs) $(MANDIR)
-		$(mkinstalldirs) $(MANDIR)/man1
-		$(INSTALL) src/aspic $(BINDIR)/aspic
-		$(INSTALL_DATA) doc/aspic.1 $(MANDIR)/man1
+		$(mkinstalldirs) $(DESTDIR)$(BINDIR)
+		$(mkinstalldirs) $(DESTDIR)$(MANDIR)
+		$(mkinstalldirs) $(DESTDIR)$(MANDIR)/man1
+		$(INSTALL) src/aspic $(DESTDIR)$(BINDIR)/aspic
+		$(INSTALL_DATA) doc/aspic.1 $(DESTDIR)$(MANDIR)/man1
 # End
