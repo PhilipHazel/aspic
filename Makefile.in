@@ -8,7 +8,8 @@ mkinstalldirs = $(SHELL) mkinstalldirs
 
 CC=@CC@
 CFLAGS=@CFLAGS@
-LFLAGS=@LFLAGS@
+CPPFLAGS=@CPPFLAGS@
+LDFLAGS=@LDFLAGS@
 
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -34,7 +35,8 @@ build:; @cd src; $(MAKE) \
                  MANDIR=$(MANDIR) \
                  CC="$(CC)" \
                  CFLAGS="$(CFLAGS)" \
-                 LFLAGS="$(LFLAGS)" \
+                 CPPFLAGS="$(CPPFLAGS)" \
+                 LDFLAGS="$(LDFLAGS)" \
                  FE="$(FE)" \
                  aspic
 
