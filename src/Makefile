@@ -6,8 +6,8 @@
 # Compile step for the modules
 
 .SUFFIXES:     .o .c
-.c.o:;         @echo "$(CC) $*.c"
-	       $(FE)$(CC) -c $(CFLAGS) $*.c
+.c.o:;         @echo "$(CC) $(CPPFLAGS) $(CFLAGS) -c $*.c"
+	             $(FE)$(CC) $(CPPFLAGS) $(CFLAGS) -c $*.c
 
 
 # Object module lists for the program
@@ -19,9 +19,9 @@ ASPICOBJ =     aspic.o rditem.o rdsubs.o read.o tables.o tree.o \
 # Link step for the program
 
 aspic:         $(ASPICOBJ)
-	       @echo "$(CC) -o aspic"
-	       $(FE)$(CC) $(CFLAGS) $(LFLAGS) -o aspic $(ASPICOBJ) -lm
-	       @echo ">>> aspic command built"; echo ""
+	             @echo "$(CC) $(CFLAGS) $(LDFLAGS) -o aspic"
+	             $(FE)$(CC) $(CFLAGS) $(LDFLAGS) -o aspic $(ASPICOBJ) -lm
+	             @echo ">>> aspic command built"; echo ""
 
 
 # Dependencies
