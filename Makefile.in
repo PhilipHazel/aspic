@@ -41,10 +41,11 @@ build:; @cd src; $(MAKE) \
                  FE="$(FE)" \
                  aspic
 
-clean:; cd src; $(MAKE) clean
+clean:
+		$(MAKE) -C src clean
 
-distclean:;     rm Makefile config.cache config.log config.status; \
-                cd src; $(MAKE) clean
+distclean: clean
+		$(RM) Makefile config.cache config.log config.status
 
 test:           build
 		cd testing; ./RunTests
