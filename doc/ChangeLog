@@ -1,12 +1,17 @@
 Change Log for Aspic
 --------------------
 
-Version 2.01  xx January 2023
+Version 2.01  xx yy 2026
 -----------------------------
 
 1. Fix memory overrun when processing unterminated string.
 
 2. Detects and give error for overlong variable name in substitution.
+
+3. Merged @ronjdesusa's patches to the build system:
+   . Improve clean and distclean targets
+   . Propagate CPPFLAGS and LDFLAGS during build
+   . Add DESTDIR support for staged installation
 
 
 Version 2.00  15 October 2022

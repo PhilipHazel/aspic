@@ -1828,7 +1828,7 @@ it is greater than the depth computed from the size of the font.
 .chapter "List of commands"
 This is a complete list of all Aspic commands.
 .
-.itable none 0 0 3 20 left 160 left 220 left
+.itable none 0 0 3 20 left 160 left 240 left
 .o arc               "draw a circular arc"
 .o arcarrow          "draw a circular arc with arrowhead(s)"
 .o arcradius         "set default arc radius"

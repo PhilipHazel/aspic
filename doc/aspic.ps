@@ -1,6 +1,6 @@
 %!PS-Adobe-3.0
-%%Creator: SDoP 0.90
-%%CreationDate: Mon Oct 10 17:25:32 2022
+%%Creator: SDoP 1.11
+%%CreationDate: Fri Sep 25 16:26:26 2026
 %%Pages: (atend)
 %%DocumentNeededResources:
 %%+ font Times-Roman
@@ -128,8 +128,7 @@ UpperEncoding 0 [
 /radical/ring/scommaaccent/summation
 /tcommaaccent/tilde/trademark/infinity
 ]putinterval
-/inf{dup dup findfont 3 1 roll FontDirectory exch known {pop}{(**** Font ")print
-100 string cvs print (" is not loaded ****\r\n)print stop}ifelse
+/inf{findfont
 dup dup/Encoding get StandardEncoding eq
 {maxlength dup dict/newfont0 exch def dict/newfont1 exch def
 dup
@@ -145,9 +144,19 @@ newfont0/Encoding LowerEncoding put dup newfont0 definefont def
 /Mt/moveto load def
 /RMt/rmoveto load def
 /RLt/rlineto load def
-/S/show load def
+/Ct/curveto load def
+/Sd/setdash load def
+/Slc/setlinecap load def
+/Slj/setlinejoin load def
+/Slm/setmiterlimit load def
 /Slw/setlinewidth load def
 /St/stroke load def
+/S/show load def
+/SM { dup stringwidth pop 2 div neg 0 RMt show } bind def
+/SE { dup stringwidth pop neg 0 RMt show } bind def
+/multifindfont{
+{dup/Font resourcestatus{pop pop findfont exit}{pop}ifelse}forall
+}bind def
 %%EndProlog
 
 %%BeginSetup
@@ -11266,16 +11275,18 @@ pagesave restore showpage
 257 150 Mt 0 Sf (set colour for lines \(and arcs and curv)S -0.165 R(e)S
 (s\))S
 97 138 Mt 6 Sf (linedash)S
-257 138 Mt 0 Sf (set dash parameters for lines \(and arcs and)S
-257 126 Mt(curv)S -0.165 R(es\))S
-97 114 Mt 6 Sf (linegr)S -0.198 R(ey)S
-257 114 Mt 0 Sf (set gre)S -0.165 R(yness for lines \(and arcs)S
+257 138 Mt 0 Sf (set dash parameters for lines \(and arcs and )S
+(curv)S -0.165 R(es\))S
+97 126 Mt 6 Sf (linegr)S -0.198 R(ey)S
+257 126 Mt 0 Sf (set gre)S -0.165 R(yness for lines \(and arcs)S
 ( and curv)S -0.165 R(es\))S
-97 102 Mt 6 Sf (linethickness)S
-257 102 Mt 0 Sf (set thickness of lines \(and arcs and curv)S
+97 114 Mt 6 Sf (linethickness)S
+257 114 Mt 0 Sf (set thickness of lines \(and arcs and curv)S
 -0.165 R(es\))S
-97 90 Mt 6 Sf (magnify)S
-257 90 Mt 0 Sf (magnify or reduce the picture)S
+97 102 Mt 6 Sf (magnify)S
+257 102 Mt 0 Sf (magnify or reduce the picture)S
+97 90 Mt 6 Sf (macr)S -0.198 R(o)S
+257 90 Mt 0 Sf (de)S 1 Sf (\216)S 0 Sf (ne an Aspic macro)S
 72 72 Mt( )S
 291.499 60 Mt(38)S
 423.307 60 Mt 2 Sf (List of commands \(16\))S
@@ -11286,35 +11297,33 @@ pagesave restore showpage
 %%BeginPageSetup
 /pagesave save def
 %%EndPageSetup
-97 768 Mt 6 Sf (macr)S -0.198 R(o)S
-257 768 Mt 0 Sf (de)S 1 Sf (\216)S 0 Sf (ne an Aspic macro)S
-97 756 Mt 6 Sf (pop)S
-257 756 Mt 0 Sf (restore en)S -0.44 R(vironment from the stack)S
-97 744 Mt 6 Sf (push)S
-257 744 Mt 0 Sf (push en)S -0.44 R(vironment onto the stack)S
-97 732 Mt 6 Sf (r)S -0.198 R(esolution)S
-257 732 Mt 0 Sf (set output resolution)S
-97 720 Mt 6 Sf (right)S
-257 720 Mt 0 Sf (set current direction)S
-97 708 Mt 6 Sf (set)S
-257 708 Mt 0 Sf (set v)S -0.275 R(alue of v)S -0.275 R(ariable)S
-97 696 Mt 6 Sf (setf)S -0.275 R(ont)S
-257 696 Mt 0 Sf (set current font)S
-97 684 Mt 6 Sf (shape)S 7 Sf (\216)S 6 Sf (ll)S
-257 684 Mt 0 Sf (set dra)S -0.165 R(wn shape )S 1 Sf (\216)S 0 Sf
+97 768 Mt 6 Sf (pop)S
+257 768 Mt 0 Sf (restore en)S -0.44 R(vironment from the stack)S
+97 756 Mt 6 Sf (push)S
+257 756 Mt 0 Sf (push en)S -0.44 R(vironment onto the stack)S
+97 744 Mt 6 Sf (r)S -0.198 R(esolution)S
+257 744 Mt 0 Sf (set output resolution)S
+97 732 Mt 6 Sf (right)S
+257 732 Mt 0 Sf (set current direction)S
+97 720 Mt 6 Sf (set)S
+257 720 Mt 0 Sf (set v)S -0.275 R(alue of v)S -0.275 R(ariable)S
+97 708 Mt 6 Sf (setf)S -0.275 R(ont)S
+257 708 Mt 0 Sf (set current font)S
+97 696 Mt 6 Sf (shape)S 7 Sf (\216)S 6 Sf (ll)S
+257 696 Mt 0 Sf (set dra)S -0.165 R(wn shape )S 1 Sf (\216)S 0 Sf
 (ll colour)S
-97 672 Mt 6 Sf (text)S
-257 672 Mt 0 Sf (output te)S -0.165 R(xt at gi)S -0.275 R(v)S
+97 684 Mt 6 Sf (text)S
+257 684 Mt 0 Sf (output te)S -0.165 R(xt at gi)S -0.275 R(v)S
 -0.165 R(en position)S
-97 660 Mt 6 Sf (textcolour)S
-257 660 Mt 0 Sf (set te)S -0.165 R(xt colour)S
-97 648 Mt 6 Sf (textdepth)S
-257 648 Mt 0 Sf (set minimal separation of te)S -0.165 R(xt it)S
+97 672 Mt 6 Sf (textcolour)S
+257 672 Mt 0 Sf (set te)S -0.165 R(xt colour)S
+97 660 Mt 6 Sf (textdepth)S
+257 660 Mt 0 Sf (set minimal separation of te)S -0.165 R(xt it)S
 (ems)S
-97 636 Mt 6 Sf (up)S
-257 636 Mt 0 Sf (set current direction)S
-97 624 Mt 6 Sf (vlinelength)S
-257 624 Mt 0 Sf (set def)S -0.11 R(ault v)S -0.165 R(ertical l)S
+97 648 Mt 6 Sf (up)S
+257 648 Mt 0 Sf (set current direction)S
+97 636 Mt 6 Sf (vlinelength)S
+257 636 Mt 0 Sf (set def)S -0.11 R(ault v)S -0.165 R(ertical l)S
 (ine length)S
 72 72 Mt( )S
 291.499 60 Mt(39)S
