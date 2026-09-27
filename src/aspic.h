@@ -2,9 +2,9 @@
 *                       ASPIC                    *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: September 2026 */
 
 /* General header file used by all modules */
 
@@ -23,7 +23,7 @@
 
 /* Miscellaneous defines */
 
-#define Version_String "2.01-DEV (25-January-2023)"
+#define Version "2.01-DEV (26-September-2026)"
 
 #define UNSET INT_MAX          /* For unset parameters */
 #define MEMORY_CHUNKSIZE 4096
@@ -360,72 +360,77 @@ typedef struct u2sencod {
 *                  Global variables              *
 *************************************************/
 
-extern FILE   *main_input;        /* source input file */
-extern FILE   *out_file;          /* output file */
-extern item_box *drawbbox;        /* box item for bounding box */
+extern uschar *Version_String;     /* for outputting */
+extern FILE   *main_input;         /* source input file */
+extern FILE   *out_file;           /* output file */
+extern item_box *drawbbox;         /* box item for bounding box */
 
-extern includestr *included_from; /* chain for included files */
-extern includestr *spare_included;/* chain of spare blocks */
-extern uschar **file_line_stack;  /* saved lines for included files */
-extern int    *file_chptr_stack;  /* saved chptrs ditto */
-extern int    inc_stack_ptr;      /* stack position */
-extern void   *spare_lines;       /* chain of re-usable input lines */
+extern tree_node *command_creator; /* the -creator option */
+extern tree_node *command_date;    /* the -date option */
+extern tree_node *command_title;   /* the -title option */
 
-extern item   *main_item_base;    /* base of chain of items */
-extern item   *lastitem;          /* last on list of items read */
-extern item   *baseitem;          /* item to base next item on */
+extern includestr *included_from;  /* chain for included files */
+extern includestr *spare_included; /* chain of spare blocks */
+extern uschar **file_line_stack;   /* saved lines for included files */
+extern int    *file_chptr_stack;   /* saved chptrs ditto */
+extern int    inc_stack_ptr;       /* stack position */
+extern void   *spare_lines;        /* chain of re-usable input lines */
 
-extern label  *label_base;        /* base of chain of labels */
-extern label  *nextlabel;         /* next label item */
-extern environment *env;          /* input environment */
+extern item   *main_item_base;     /* base of chain of items */
+extern item   *lastitem;           /* last on list of items read */
+extern item   *baseitem;           /* item to base next item on */
 
-extern bindfont *font_base;       /* base of chain of font bindings */
-extern BOOL   translate_chars;    /* TRUE to translate quotes and dash */
+extern label  *label_base;         /* base of chain of labels */
+extern label  *nextlabel;          /* next label item */
+extern environment *env;           /* input environment */
 
-extern double pi;                 /* PI */
+extern bindfont *font_base;        /* base of chain of font bindings */
+extern BOOL   translate_chars;     /* TRUE to translate quotes and dash */
 
-extern colour black;              /* For easy setting colours to black */
-extern colour unfilled;           /* An "impossible" colour */
+extern double pi;                  /* PI */
 
-extern int    chptr;		  /* offset to next char */
-extern int    drawbboxoffset;	  /* draw bounding box offset */
-extern BOOL   endfile;		  /* TRUE when EOF reached */
-extern int    item_arg1;	  /* parameter 1 for items */
-extern int    item_arg2;	  /* parameter 2 for items */
-extern int    joined_xx;          /* explicit join point */
+extern colour black;               /* For easy setting colours to black */
+extern colour unfilled;            /* An "impossible" colour */
+
+extern int    chptr;		   /* offset to next char */
+extern int    drawbboxoffset;	   /* draw bounding box offset */
+extern BOOL   endfile;		   /* TRUE when EOF reached */
+extern int    item_arg1;	   /* parameter 1 for items */
+extern int    item_arg2;	   /* parameter 2 for items */
+extern int    joined_xx;           /* explicit join point */
 extern int    joined_yy;
-extern int    max_level;          /* uppermost level used */
-extern int    min_level;          /* lowermost level used */
-extern int    macro_count;        /* count of executed macros */
-extern int    macro_id;		  /* this macro's id */
-extern int    minimum_thickness;  /* minimum line thickness */
-extern BOOL   no_variables;       /* disable variables */
-extern int    resolution;         /* resolution of output device */
-extern BOOL   strings_exist;      /* at least one item has a string */
-extern int    subs_ptr;           /* error offset in raw buffer */
+extern int    max_level;           /* uppermost level used */
+extern int    min_level;           /* lowermost level used */
+extern int    macro_count;         /* count of executed macros */
+extern int    macro_id;		   /* this macro's id */
+extern int    minimum_thickness;   /* minimum line thickness */
+extern BOOL   no_variables;        /* disable variables */
+extern int    resolution;          /* resolution of output device */
+extern BOOL   strings_exist;       /* at least one item has a string */
+extern int    subs_ptr;            /* error offset in raw buffer */
 
-extern uschar word[];             /* next word in input */
-extern uschar wordstd[];          /* ...with standardized spelling */
+extern uschar word[];              /* next word in input */
+extern uschar wordstd[];           /* ...with standardized spelling */
 
-extern uschar *in_line;           /* current input line */
-extern uschar *in_prev;           /* previous input line */
-extern uschar *in_raw;            /* raw input line */
+extern uschar *in_line;            /* current input line */
+extern uschar *in_prev;            /* previous input line */
+extern uschar *in_raw;             /* raw input line */
 
-extern uschar **in_line_stack;    /* stack of pointers to saved in_lines */
-extern int    *chptr_stack;       /* stack of saved chptrs */
-extern int    mac_stack_ptr;      /* the stack position */
-extern int    *mac_count_stack;   /* stack current count */
+extern uschar **in_line_stack;     /* stack of pointers to saved in_lines */
+extern int    *chptr_stack;        /* stack of saved chptrs */
+extern int    mac_stack_ptr;       /* the stack position */
+extern int    *mac_count_stack;    /* stack current count */
 
-extern macro  *macroot;           /* root of all macros */
-extern macro  *macactive;         /* chain of active macros */
-extern macro  *spare_macros;      /* chain of re-usable macro blocks */
+extern macro  *macroot;            /* root of all macros */
+extern macro  *macactive;          /* chain of active macros */
+extern macro  *spare_macros;       /* chain of re-usable macro blocks */
 
-extern int    outstyle;           /* output style */
-extern BOOL   reading;            /* TRUE while reading input */
-extern BOOL   substituting;       /* TRUE while substituting variables */
-extern BOOL   testing;            /* set when running tests */
+extern int    outstyle;            /* output style */
+extern BOOL   reading;             /* TRUE while reading input */
+extern BOOL   substituting;        /* TRUE while substituting variables */
+extern BOOL   testing;             /* set when running tests */
 
-extern tree_node *varroot;        /* variables root */
+extern tree_node *varroot;         /* variables root */
 
 /* UTF-8 tables */
 

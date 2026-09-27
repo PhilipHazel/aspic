@@ -2,16 +2,16 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2023 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: January 2023 */
+/* Last modified: September 2026 */
 
 /* ASPIC is an Amazingly Simple PICture composing program. It reads a
 description of a line-art picture, and outputs commands for another program to
 draw it. Aspic can output encapsulated PostScript (eps) or Scalable Vector
 Graphics (svg).
 
-This module contains the globals variables, main program, the error-handline
+This module contains the globals variables, main program, the error-handling
 function, memory allocator, and some other commonly used functions. */
 
 
@@ -26,14 +26,19 @@ function, memory allocator, and some other commonly used functions. */
 FILE *main_input;
 FILE *out_file;
 
-includestr *included_from = NULL;   /* chain for included files */
-includestr *spare_included = NULL;  /* chain of spare blocks */
-uschar **file_line_stack;           /* line stack for included files */
-int *file_chptr_stack;              /* chptr stack ditto */
-int inc_stack_ptr = 0;              /* stack position */
-void *spare_lines = NULL;           /* chain of re-usable input lines */
+uschar *Version_String = US Version; /* usually the real version. */
 
-item *main_item_base;               /* root of chain of drawing items */
+includestr *included_from = NULL;    /* chain for included files */
+includestr *spare_included = NULL;   /* chain of spare blocks */
+uschar **file_line_stack;            /* line stack for included files */
+int *file_chptr_stack;               /* chptr stack ditto */
+int inc_stack_ptr = 0;               /* stack position */
+void *spare_lines = NULL;            /* chain of re-usable input lines */
+
+item *main_item_base;                /* root of chain of drawing items */
+tree_node *command_creator = NULL;   /* the -creator option */
+tree_node *command_date = NULL;      /* the -date option */
+tree_node *command_title = NULL;     /* the -title option */
 
 double pi;
 colour black;
@@ -132,7 +137,7 @@ static uschar *error_messages[] = {
   US"End of file while reading macro \"%s\" - processing abandoned", /* 40 */
   US"Recursive macro call not allowed - processing abandoned", /* 41 */
   US"The \"align\" option is not valid for a sloping line", /* 42 */
-  US"Variable name is too long in substitution",            /* 43 */ 
+  US"Variable name is too long in substitution",            /* 43 */
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))
@@ -446,14 +451,17 @@ void usage(FILE *f)
 {
 fprintf(f, "Usage: aspic [<options>] [<input> [<output>]]\n\n");
 fprintf(f, "Options:\n");
-fprintf(f, "  -[-]help       show usage information and exit\n");
-fprintf(f, "  -nv            disable variable substitutions\n");
-fprintf(f, "  -[e]ps         generate Encapsulated PostScript\n");
-fprintf(f, "  -svg           generate SVG\n");
-fprintf(f, "  -testing       used by 'make test'\n");
-fprintf(f, "  -tr            translate quotes and double-hyphens\n");
-fprintf(f, "  -v             show version and exit\n");
-fprintf(f, "  -[-]version    show version and exit\n\n");
+fprintf(f, "  -creator <string>  force $creator variable\n");
+fprintf(f, "  -date <string>     force $date variable\n");
+fprintf(f, "  -[-]help           show usage information and exit\n");
+fprintf(f, "  -nv                disable variable substitutions\n");
+fprintf(f, "  -ov                omit version string in output\n");
+fprintf(f, "  -[e]ps             generate Encapsulated PostScript\n");
+fprintf(f, "  -svg               generate SVG\n");
+fprintf(f, "  -title <string>    force $title variable\n");
+fprintf(f, "  -tr                translate quotes and double-hyphens\n");
+fprintf(f, "  -v                 show version and exit\n");
+fprintf(f, "  -[-]version        show version and exit\n\n");
 
 fprintf(f, "The default output format is Encapsulated PostScript.\n");
 fprintf(f, "Only one of -[e]ps or -svg is permitted.\n");
@@ -512,23 +520,49 @@ while (firstarg < argc && argv[firstarg][0] == '-' && argv[firstarg][1] != 0)
   uschar *arg = US argv[firstarg++];
   if (Ustrcmp(arg, "-nv") == 0)
     no_variables = TRUE;
+  else if (Ustrcmp(arg, "-ov") == 0)
+    Version_String = US "(version omitted)";
   else if (Ustrcmp(arg, "-testing") == 0)
+    {
     testing = TRUE;
+    Version_String = US "";
+    }
   else if (Ustrcmp(arg, "-ps") == 0 || Ustrcmp(arg, "-eps") == 0)
     { if (outstyle == OUT_UNSET) outstyle = OUT_EPS; else error_moan(28); }
   else if (Ustrcmp(arg, "-svg") == 0)
     { if (outstyle == OUT_UNSET) outstyle = OUT_SVG; else error_moan(28); }
   else if (Ustrcmp(arg, "-tr") == 0)
     translate_chars = TRUE;
+  else if (Ustrcmp(arg, "-creator") == 0)
+    {
+    command_creator = getstore(sizeof(tree_node) + 7);
+    Ustrcpy(command_creator->name, "creator");
+    command_creator->value = US argv[firstarg++];
+    (void)tree_insertnode(&varroot, command_creator);
+    }
+  else if (Ustrcmp(arg, "-date") == 0)
+    {
+    command_date = getstore(sizeof(tree_node) + 4);
+    Ustrcpy(command_date->name, "date");
+    command_date->value = US argv[firstarg++];
+    (void)tree_insertnode(&varroot, command_date);
+    }
+  else if (Ustrcmp(arg, "-title") == 0)
+    {
+    command_title = getstore(sizeof(tree_node) + 5);
+    Ustrcpy(command_title->name, "title");
+    command_title->value = US argv[firstarg++];
+    (void)tree_insertnode(&varroot, command_title);
+    }
   else if (Ustrcmp(arg, "-v") == 0 || Ustrcmp(arg, "-version") == 0 ||
            Ustrcmp(arg, "--version") == 0)
     {
-    printf("\rAspic %s\n", testing? "" : Version_String);
+    printf("\rAspic %s\n", Version_String);
     exit(EXIT_SUCCESS);
     }
   else if (Ustrcmp(arg, "-help") == 0 || Ustrcmp(arg, "--help") == 0)
     {
-    printf("\rAspic %s\n", testing? "": Version_String);
+    printf("\rAspic %s\n", Version_String);
     usage(stdout);
     exit(EXIT_SUCCESS);
     }
@@ -561,26 +595,33 @@ else
     }
   }
 
-/* Set up some default value for certain conventional variables. Put the data
-in malloc memory so it can be freed just like other variables. */
+/* Set up some default value for certain conventional variables if they are not
+set on the command line. */
 
-tn = getstore(sizeof(tree_node) + 7);
-Ustrcpy(tn->name, "creator");
-tn->value = getstore(8);
-Ustrcpy(tn->value, "Unknown");
-(void)tree_insertnode(&varroot, tn);
+if (command_creator == NULL)
+  {
+  tn = getstore(sizeof(tree_node) + 7);
+  Ustrcpy(tn->name, "creator");
+  tn->value = US "Unknown";
+  (void)tree_insertnode(&varroot, tn);
+  }
 
-tn = getstore(sizeof(tree_node) + 4);
-Ustrcpy(tn->name, "date");
-tn->value = getstore(sizeof(timebuf) + 1);
-Ustrcpy(tn->value, time_stamp(timebuf, sizeof(timebuf)));
-(void)tree_insertnode(&varroot, tn);
+if (command_date == NULL)
+  {
+  tn = getstore(sizeof(tree_node) + 4);
+  Ustrcpy(tn->name, "date");
+  tn->value = getstore(sizeof(timebuf) + 1);
+  Ustrcpy(tn->value, time_stamp(timebuf, sizeof(timebuf)));
+  (void)tree_insertnode(&varroot, tn);
+  }
 
-tn = getstore(sizeof(tree_node) + 5);
-Ustrcpy(tn->name, "title");
-tn->value = getstore(8);
-Ustrcpy(tn->value, "Unknown");
-(void)tree_insertnode(&varroot, tn);
+if (command_title == NULL)
+  {
+  tn = getstore(sizeof(tree_node) + 5);
+  Ustrcpy(tn->name, "title");
+  tn->value = US "Unknown";
+  (void)tree_insertnode(&varroot, tn);
+  }
 
 /* Initialization that depends on the output style */
 

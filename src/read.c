@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2023 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: January 2023 */
+/* Last modified: September 2026 */
 
 /* This module contains the code for reading the input, with the exception of
 commands for drawing objects (see rditem.c) and a number of common subroutines
@@ -209,6 +209,19 @@ for (;;)
   }
 s[n] = 0;
 nextsigch();
+
+/* A command line setting of creator, date, or title overrides. */
+
+if ((Ustrcmp(word, "creator") == 0 && command_creator != NULL) ||
+    (Ustrcmp(word, "date") == 0 && command_date != NULL) ||
+    (Ustrcmp(word, "title") == 0 && command_title != NULL))
+  {
+  fprintf(stderr,
+    "Warning: command line option -%s overrode in-file setting\n", word);
+  return;
+  }
+
+/* Update existing variable or create a new one. */
 
 tn = tree_search(varroot, word);
 

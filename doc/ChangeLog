@@ -13,6 +13,11 @@ Version 2.01  xx yy 2026
    . Propagate CPPFLAGS and LDFLAGS during build
    . Add DESTDIR support for staged installation
 
+4. Added -creator, -date, and -title command line options, overriding any
+settings within the input.
+
+5. Adde the -ov (omit version) command line option.
+
 
 Version 2.00  15 October 2022
 -----------------------------
@@ -42,17 +47,17 @@ Time for a spring clean of this very old code.
 
 11. Avoid closing stdin or stdout.
 
-12. Change default output to .eps or .svg if a named input file but no output 
+12. Change default output to .eps or .svg if a named input file but no output
 given.
 
-13. Give error for text option consisting just one number if it contains a 
+13. Give error for text option consisting just one number if it contains a
 decimal point, as it is supposed to be a font number.
 
 14. Add support for bounding frame thickness, colour, fill, dashedness.
 
 15. With the help of LCOV, extend the tests to improve their coverage.
 
-16. General code tidying throughout, without affecting behaviour, for example 
+16. General code tidying throughout, without affecting behaviour, for example
 moving some declarations into "for" loops and adding/extending comments.
 
 

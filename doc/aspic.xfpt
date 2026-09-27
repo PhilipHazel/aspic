@@ -87,15 +87,15 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>09 October 2022</date>
+<date>27 September 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
-  <revnumber>2.00</revnumber>
-  <date>09 October 2022</date>
+  <revnumber>2.01</revnumber>
+  <date>09 September 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
-<copyright><year>2022</year><holder>University of Cambridge</holder></copyright>
+<copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
 </bookinfo>
 .literal off
 
@@ -153,18 +153,30 @@ adding &`.eps`& or &`.svg`& as appropriate. The standard input or output may be
 explicitly referenced by specifying a single hyphen character. The options are
 as follows:
 
-&*-help*& causes Aspic to display usage information on the standard output, and
-then exit.
+&*-creator*& <&'string'&> forces a value into the &`$creator`& variable, 
+overriding any setting within the input.
+
+&*-date*& <&'string'&> forces a value into the &`$date`& variable, overriding
+any setting within the input.
+
+&*-help*& or &*--help*& causes Aspic to display usage information on the
+standard output, and then exit.
 
 &*-nv*& disables the use of Aspic variables. This means that dollar characters
 in the input file are no longer treated specially. The option is useful when
 there are dollar characters in an Aspic source that does not make use of Aspic
 variables.
 
+&*-ov*& causes Aspic to omit the version information it normally includes in 
+its output. This is mainly useful for testing.
+
 &*-eps*& or &*-ps*& (the default) causes Aspic to generate Encapsulated
 PostScript.
 
 &*-svg*& causes Aspic to generate Scalable Vector Graphics (SVG).
+
+&*-title*& <&'string'&> forces a value into the &`$title`& variable, overriding
+any setting within the input.
 
 &*-tr*& causes Aspic to translate certain input characters; for example, a
 grave accent is translated into a typographic opening quote. Details are given
@@ -172,9 +184,6 @@ in section &<<SECTCODES>>&.
 
 &*-v*& or &*--version*& causes Aspic to display its version number on the
 standard output, and then exit.
-
-There is also a &*-testing*& option that is used in testing to suppress the
-Aspic version number in the output, but is not intended for general use.
 
 Error messages are written to the standard error stream. No output is generated
 if any errors are found in the input. A few errors are sufficiently serious
@@ -627,12 +636,14 @@ Later in the input file, the variable could be used like this:
 box filled $red;
 .endd
 
-At the start of an Aspic run, the variable &*$date*& is initialized to contain
-the date and time, and the variables &*$creator*& and &*$title*& are each set
-to the string `Unknown'. These three variables are used to create comments at
-the start of the output, but otherwise they are treated like any other
-variable, and you can change them as required. For example, you might like to
-set &*$date*& to the date on which the picture was defined.
+There are three variables that are treated specially: &`$creator`&, &`$date`&,
+and &`$title`&. Their values may be set by command line options, but if they
+are not, the variable &`$date`& is initialized to contain the date and time,
+and the variables &`$creator`& and &`$title`& are each set to the string
+`Unknown'. These three variables are used to create comments at the start of
+Aspic's output. If they are not set via the command line, you can set them from 
+within the Aspic input. For example, you might like to set &`$date`& to the
+date on which the picture was defined.
 
 
 

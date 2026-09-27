@@ -11,15 +11,15 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>09 October 2022</date>
+<date>27 September 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
-  <revnumber>2.00</revnumber>
-  <date>09 October 2022</date>
+  <revnumber>2.01</revnumber>
+  <date>09 September 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
-<copyright><year>2022</year><holder>University of Cambridge</holder></copyright>
+<copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
 </bookinfo>
 <chapter>
 <title>Introduction to Aspic</title>
@@ -80,14 +80,26 @@ explicitly referenced by specifying a single hyphen character. The options are
 as follows:
 </para>
 <para>
-<emphasis role="bold">-help</emphasis> causes Aspic to display usage information on the standard output, and
-then exit.
+<emphasis role="bold">-creator</emphasis> &lt;<emphasis>string</emphasis>&gt; forces a value into the <literal>$creator</literal> variable, 
+overriding any setting within the input.
+</para>
+<para>
+<emphasis role="bold">-date</emphasis> &lt;<emphasis>string</emphasis>&gt; forces a value into the <literal>$date</literal> variable, overriding
+any setting within the input.
+</para>
+<para>
+<emphasis role="bold">-help</emphasis> or <emphasis role="bold">--help</emphasis> causes Aspic to display usage information on the
+standard output, and then exit.
 </para>
 <para>
 <emphasis role="bold">-nv</emphasis> disables the use of Aspic variables. This means that dollar characters
 in the input file are no longer treated specially. The option is useful when
 there are dollar characters in an Aspic source that does not make use of Aspic
 variables.
+</para>
+<para>
+<emphasis role="bold">-ov</emphasis> causes Aspic to omit the version information it normally includes in 
+its output. This is mainly useful for testing.
 </para>
 <para>
 <emphasis role="bold">-eps</emphasis> or <emphasis role="bold">-ps</emphasis> (the default) causes Aspic to generate Encapsulated
@@ -97,6 +109,10 @@ PostScript.
 <emphasis role="bold">-svg</emphasis> causes Aspic to generate Scalable Vector Graphics (SVG).
 </para>
 <para>
+<emphasis role="bold">-title</emphasis> &lt;<emphasis>string</emphasis>&gt; forces a value into the <literal>$title</literal> variable, overriding
+any setting within the input.
+</para>
+<para>
 <emphasis role="bold">-tr</emphasis> causes Aspic to translate certain input characters; for example, a
 grave accent is translated into a typographic opening quote. Details are given
 in section <xref linkend="SECTCODES"/>.
@@ -104,10 +120,6 @@ in section <xref linkend="SECTCODES"/>.
 <para>
 <emphasis role="bold">-v</emphasis> or <emphasis role="bold">--version</emphasis> causes Aspic to display its version number on the
 standard output, and then exit.
-</para>
-<para>
-There is also a <emphasis role="bold">-testing</emphasis> option that is used in testing to suppress the
-Aspic version number in the output, but is not intended for general use.
 </para>
 <para>
 Error messages are written to the standard error stream. No output is generated
@@ -1091,12 +1103,14 @@ Later in the input file, the variable could be used like this:
 box filled $red;
 </literallayout>
 <para>
-At the start of an Aspic run, the variable <emphasis role="bold">$date</emphasis> is initialized to contain
-the date and time, and the variables <emphasis role="bold">$creator</emphasis> and <emphasis role="bold">$title</emphasis> are each set
-to the string &#x2018;Unknown&#x2019;. These three variables are used to create comments at
-the start of the output, but otherwise they are treated like any other
-variable, and you can change them as required. For example, you might like to
-set <emphasis role="bold">$date</emphasis> to the date on which the picture was defined.
+There are three variables that are treated specially: <literal>$creator</literal>, <literal>$date</literal>,
+and <literal>$title</literal>. Their values may be set by command line options, but if they
+are not, the variable <literal>$date</literal> is initialized to contain the date and time,
+and the variables <literal>$creator</literal> and <literal>$title</literal> are each set to the string
+&#x2018;Unknown&#x2019;. These three variables are used to create comments at the start of
+Aspic&#x2019;s output. If they are not set via the command line, you can set them from 
+within the Aspic input. For example, you might like to set <literal>$date</literal> to the
+date on which the picture was defined.
 </para>
 </chapter>
 

@@ -10,11 +10,11 @@ aspic - a line-art processor
 .SH DESCRIPTION
 .rs
 .sp
-\fBAspic\fP is a program that processes a textual description of a line art 
+\fBAspic\fP is a program that processes a textual description of a line art
 graphic, converting it into a form that is suitable for inclusion in another
 document. The default output format is Encapsulated PostScript, but there is
 also support for Scalable Vector Graphics (SVG). For a full specification, see
-the reference manual. This man page contains only a description of the command
+the reference manual. This man page contains only a summary of the command
 line interface.
 .P
 If no source or destination is given, Aspic reads from the standard input and
@@ -28,11 +28,20 @@ the standard error stream.
 .SH OPTIONS
 .rs
 .TP 10
-\fB-help\fP
-Give some help information and exit.
+\fB-creator\fP <\fIname\fP>
+Set the $creator variable, overriding a setting in the input.
+.TP
+\fB-date\fP <\fItext\fP>
+Set the $date variable, overriding a setting in the input.
+.TP
+\fB-help\fP or \fB--help\fP
+Give some help information, then exit.
 .TP
 \fB-nv\fP
 Disable the use of Aspic variables (dollar is no longer special).
+.TP
+\fB-ov\fP
+Omit Aspic version information in the output.
 .TP
 \fB-eps\fP or \fB-ps\fP
 Output is encapsulated PostScript. This is the default.
@@ -40,17 +49,20 @@ Output is encapsulated PostScript. This is the default.
 \fB-svg\fP
 Output is Scalar Vector Graphics (SVG).
 .TP
+\fB-title\fP <\fItext\fP>
+Set the $title variable, overriding a setting in the input.
+.TP
 \fB-tr\fP
 Translate certain characters (e.g. grave accent becomes opening quote).
 .TP
-\fB-v\fP
-Verify the Aspic version number, and exit.
+\fB-v\fP or \fB--version\fP
+Verify the Aspic version number, then exit.
 .
 .
-.SH AUTHOR          
+.SH AUTHOR
 .rs
 .sp
-.nf                                                                        
+.nf
 Philip Hazel
 .fi
 .
@@ -59,5 +71,5 @@ Philip Hazel
 .rs
 .sp
 .nf
-Last updated: 10 September 2022
+Last updated: 26 September 2026
 .fi

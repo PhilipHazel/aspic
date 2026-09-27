@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: September 2026 */
 
 /* This module generates output as encapsulated PostScript.*/
 
@@ -691,8 +691,8 @@ fprintf(out_file, "%%!PS-Adobe-2.0 EPSF-2.0\n");
 tn = tree_search(varroot, US"title");
 fprintf(out_file, "%%%%Title: %s\n", tn->value);
 tn = tree_search(varroot, US"creator");
-fprintf(out_file, "%%%%Creator: %s, using Aspic %s\n", tn->value,
-  testing? "" : Version_String);
+fprintf(out_file, "%%%%Creator: %s, using Aspic %s\n", tn->value, 
+  Version_String);
 tn = tree_search(varroot, US"date");
 fprintf(out_file, "%%%%CreationDate: %s\n", tn->value);
 fprintf(out_file, "%%%%BoundingBox: 0 0 %s %s\n",

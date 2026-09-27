@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: September 2026 */
 
 
 /* This module generates output in SVG (Scalar Vector Graphics) format. */
@@ -654,7 +654,7 @@ fprintf(out_file, "     xmlns=\"http://www.w3.org/2000/svg\">\n\n");
 tnc = tree_search(varroot, US"creator");
 tnd = tree_search(varroot, US"date");
 fprintf(out_file, "<!-- created by %s on %s, using Aspic %s -->\n",
-  tnc->value,  tnd->value, testing? "" : Version_String);
+  tnc->value,  tnd->value, Version_String);
 
 tnc = tree_search(varroot, US"title");
 fprintf(out_file, "<title>%s</title>\n\n", tnc->value);
