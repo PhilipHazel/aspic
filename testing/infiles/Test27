@@ -1,5 +1,3 @@
-set date "<Dummy date>";
-
 arc to (40,40);
 A: box width 80; 
 left; arc to (40,40);

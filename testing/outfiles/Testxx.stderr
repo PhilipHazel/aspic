@@ -1,15 +1,18 @@
-Aspic 
+Aspic (version omitted)
 Usage: aspic [<options>] [<input> [<output>]]
 
 Options:
-  -[-]help       show usage information and exit
-  -nv            disable variable substitutions
-  -[e]ps         generate Encapsulated PostScript
-  -svg           generate SVG
-  -testing       used by 'make test'
-  -tr            translate quotes and double-hyphens
-  -v             show version and exit
-  -[-]version    show version and exit
+  -creator <string>  force $creator variable
+  -date <string>     force $date variable
+  -[-]help           show usage information and exit
+  -nv                disable variable substitutions
+  -ov                omit version string in output
+  -[e]ps             generate Encapsulated PostScript
+  -svg               generate SVG
+  -title <string>    force $title variable
+  -tr                translate quotes and double-hyphens
+  -v                 show version and exit
+  -[-]version        show version and exit
 
 The default output format is Encapsulated PostScript.
 Only one of -[e]ps or -svg is permitted.
@@ -22,7 +25,7 @@ Omit file names or use "-" for stdin and stdout.
 <svg width="138" height="36.5" version="1.1"
      xmlns="http://www.w3.org/2000/svg">
 
-<!-- created by Unknown on <Dummy date>, using Aspic  -->
+<!-- created by Unknown on <date>, using Aspic (version omitted) -->
 <title>Unknown</title>
 
 <g transform="translate(0,36.5)" font-family="Times" font-size="12">
@@ -30,20 +33,23 @@ Omit file names or use "-" for stdin and stdout.
 <text x="69" y="-15.25" text-anchor="middle">Dollar $abc not special</text>
 </g></svg>
 
-Aspic 
+Aspic (version omitted)
 
 Aspic: Unrecognized command line option "-badoption"
 Usage: aspic [<options>] [<input> [<output>]]
 
 Options:
-  -[-]help       show usage information and exit
-  -nv            disable variable substitutions
-  -[e]ps         generate Encapsulated PostScript
-  -svg           generate SVG
-  -testing       used by 'make test'
-  -tr            translate quotes and double-hyphens
-  -v             show version and exit
-  -[-]version    show version and exit
+  -creator <string>  force $creator variable
+  -date <string>     force $date variable
+  -[-]help           show usage information and exit
+  -nv                disable variable substitutions
+  -ov                omit version string in output
+  -[e]ps             generate Encapsulated PostScript
+  -svg               generate SVG
+  -title <string>    force $title variable
+  -tr                translate quotes and double-hyphens
+  -v                 show version and exit
+  -[-]version        show version and exit
 
 The default output format is Encapsulated PostScript.
 Only one of -[e]ps or -svg is permitted.
@@ -63,7 +69,7 @@ Aspic: No output generated
 <svg width="72.5" height="36.5" version="1.1"
      xmlns="http://www.w3.org/2000/svg">
 
-<!-- created by Unknown on <Dummy date>, using Aspic  -->
+<!-- created by Unknown on <date>, using Aspic (version omitted) -->
 <title>Unknown</title>
 
 <g transform="translate(0,36.5)" font-family="Times" font-size="12">
@@ -71,8 +77,8 @@ Aspic: No output generated
 </g></svg>
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: Unknown
-%%Creator: Unknown, using Aspic 
-%%CreationDate: <Dummy date>
+%%Creator: Unknown, using Aspic (version omitted)
+%%CreationDate: <date>
 %%BoundingBox: 0 0 72.5 36.5
 %%EndComments
 

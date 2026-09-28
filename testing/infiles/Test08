@@ -1,4 +1,3 @@
-set date "<dummy date>";
 boundingbox 20;
 A: arc "A";
 B: arc clockwise radius 20 angle 180 "B";

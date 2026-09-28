@@ -1,4 +1,3 @@
-set date "<dummy date>";
 set Green       "0,0.7,0";
 FR:  box;
      iline down 100; 

@@ -1,4 +1,3 @@
-set date "<dummy date>";
 iline up; 
 text "ABC";
 iline down 144 "XYZ"/r;

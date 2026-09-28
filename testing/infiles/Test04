@@ -1,4 +1,3 @@
-set date "<dummy date>";
 box width 120 """abc"" <a> &c <b> $$34";
 
 bindfont 2 "Times-Bold" 14;

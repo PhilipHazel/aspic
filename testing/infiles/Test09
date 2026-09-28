@@ -1,4 +1,3 @@
-set date "<dummy date>";
 A: line; curve to start;
 iline; line; curve to start clockwise;
 B: curve from start to start of A wavy;

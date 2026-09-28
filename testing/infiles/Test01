@@ -1,5 +1,3 @@
-set date "<dummy date>";
-
 # These settings improve coverage in the tree functions, making sure all the
 # paths through the tree-balancing code get exercised.
 

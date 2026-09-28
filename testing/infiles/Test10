@@ -1,4 +1,3 @@
-set date "<dummy date>";
 boxdepth 24;
 
 macro arbox {

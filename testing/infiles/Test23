@@ -1,5 +1,3 @@
-set date "<dummy date>";
-
 boxgreyness 0.5; boxthickness 2; boxwidth 20; boxdepth 10;
 A: box "A"; box grey 0.2 thickness 4 width 30 depth 20 "B"; 
 boxcolour 0,1,0; box colour 1,0,0 "C"; box "D";

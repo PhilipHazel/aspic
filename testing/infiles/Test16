@@ -1,4 +1,3 @@
-set date "<dummy date>";
 bindfont 1 "Times-Roman" 24;
 text "A&#123;B open curly"
      "A&#123;B open curly"/l
