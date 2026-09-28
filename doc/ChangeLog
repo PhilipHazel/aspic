@@ -16,7 +16,10 @@ Version 2.01  xx yy 2026
 4. Added -creator, -date, and -title command line options, overriding any
 settings within the input.
 
-5. Adde the -ov (omit version) command line option.
+5. Added the -ov (omit version) command line option.
+
+6. Removed the obsolete -testing option as the tests have been updated to use 
+the new options above.
 
 
 Version 2.00  15 October 2022

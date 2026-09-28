@@ -71,7 +71,6 @@ BOOL no_variables = FALSE;     /* variables are available by default */
 BOOL reading = FALSE;          /* true while reading */
 BOOL strings_exist = FALSE;    /* at least one item has a string */
 BOOL substituting = FALSE;     /* true while substituting variables */
-BOOL testing = FALSE;          /* suppress version in output */
 
 tree_node *varroot = NULL;     /* root of variables tree */
 
@@ -522,11 +521,6 @@ while (firstarg < argc && argv[firstarg][0] == '-' && argv[firstarg][1] != 0)
     no_variables = TRUE;
   else if (Ustrcmp(arg, "-ov") == 0)
     Version_String = US "(version omitted)";
-  else if (Ustrcmp(arg, "-testing") == 0)
-    {
-    testing = TRUE;
-    Version_String = US "";
-    }
   else if (Ustrcmp(arg, "-ps") == 0 || Ustrcmp(arg, "-eps") == 0)
     { if (outstyle == OUT_UNSET) outstyle = OUT_EPS; else error_moan(28); }
   else if (Ustrcmp(arg, "-svg") == 0)

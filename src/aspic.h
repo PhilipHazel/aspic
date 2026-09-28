@@ -428,7 +428,6 @@ extern macro  *spare_macros;       /* chain of re-usable macro blocks */
 extern int    outstyle;            /* output style */
 extern BOOL   reading;             /* TRUE while reading input */
 extern BOOL   substituting;        /* TRUE while substituting variables */
-extern BOOL   testing;             /* set when running tests */
 
 extern tree_node *varroot;         /* variables root */
 
