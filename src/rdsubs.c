@@ -95,16 +95,16 @@ void
 chain_label(item *newitem)
 {
 newitem->next = NULL;
-if (lastitem == NULL) 
+if (lastitem == NULL)
   {
   main_item_base = newitem;
-  newitem->prev = NULL;  
+  newitem->prev = NULL;
   }
-else 
+else
   {
   lastitem->next = newitem;
-  newitem->prev = lastitem; 
-  } 
+  newitem->prev = lastitem;
+  }
 baseitem = lastitem = newitem;
 
 if (nextlabel != NULL)
@@ -186,15 +186,15 @@ for (s = raw, t = cooked; *s != 0; )
 
   toolong = FALSE;
   p = name;
-  while (isalpha(*s) || isdigit(*s)) 
+  while (isalpha(*s) || isdigit(*s))
     {
     if (!toolong)
-      {  
+      {
       if ((size_t)(p - name) >= sizeof(name) - 1) toolong = TRUE;
         else *p++ = *s;
-      } 
-    s++;   
-    } 
+      }
+    s++;
+    }
   *p = 0;
 
   subs_ptr = s - raw;   /* Offset for errors */
@@ -204,8 +204,8 @@ for (s = raw, t = cooked; *s != 0; )
     if (*s == '}') s++; else error_moan(27, name);
     }
 
-  if (*name == 0) error_moan(17); 
-  else if (toolong) error_moan(43); 
+  if (*name == 0) error_moan(17);
+  else if (toolong) error_moan(43);
   else
     {
     tree_node *tn = tree_search(varroot, name);
@@ -1380,6 +1380,43 @@ return TRUE;
 
 
 /*************************************************
+*         Find item to copy data from            *
+*************************************************/
+
+/* If next character is '*', look back for item of the same type. If next is
+"of <label>", search for the label.
+
+Argument: the item currently being set up
+Returns:  the reference item or NULL if not found
+*/
+
+static item *
+find_ref(item *p)
+{
+item *ref;
+
+if (in_line[chptr] == '*')
+  {
+  for (ref = baseitem; ref != NULL; ref = ref->prev)
+    {
+    if (ref->type == p->type) break;
+    }
+  if (ref == NULL) error_moan(44);
+    else chptr ++;  /* Move past '*' */
+  return ref;
+  }
+
+readword();
+if (Ustrcmp(word, "of") != 0) return NULL;
+readword();
+ref = findlabel(word);
+if (ref == NULL) error_moan(10, word);
+return ref;
+}
+
+
+
+/*************************************************
 *            Handle optional parameters          *
 *************************************************/
 
@@ -1430,7 +1467,8 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_yline:
         case opt_ynline:
           {
-	  int value = (type == opt_xline || type == opt_xnline)? env->line_hw : env->line_vd;
+	  int value = (type == opt_xline || type == opt_xnline)?
+            env->line_hw : env->line_vd;
 	  int sign = (type == opt_xnline || type == opt_ynline)? (-1) : (+1);
           if (isdigit((int)in_line[chptr])) value = mag(readnumber());
 	  if (arg1 >= 0) *(int *)(((uschar *)p) + arg1) = value * sign;
@@ -1440,8 +1478,17 @@ while (wordread || isalpha((int)in_line[chptr]))
         break;
 
         case opt_dim:      /* single dimension, magnified */
-	if (!isdigit((int)in_line[chptr])) error_moan(8); else *(int *)(((uschar *)p) + arg1) =
-          mag(readnumber());
+	if (isdigit((int)in_line[chptr]))
+          {
+          *(int *)(((uschar *)p) + arg1) = mag(readnumber());
+          }
+        else
+          {
+          item *ref = find_ref(p);
+          if (ref != NULL) *(int *)(((uschar *)p) + arg1) =
+            *(int *)(((uschar *)ref) + arg1);
+          else error_moan(8);
+          }
         break;
 
         case opt_angle:    /* single angle -- don't magnify! */

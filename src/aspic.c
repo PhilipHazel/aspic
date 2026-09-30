@@ -101,7 +101,7 @@ static uschar *error_messages[] = {
   US"Font number must be greater than 0",                   /* 5 */
   US"Unknown%s variable \"%s\"",                            /* 6 */
   US"Unknown option word \"%s\"",                           /* 7 */
-  US"Dimension expected",                                   /* 8 */
+  US"Dimension, '*', or \"of <label>\" expected",           /* 8 */
   US"Label \"%s\" incorrectly placed (may only precede drawing command)", /* 9 */
   US"Can't find item labelled \"%s\"",                      /* 10 */
   US"%s expected",                                          /* 11 */
@@ -137,6 +137,7 @@ static uschar *error_messages[] = {
   US"Recursive macro call not allowed - processing abandoned", /* 41 */
   US"The \"align\" option is not valid for a sloping line", /* 42 */
   US"Variable name is too long in substitution",            /* 43 */
+  US"No previous item of the same type exists",             /* 44 */ 
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))
