@@ -242,6 +242,7 @@ typedef struct environment {
 
 #define itemhdr \
   struct item *next; \
+  struct item *prev; \
   stringchain *strings; \
   int level; \
   int type; \

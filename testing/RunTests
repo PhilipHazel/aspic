@@ -4,8 +4,6 @@ cf="diff -u"
 testing="-ov -date <date>"
 valgrind=""
 
-echo XXX $testing
-
 /bin/rm -f test.*
 /bin/rm -f test-*
 

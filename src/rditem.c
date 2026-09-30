@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2022 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: October 2022 */
+/* Last modified: October 2026 */
 
 /* This module contains code for reading commands that define shapes. Each gets
 added to the item list. */
@@ -226,7 +226,6 @@ arc->arrow_end = item_arg2;
 arc->arrow_x = env->arrow_x;
 arc->arrow_y = env->arrow_y;
 arc->cw = FALSE;
-arc->next = NULL;
 arc->strings = NULL;
 arc->level = env->level;
 
@@ -618,9 +617,7 @@ c_curve(void)
 item_curve *curve = getstore(sizeof(item_curve));
 double f, fm, h, w, angle, len, flen, ylen, dx, dy, cwsign;
 
-curve->next = NULL;
 curve->strings = NULL;
-
 curve->type = i_curve;
 curve->style = item_arg1;
 curve->level = env->level;
@@ -760,7 +757,6 @@ box->style = item_arg1;
 box->dash1 = 0;
 box->linedepth = env->linedepth;
 box->fontdepth = env->fontdepth;
-box->next = NULL;
 box->strings = NULL;
 box->boxtype = boxtype;
 box->level = env->level;
@@ -1154,7 +1150,6 @@ line->type = i_line;
 line->style = item_arg1;
 line->linedepth = env->linedepth;
 line->fontdepth = env->fontdepth;
-line->next = NULL;
 line->strings = NULL;
 line->dash1 = 0;
 line->dash2 = 0;

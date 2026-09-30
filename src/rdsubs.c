@@ -2,9 +2,9 @@
 *                      ASPIC                     *
 *************************************************/
 
-/* Copyright (c) University of Cambridge 1991 - 2023 */
+/* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: January 2023 */
+/* Last modified: September 2026 */
 
 /* This module contains miscellaneous functions that are called while the input
 is being read. */
@@ -94,7 +94,17 @@ Returns:    nothing
 void
 chain_label(item *newitem)
 {
-if (lastitem == NULL) main_item_base = newitem; else lastitem->next = newitem;
+newitem->next = NULL;
+if (lastitem == NULL) 
+  {
+  main_item_base = newitem;
+  newitem->prev = NULL;  
+  }
+else 
+  {
+  lastitem->next = newitem;
+  newitem->prev = lastitem; 
+  } 
 baseitem = lastitem = newitem;
 
 if (nextlabel != NULL)
