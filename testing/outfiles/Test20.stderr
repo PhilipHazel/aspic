@@ -79,22 +79,22 @@ line; arc to start of B;              #11 label
 Aspic: Parenthesized vector (x,y) expected
 line; arc to start plus;              #11 vector
                        ^
-Aspic: unsigned angle expected
+Aspic: unsigned angle, *, or "copy <label>" expected
 arc angle rhubarb;                    #11 angle
-          ^
-Aspic: grey level expected
+                 ^
+Aspic: grey level, *, or "copy <label>" expected
 line greyness rhubarb;                #11 grey level
-              ^
-Aspic: colour values expected
+                     ^
+Aspic: colour values, *, or "copy <label>" expected
 line colour rhubarb;                  #11 colour
-            ^
+                   ^
 Aspic: green and blue values expected
 line colour 0.5;                      #11 green and blue
                ^
 Aspic: blue value expected
 line colour 0.5,0.5;                  #11 blue
                    ^
-Aspic: grey level or colour values expected
+Aspic: grey level, colour values, *, or "copy <label>" expected
 box filled;                           #11 colour or grey
           ^
 Aspic: blue value expected

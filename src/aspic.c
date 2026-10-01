@@ -4,7 +4,7 @@
 
 /* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: September 2026 */
+/* Last modified: October 2026 */
 
 /* ASPIC is an Amazingly Simple PICture composing program. It reads a
 description of a line-art picture, and outputs commands for another program to
@@ -138,6 +138,7 @@ static uschar *error_messages[] = {
   US"The \"align\" option is not valid for a sloping line", /* 42 */
   US"Variable name is too long in substitution",            /* 43 */
   US"No previous item of the same type exists",             /* 44 */ 
+  US"Item \"%s\" is not the same type as the current item", /* 45 */ 
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))

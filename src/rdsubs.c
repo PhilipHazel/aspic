@@ -4,7 +4,7 @@
 
 /* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: September 2026 */
+/* Last modified: October 2026 */
 
 /* This module contains miscellaneous functions that are called while the input
 is being read. */
@@ -1386,14 +1386,18 @@ return TRUE;
 /* If next character is '*', look back for item of the same type. If next is
 "of <label>", search for the label.
 
-Argument: the item currently being set up
-Returns:  the reference item or NULL if not found
+Arguments:
+  p         the item currently being set up
+  optional  TRUE if optional - if neither * nor "of", reset position
+            FALSE if either * or "of <name>" must exist
+Returns:    reference item or NULL if not found
 */
 
 static item *
-find_ref(item *p)
+find_ref(item *p, BOOL optional)
 {
 item *ref;
+int save_chptr = chptr;
 
 if (in_line[chptr] == '*')
   {
@@ -1407,10 +1411,19 @@ if (in_line[chptr] == '*')
   }
 
 readword();
-if (Ustrcmp(word, "of") != 0) return NULL;
+if (Ustrcmp(word, "of") != 0 && Ustrcmp(word, "copy") != 0)
+  {
+  if (optional) chptr = save_chptr;
+  return NULL;
+  }
 readword();
 ref = findlabel(word);
 if (ref == NULL) error_moan(10, word);
+else if (ref->type != p->type)
+  {
+  error_moan(45, word);
+  ref = NULL;
+  }
 return ref;
 }
 
@@ -1470,9 +1483,17 @@ while (wordread || isalpha((int)in_line[chptr]))
 	  int value = (type == opt_xline || type == opt_xnline)?
             env->line_hw : env->line_vd;
 	  int sign = (type == opt_xnline || type == opt_ynline)? (-1) : (+1);
-          if (isdigit((int)in_line[chptr])) value = mag(readnumber());
-	  if (arg1 >= 0) *(int *)(((uschar *)p) + arg1) = value * sign;
-	  if (arg2 >= 0 && (*(int *)(((uschar *)p + arg2)) == UNSET))
+          if (isdigit((int)in_line[chptr]))
+            {
+            value = mag(readnumber());
+            }
+          else
+            {
+            item *ref = find_ref(p, TRUE);
+            if (ref != NULL) value = abs(*(int *)(((uschar *)ref) + arg1));
+            }
+	  *(int *)(((uschar *)p) + arg1) = value * sign;
+	  if ((*(int *)(((uschar *)p + arg2)) == UNSET))
 	    *(int *)(((uschar *)p) + arg2) = 0;
           }
         break;
@@ -1484,7 +1505,7 @@ while (wordread || isalpha((int)in_line[chptr]))
           }
         else
           {
-          item *ref = find_ref(p);
+          item *ref = find_ref(p, FALSE);
           if (ref != NULL) *(int *)(((uschar *)p) + arg1) =
             *(int *)(((uschar *)ref) + arg1);
           else error_moan(8);
@@ -1492,24 +1513,40 @@ while (wordread || isalpha((int)in_line[chptr]))
         break;
 
         case opt_angle:    /* single angle -- don't magnify! */
-	if (!isdigit((int)in_line[chptr])) error_moan(11, "unsigned angle");
-          else *(int *)(((uschar *)p) + arg1) = readnumber();
+	if (!isdigit((int)in_line[chptr]))
+          {
+          item *ref = find_ref(p, FALSE);
+          if (ref != NULL) *(int *)(((uschar *)p) + arg1) =
+            *(int *)(((uschar *)ref) + arg1);
+          else error_moan(11, "unsigned angle, *, or \"copy <label>\"");
+          }
+        else *(int *)(((uschar *)p) + arg1) = readnumber();
         break;
 
         case opt_grey:     /* grey level -- don't magnify! */
-	if (!isdigit((int)in_line[chptr])) error_moan(11, "grey level");
-          else
-            {
-            colour *c = (colour *)(((uschar *)p) + arg1);
-            c->red = c->green = c->blue = readnumber();
-            }
+	if (!isdigit((int)in_line[chptr]))
+          {
+          item *ref = find_ref(p, FALSE);
+          if (ref != NULL) *(colour *)(((uschar *)p) + arg1) =
+            *(colour *)(((uschar *)ref) + arg1);
+          else error_moan(11, "grey level, *, or \"copy <label>\"");
+          }
+        else
+          {
+          colour *c = (colour *)(((uschar *)p) + arg1);
+          c->red = c->green = c->blue = readnumber();
+          }
         break;
 
         case opt_colour:   /* colour rgb -- don't magnify! */
           {
           colour *c = (colour *)(((uschar *)p) + arg1);
-          if (!isdigit((int)in_line[chptr]) && in_line[chptr] != '-')
-            error_moan(11, "colour values");
+          if (!isdigit((int)in_line[chptr]))
+            {
+            item *ref = find_ref(p, FALSE);
+            if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
+              else error_moan(11, "colour values, *, or \"copy <label>\"");
+            }
           else
             {
             c->red = readnumber();
@@ -1542,8 +1579,12 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_colgrey:   /* colour rgb or grey level -- don't magnify! */
           {
           colour *c = (colour *)(((uschar *)p) + arg1);
-          if (!isdigit((int)in_line[chptr]) && in_line[chptr] != '-')
-            error_moan(11, "grey level or colour values");
+          if (!isdigit((int)in_line[chptr]))
+            {
+            item *ref = find_ref(p, FALSE);
+            if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
+              else error_moan(11, "grey level, colour values, *, or \"copy <label>\"");
+            }
           else
             {
             c->red = c->green = c->blue = readnumber();
