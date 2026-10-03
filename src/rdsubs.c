@@ -1631,7 +1631,13 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_at:       /* absolute position */
           {
 	  int x, y;
-          if (readposition(&x, &y))
+          item *ref = find_ref(p, TRUE);  /* Optional */
+          if (ref != NULL)
+            {
+            *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
+	    *(int *)(((uschar *)p) + arg2) = *(int *)(((uschar *)ref) + arg2);
+            }
+          else if (readposition(&x, &y))
             {
 	    *(int *)(((uschar *)p) + arg1) = x;
 	    *(int *)(((uschar *)p) + arg2) = y;
