@@ -20,3 +20,10 @@ line down 4;
 box width 10 depth 10 filled 1 0 0;
 line down 4;
 box width * depth * filled *;
+line down 15;
+circle radius 5;
+circle radius *;
+box width 10;
+circle radius *;
+box depth *;
+

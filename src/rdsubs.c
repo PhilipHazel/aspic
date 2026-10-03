@@ -1462,7 +1462,8 @@ while (wordread || isalpha((int)in_line[chptr]))
     {
     if (Ustrcmp(wordstd, pp->name) == 0)  /* Compare standardized word */
       {
-      /* Found the word; switch on its type */
+      /* Found the word; switch on its type to set any optional values. Some of
+      them can be copied from previous items instead of being literal. */
 
       int arg1 = pp->arg1;
       int arg2 = pp->arg2;
@@ -1506,8 +1507,21 @@ while (wordread || isalpha((int)in_line[chptr]))
         else
           {
           item *ref = find_ref(p, FALSE);
-          if (ref != NULL) *(int *)(((uschar *)p) + arg1) =
-            *(int *)(((uschar *)ref) + arg1);
+          if (ref != NULL)
+            {
+            *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
+
+            /* A special fudge is needed when copying to the radius of a
+            circle, which is set in the "width" field of a box. We have to
+            divide by 2 for the radius because later this gets multiplied to
+            get a width for the item. */
+
+            if (p->type == i_box && ((item_box *)p)->boxtype == box_circle &&
+                  arg1 == offsetof(item_box, width))
+              {
+              *(int *)(((uschar *)p) + arg1) /= 2;
+              }
+            }
           else error_moan(8);
           }
         break;
