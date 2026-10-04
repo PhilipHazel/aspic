@@ -1411,7 +1411,7 @@ if (in_line[chptr] == '*')
   }
 
 readword();
-if (Ustrcmp(word, "of") != 0 && Ustrcmp(word, "copy") != 0)
+if (Ustrcmp(word, "copy") != 0)
   {
   if (optional) chptr = save_chptr;
   return NULL;

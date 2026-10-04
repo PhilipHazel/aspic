@@ -11,7 +11,7 @@ bindfont 0 "Fontname" 16;             #5
 box $unknownvar;                      #6
 box unknown option;                   #7
 line thickness down;                  #8
-box width of Z;                       #8
+box width copy Z;                     #8
 LABEL: set x "value";                 #9
 LABEL2: text "abc";                   #9
 goto NONEXIST;                        #10

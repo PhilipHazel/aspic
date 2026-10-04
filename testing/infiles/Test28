@@ -2,7 +2,7 @@ A: box width 10 depth 100;
 line right 10;
 box width *;
 box depth *;
-box width of A;
+box width copy A;
 goto A;
 box depth *;
 B: line down 10 thickness 40;

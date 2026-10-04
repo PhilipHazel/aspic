@@ -28,15 +28,15 @@ box $unknownvar;                      #6
 Aspic: Unknown option word "unknown"
 box unknown option;                   #7
             ^
-Aspic: Dimension, '*', or "of <label>" expected
+Aspic: Dimension, '*', or "copy <label>" expected
 line thickness down;                  #8
                    ^
 Aspic: Can't find item labelled "Z"
-box width of Z;                       #8
-              ^
-Aspic: Dimension, '*', or "of <label>" expected
-box width of Z;                       #8
-              ^
+box width copy Z;                     #8
+                ^
+Aspic: Dimension, '*', or "copy <label>" expected
+box width copy Z;                     #8
+                ^
 Aspic: Label "LABEL" incorrectly placed (may only precede drawing command)
 LABEL: set x "value";                 #9
                      ^

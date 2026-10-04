@@ -101,7 +101,7 @@ static uschar *error_messages[] = {
   US"Font number must be greater than 0",                   /* 5 */
   US"Unknown%s variable \"%s\"",                            /* 6 */
   US"Unknown option word \"%s\"",                           /* 7 */
-  US"Dimension, '*', or \"of <label>\" expected",           /* 8 */
+  US"Dimension, '*', or \"copy <label>\" expected",         /* 8 */
   US"Label \"%s\" incorrectly placed (may only precede drawing command)", /* 9 */
   US"Can't find item labelled \"%s\"",                      /* 10 */
   US"%s expected",                                          /* 11 */
