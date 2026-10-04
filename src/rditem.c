@@ -117,9 +117,9 @@ static arg_item curve_args[] = {
   { US"to",          opt_at,   oo(item_curve, x1), oo(item_curve,   y1) },
   { US"clockwise",   opt_bool, oo(item_curve, cw),                   -1 },
   { US"wavy",        opt_bool, oo(item_curve, wavy),                 -1 },
-  { US"c1",          opt_at,   oo(item_curve, cx1), oo(item_curve, cy1) },
-  { US"c2",          opt_at,   oo(item_curve, cx2), oo(item_curve, cy2) },
-  { US"cs",          opt_at,   oo(item_curve, cxs), oo(item_curve, cys) },
+  { US"c1",          opt_vec,  oo(item_curve, orig_cx1), oo(item_curve, orig_cy1) },
+  { US"c2",          opt_vec,  oo(item_curve, orig_cx2), oo(item_curve, orig_cy2) },
+  { US"cs",          opt_vec,  oo(item_curve, orig_cxs), oo(item_curve, orig_cys) },
   { US"dashed",      opt_bool, oo(item_curve, dash1),                -1 },
   { US"thickness",   opt_dim,  oo(item_curve, thickness),            -1 },
   { US"colour",      opt_colour, oo(item_curve, colour),             -1 },
@@ -661,6 +661,17 @@ if (curve->x0 == UNSET)
 
 curve->x = (curve->x0 + curve->x1)/2;
 curve->y = (curve->y0 + curve->y1)/2;
+
+/* Copy the given control points to the working fields that can be adjusted as
+necessary, leaving the originals alone in case they are copied to a successive
+curve. */
+
+curve->cx1 = curve->orig_cx1;
+curve->cy1 = curve->orig_cy1;
+curve->cx2 = curve->orig_cx2;
+curve->cy2 = curve->orig_cy2;
+curve->cxs = curve->orig_cxs;
+curve->cys = curve->orig_cys;
 
 /* Add any "cs" adjustment to the individual control point adjustments. */
 

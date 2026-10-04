@@ -4,7 +4,7 @@
 
 /* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: September 2026 */
+/* Last modified: October 2026 */
 
 /* General header file used by all modules */
 
@@ -95,6 +95,7 @@ enum { opt_bool,            /* no data; set first arg; unset second arg */
        opt_join,	    /* position specified by joining point */
        opt_angle,           /* one angle */
        opt_int,             /* integer */
+       opt_vec,             /* parenthesised vector */
        opt_dir              /* no data; sets direction from table data */
 };
 
@@ -310,6 +311,9 @@ typedef struct {
   int cw;
   int wavy;
   int x0, y0, x1, y1;
+  int orig_cx1, orig_cy1;
+  int orig_cx2, orig_cy2;
+  int orig_cxs, orig_cys;
   int cx1, cy1, cx2, cy2;
   int cxs, cys;
 } item_curve;

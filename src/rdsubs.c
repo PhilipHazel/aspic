@@ -1628,6 +1628,22 @@ while (wordread || isalpha((int)in_line[chptr]))
         else *(int *)(((uschar *)p) + arg1) = readint();
         break;
 
+        case opt_vec:
+        if (in_line[chptr] == '(')
+          readvector((int *)(((uschar *)p) + arg1),
+                     (int *)(((uschar *)p) + arg2));
+        else
+          {
+          item *ref = find_ref(p, FALSE);
+          if (ref != NULL)
+            {
+            *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
+	    *(int *)(((uschar *)p) + arg2) = *(int *)(((uschar *)ref) + arg2);
+            }
+          else error_moan(11, "parenthesised vector, *, or \"copy <label>\"");
+          }
+        break;
+
         case opt_at:       /* absolute position */
           {
 	  int x, y;
