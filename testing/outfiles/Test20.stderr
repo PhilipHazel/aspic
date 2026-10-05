@@ -30,7 +30,7 @@ box unknown option;                   #7
             ^
 Aspic: Dimension, '*', or "copy <label>" expected
 line thickness down;                  #8
-                   ^
+               ^
 Aspic: Can't find item labelled "Z"
 box width copy Z;                     #8
                 ^
@@ -81,13 +81,13 @@ line; arc to start plus;              #11 vector
                        ^
 Aspic: unsigned angle, *, or "copy <label>" expected
 arc angle rhubarb;                    #11 angle
-                 ^
+          ^
 Aspic: grey level, *, or "copy <label>" expected
 line greyness rhubarb;                #11 grey level
-                     ^
+              ^
 Aspic: colour values, *, or "copy <label>" expected
 line colour rhubarb;                  #11 colour
-                   ^
+            ^
 Aspic: green and blue values expected
 line colour 0.5;                      #11 green and blue
                ^
