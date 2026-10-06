@@ -92,7 +92,7 @@
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>09 September 2026</date>
+  <date>01 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -153,7 +153,7 @@ adding &`.eps`& or &`.svg`& as appropriate. The standard input or output may be
 explicitly referenced by specifying a single hyphen character. The options are
 as follows:
 
-&*-creator*& <&'string'&> forces a value into the &`$creator`& variable, 
+&*-creator*& <&'string'&> forces a value into the &`$creator`& variable,
 overriding any setting within the input.
 
 &*-date*& <&'string'&> forces a value into the &`$date`& variable, overriding
@@ -167,7 +167,7 @@ in the input file are no longer treated specially. The option is useful when
 there are dollar characters in an Aspic source that does not make use of Aspic
 variables.
 
-&*-ov*& causes Aspic to omit the version information it normally includes in 
+&*-ov*& causes Aspic to omit the version information it normally includes in
 its output. This is mainly useful for testing.
 
 &*-eps*& or &*-ps*& (the default) causes Aspic to generate Encapsulated
@@ -286,7 +286,7 @@ of the horizontal and vertical axes. For example:
 Lines may be drawn dashed, and, by using the &*arrow*& command, with arrowheads
 on one or both ends.
 .pic 13
-The dash parameters (lengths of lines and gaps) are adjustable (see chapter 
+The dash parameters (lengths of lines and gaps) are adjustable (see chapter
 &<<CHAPENV>>&). By default, &*arrow*& requests an arrowhead on the end of the
 line. The option &*both*& gives arrowheads on both ends, whereas &*back*& gives
 a backward-pointing arrowhead only.
@@ -369,10 +369,11 @@ other control point is in a matching position at the other end of the line.
 The default control points give an almost circular arc, but the &*c1*& and
 &*c2*& options can be used to move the control points. Their argument is a pair
 of parenthesized dimensions. The first moves parallel to the joining line, with
-a positive value moving further from the end point. The second number moves
-away from the line if positive, or nearer if negative. As a convenience, the
-&*cs*& option can be used to set both to the same values, thus preserving the
-symmetry of the curve. This example shows the positions of the control points:
+a positive value moving towards the end point. The second number moves away
+from the line, towards the curve if positive, or nearer if negative. As a
+convenience, the &*cs*& option can be used to set both to the same values, thus
+preserving the symmetry of the curve. This example shows the positions of the
+control points:
 .pic 50
 If &*c1*& or &*c2*& is used with &*cs*&, the result is cumulative.
 .pic 51
@@ -603,10 +604,11 @@ The &*include*& command may not appear inside a macro (see chapter
 
 .chapter "Aspic variables" CHAPVARIABLE
 Aspic supports simple variables, which can be used to save repetition in the
-input. This feature can, however, be disabled by use of the &*-nv*& command
-line option. If you are not using Aspic variables, but are making use of dollar
-($) characters in strings, you should use &*-nv*&, because otherwise the
-dollars will be misinterpreted by Aspic.
+input. See section &<<SECTREFVAR>>& for another way of avoiding repetition. The
+use of variables can be disabled by use of the &*-nv*& command line option. If
+you are not using Aspic variables, but are making use of dollar ($) characters
+in strings, you should use &*-nv*&, because otherwise the dollars will be
+misinterpreted by Aspic.
 
 When variables are not disabled, a dollar character in an input line introduces
 a variable substitution. There is, however, one exception: the special sequence
@@ -624,26 +626,26 @@ defined before it is used. The contents of a macro (see chapter
 defined, not when it is called.
 
 Variables are given values by means of the &*set*& command, which is followed
-by a variable name (without a dollar) and a string value. The value of a
-variable can be changed as many times as you like during the course of a
-picture description. For example, this command defines the variable &*red*& to
-contain the three colour values for the colour red:
+by a variable name (without a dollar) and a string value in double quotes. The
+value of a variable can be changed as many times as you like during the course
+of a picture description. For example, this command defines the variable
+&*gold*& to contain three RGB colour values:
 .code
-set red "1,0,0";
+set gold "0.99,0.77,0.27";
 .endd
 Later in the input file, the variable could be used like this:
 .code
-box filled $red;
+box filled $gold;
 .endd
 
-There are three variables that are treated specially: &`$creator`&, &`$date`&,
-and &`$title`&. Their values may be set by command line options, but if they
-are not, the variable &`$date`& is initialized to contain the date and time,
-and the variables &`$creator`& and &`$title`& are each set to the string
-`Unknown'. These three variables are used to create comments at the start of
-Aspic's output. If they are not set via the command line, you can set them from 
-within the Aspic input. For example, you might like to set &`$date`& to the
-date on which the picture was defined.
+Three variables are treated specially: &`$creator`&, &`$date`&, and &`$title`&.
+Their values may be set by command line options, but if they are not, the
+variable &`$date`& is initialized to contain the current date and time, and the
+variables &`$creator`& and &`$title`& are each set to the string `Unknown'.
+These three variables are used to create comments at the start of Aspic's
+output. If they are not set via the command line, you can set them from within
+the Aspic input. For example, you might like to set &`$date`& to the date on
+which the picture was defined.
 
 
 
@@ -737,9 +739,11 @@ Unless explicitly stated to be an integer, a number may always be specified
 with an optional decimal point and fractional part. Negative numbers are
 preceded by a minus sign. Non-integer numbers are held in a fixed-point format
 to three decimal places. In the descriptions of the commands that follow, the
-following types of value are used:
+types of value listed below are used. For those that are marked with an
+asterisk, a &'reference'& may be given instead of an actual value. How this
+works is described below.
 
-.section <angle>
+.section <angle>*
 A non-negative number, specifying an angle in degrees.
 
 .section <boxpoint>
@@ -747,12 +751,12 @@ One of the phrases &'top, bottom, left, right, centre, bottom left, bottom
 right, top left'&, or &'top right'&. The first four refer to the midpoints of
 the respective sides of a box; the last four refer to the corners.
 
-.section <colour>
+.section <colour>*
 Three numbers in the range 0.0 to 1.0, separated by spaces and/or commas. They
 specify a colour by the amount of red, green, and blue, respectively, with 0.0
 meaning none and 1.0 the maximum amount of each component.
 
-.section <greylevel>
+.section <greylevel>*
 A number in the range 0.0 to 1.0, where 0.0 is black and 1.0 is white.
 
 .section <integer>
@@ -760,12 +764,16 @@ A positive or negative integer.
 
 .section <label>
 A label that identifies an existing drawing item, that is, one whose definition
-falls earlier in the input file.
+is earlier in the input file.
 
-.section <length>
+.section <length>*
 A non-negative number, specifying a length.
 
-.section <position>
+.section <vector>*
+A <&'vector'&> is two numbers separated by a comma and enclosed in
+parentheses, giving lengths in two dimensions.
+
+.section <position>*
 A <&'position'&> identifies a point in the plane. It is either an absolute
 position, specified as a pair of x-y coordinates, separated by a comma and
 enclosed in parentheses, or a relative position, specified as follows:
@@ -827,6 +835,39 @@ end of line1
 0.25 start of line3 plus (0,7)
 .endd
 
+.section "Referenced values" SECTREFVAR
+For those types of value marked with an asterisk above, instead of an actual
+value, a reference to a previous item can be given. There are two forms:
+.ilist
+If a single asterisk is given, Aspic looks back, starting with the previous
+item, for the most recent item of the same general type, visible or invisible.
+.next
+Alternatively, the word `copy' followed by a label can be given. This must
+reference an item of the same general type.
+.endlist
+There are four general types: arcs, boxes, curves, and lines. Circles and
+ellipses are `boxes' whose width and depth are those of their bounding boxes.
+.code
+circle radius 25; box depth *;
+.endd
+In this example, the depth of the box is 50 (twice the radius of the referenced
+circle). When copying a value for a circle's radius, half the width of the
+referenced item is used.
+.code
+box width 40 depth 10; circle radius *;
+.endd
+In this example, the circle's radius is 20.
+
+When the referenced item is a line or an arrow, a reference by &*right*& or
+&*left*& uses the referenced horizontal length in the given direction, and
+similarly for &*up*& and &*down*&.
+.code
+A: line right 30; line down 5; line left copy A;
+.endd
+In this example, the second line has length 30, drawn to the left.
+
+
+
 
 
 . /////////////////////////////////////////////////////////////////////////////
@@ -841,7 +882,8 @@ and the type of value that must follow each option keyword, where relevant. A
 value type that is followed by an asterisk is optional, and a vertical bar is
 used to separate alternative value types. Some combinations of options are
 mutually exclusive, and these are noted in the description of each command
-below.
+below. If an option is repeated or conflicts with an earlier option (for
+example, if both &*right*& and &*left*& are given), the later setting is used.
 
 When a command does not specify an option, a default value is used. There are
 separate sets of defaults for boxes, circles, ellipses, and lines (both
@@ -887,11 +929,11 @@ another with the same characteristics, you may need to insert a dummy command
 without a &*shapefilled*& option, in order to terminate the first shape. A line
 of length zero can be used for this.
 
-Options may be specified in any order, and may be followed by any number of
-strings enclosed in double quotes (with doubling for any double quotes within
-the string), followed optionally by a <&'vector'&> (as described above in the
-definition of <&'position'&>) and one of &`/l`& (the letter ell), &`/r`&, or
-&`/c`&. If present, the <&'vector'&> must come first. For example:
+Options may be specified in any order, and the sequence of options may be
+followed by any number of strings enclosed in double quotes (with doubling for
+any double quotes within the string), followed optionally by a <&'vector'&> (as
+described above) and one of &`/l`& (the letter ell), &`/r`&, or &`/c`&. If
+present, the <&'vector'&> must come first. For example:
 .code
 "the quick brown fox"
 "move this up"(0,20)
@@ -905,7 +947,7 @@ respect to this position. The default justification depends on the shape with
 which the string is associated, and is documented below. Other options may also
 be present, separated by slashes:
 .ilist
-An sequence of digits is interpreted as a font number for this string. A
+A sequence of digits is interpreted as a font number for this string. A
 default font, 12-point Times-Roman, is provided, numbered zero, The
 &*bindfont*& command can be used to define additional fonts, and the
 &*setfont*& command can be used to change the default font. For further details
@@ -1185,12 +1227,12 @@ This command draws a B&egrave;zier curve; the &*to*& option is mandatory. If
 &*from*& is not given, it is deduced from the previous item. The &*c1*& and
 &*c2*& options define adjustments to the curve's control points. The first
 number moves parallel to the line joining the endpoints, positive values moving
-away from the relevant end. The second number moves in a perpendicular
-direction, positive values moving further away from the joining line. The
-&*cs*& option applies to both control points and is cumulative with &*c1*& and
-&*c2*&. The &*wavy*& option moves the second control point to an equal distance
-on the opposite side of the base line. Text items are placed at the middle of
-the base line.
+towards the end. The second number moves in a perpendicular direction, positive
+values moving further away from the joining line, towards the curve. The &*cs*&
+option applies the same values to both control points and is cumulative with
+&*c1*& and &*c2*&. The &*wavy*& option moves the second control point to an
+equal distance on the opposite side of the base line. Text items are placed at
+the middle of the base line.
 
 
 .section "ellipse"
@@ -1322,11 +1364,9 @@ vertical or horizontal coordinate of the <&'position'&> specified by &*align*&
 is used, as appropriate, overriding any other value. For example:
 .pic 38
 As always, a reference to an unqualified box edge implies the midpoint of that
-edge.
-
-For a horizontal line, text is positioned at the midpoint of the line, centred
-by default. If there is more than one string, they are positioned both above
-and below the line. For non-horizontal lines, text is left-justified (by
+edge. For a horizontal line, text is positioned at the midpoint of the line,
+centred by default. If there is more than one string, they are positioned both
+above and below the line. For non-horizontal lines, text is left-justified (by
 default) close to the midpoint of the line.
 
 

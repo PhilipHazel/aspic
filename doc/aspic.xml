@@ -16,7 +16,7 @@
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>09 September 2026</date>
+  <date>01 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -80,7 +80,7 @@ explicitly referenced by specifying a single hyphen character. The options are
 as follows:
 </para>
 <para>
-<emphasis role="bold">-creator</emphasis> &lt;<emphasis>string</emphasis>&gt; forces a value into the <literal>$creator</literal> variable, 
+<emphasis role="bold">-creator</emphasis> &lt;<emphasis>string</emphasis>&gt; forces a value into the <literal>$creator</literal> variable,
 overriding any setting within the input.
 </para>
 <para>
@@ -98,7 +98,7 @@ there are dollar characters in an Aspic source that does not make use of Aspic
 variables.
 </para>
 <para>
-<emphasis role="bold">-ov</emphasis> causes Aspic to omit the version information it normally includes in 
+<emphasis role="bold">-ov</emphasis> causes Aspic to omit the version information it normally includes in
 its output. This is mainly useful for testing.
 </para>
 <para>
@@ -395,7 +395,7 @@ arrow down back dashed;
 &#x200b;
 </para>
 <para>
-The dash parameters (lengths of lines and gaps) are adjustable (see chapter 
+The dash parameters (lengths of lines and gaps) are adjustable (see chapter
 <xref linkend="CHAPENV"/>). By default, <emphasis role="bold">arrow</emphasis> requests an arrowhead on the end of the
 line. The option <emphasis role="bold">both</emphasis> gives arrowheads on both ends, whereas <emphasis role="bold">back</emphasis> gives
 a backward-pointing arrowhead only.
@@ -639,10 +639,11 @@ other control point is in a matching position at the other end of the line.
 The default control points give an almost circular arc, but the <emphasis role="bold">c1</emphasis> and
 <emphasis role="bold">c2</emphasis> options can be used to move the control points. Their argument is a pair
 of parenthesized dimensions. The first moves parallel to the joining line, with
-a positive value moving further from the end point. The second number moves
-away from the line if positive, or nearer if negative. As a convenience, the
-<emphasis role="bold">cs</emphasis> option can be used to set both to the same values, thus preserving the
-symmetry of the curve. This example shows the positions of the control points:
+a positive value moving towards the end point. The second number moves away
+from the line, towards the curve if positive, or nearer if negative. As a
+convenience, the <emphasis role="bold">cs</emphasis> option can be used to set both to the same values, thus
+preserving the symmetry of the curve. This example shows the positions of the
+control points:
 </para>
 <literallayout class="monospaced">
 A: line down 20 left; B: line down 20 right; 
@@ -1064,10 +1065,11 @@ The <emphasis role="bold">include</emphasis> command may not appear inside a mac
 <title>Aspic variables</title>
 <para>
 Aspic supports simple variables, which can be used to save repetition in the
-input. This feature can, however, be disabled by use of the <emphasis role="bold">-nv</emphasis> command
-line option. If you are not using Aspic variables, but are making use of dollar
-($) characters in strings, you should use <emphasis role="bold">-nv</emphasis>, because otherwise the
-dollars will be misinterpreted by Aspic.
+input. See section <xref linkend="SECTREFVAR"/> for another way of avoiding repetition. The
+use of variables can be disabled by use of the <emphasis role="bold">-nv</emphasis> command line option. If
+you are not using Aspic variables, but are making use of dollar ($) characters
+in strings, you should use <emphasis role="bold">-nv</emphasis>, because otherwise the dollars will be
+misinterpreted by Aspic.
 </para>
 <para>
 When variables are not disabled, a dollar character in an input line introduces
@@ -1088,29 +1090,29 @@ defined, not when it is called.
 </para>
 <para>
 Variables are given values by means of the <emphasis role="bold">set</emphasis> command, which is followed
-by a variable name (without a dollar) and a string value. The value of a
-variable can be changed as many times as you like during the course of a
-picture description. For example, this command defines the variable <emphasis role="bold">red</emphasis> to
-contain the three colour values for the colour red:
+by a variable name (without a dollar) and a string value in double quotes. The
+value of a variable can be changed as many times as you like during the course
+of a picture description. For example, this command defines the variable
+<emphasis role="bold">gold</emphasis> to contain three RGB colour values:
 </para>
 <literallayout class="monospaced">
-set red "1,0,0";
+set gold "0.99,0.77,0.27";
 </literallayout>
 <para>
 Later in the input file, the variable could be used like this:
 </para>
 <literallayout class="monospaced">
-box filled $red;
+box filled $gold;
 </literallayout>
 <para>
-There are three variables that are treated specially: <literal>$creator</literal>, <literal>$date</literal>,
-and <literal>$title</literal>. Their values may be set by command line options, but if they
-are not, the variable <literal>$date</literal> is initialized to contain the date and time,
-and the variables <literal>$creator</literal> and <literal>$title</literal> are each set to the string
-&#x2018;Unknown&#x2019;. These three variables are used to create comments at the start of
-Aspic&#x2019;s output. If they are not set via the command line, you can set them from 
-within the Aspic input. For example, you might like to set <literal>$date</literal> to the
-date on which the picture was defined.
+Three variables are treated specially: <literal>$creator</literal>, <literal>$date</literal>, and <literal>$title</literal>.
+Their values may be set by command line options, but if they are not, the
+variable <literal>$date</literal> is initialized to contain the current date and time, and the
+variables <literal>$creator</literal> and <literal>$title</literal> are each set to the string &#x2018;Unknown&#x2019;.
+These three variables are used to create comments at the start of Aspic&#x2019;s
+output. If they are not set via the command line, you can set them from within
+the Aspic input. For example, you might like to set <literal>$date</literal> to the date on
+which the picture was defined.
 </para>
 </chapter>
 
@@ -1253,10 +1255,12 @@ Unless explicitly stated to be an integer, a number may always be specified
 with an optional decimal point and fractional part. Negative numbers are
 preceded by a minus sign. Non-integer numbers are held in a fixed-point format
 to three decimal places. In the descriptions of the commands that follow, the
-following types of value are used:
+types of value listed below are used. For those that are marked with an
+asterisk, a <emphasis>reference</emphasis> may be given instead of an actual value. How this
+works is described below.
 </para>
 <section>
-<title>&lt;angle&gt;</title>
+<title>&lt;angle&gt;*</title>
 <para>
 A non-negative number, specifying an angle in degrees.
 </para>
@@ -1270,7 +1274,7 @@ the respective sides of a box; the last four refer to the corners.
 </para>
 </section>
 <section>
-<title>&lt;colour&gt;</title>
+<title>&lt;colour&gt;*</title>
 <para>
 Three numbers in the range 0.0 to 1.0, separated by spaces and/or commas. They
 specify a colour by the amount of red, green, and blue, respectively, with 0.0
@@ -1278,7 +1282,7 @@ meaning none and 1.0 the maximum amount of each component.
 </para>
 </section>
 <section>
-<title>&lt;greylevel&gt;</title>
+<title>&lt;greylevel&gt;*</title>
 <para>
 A number in the range 0.0 to 1.0, where 0.0 is black and 1.0 is white.
 </para>
@@ -1293,17 +1297,24 @@ A positive or negative integer.
 <title>&lt;label&gt;</title>
 <para>
 A label that identifies an existing drawing item, that is, one whose definition
-falls earlier in the input file.
+is earlier in the input file.
 </para>
 </section>
 <section>
-<title>&lt;length&gt;</title>
+<title>&lt;length&gt;*</title>
 <para>
 A non-negative number, specifying a length.
 </para>
 </section>
 <section>
-<title>&lt;position&gt;</title>
+<title>&lt;vector&gt;*</title>
+<para>
+A &lt;<emphasis>vector</emphasis>&gt; is two numbers separated by a comma and enclosed in
+parentheses, giving lengths in two dimensions.
+</para>
+</section>
+<section>
+<title>&lt;position&gt;*</title>
 <para>
 A &lt;<emphasis>position</emphasis>&gt; identifies a point in the plane. It is either an absolute
 position, specified as a pair of x-y coordinates, separated by a comma and
@@ -1389,6 +1400,56 @@ end of line1
 0.25 start of line3 plus (0,7)
 </literallayout>
 </section>
+<section id="SECTREFVAR">
+<title>Referenced values</title>
+<para>
+For those types of value marked with an asterisk above, instead of an actual
+value, a reference to a previous item can be given. There are two forms:
+</para>
+<itemizedlist>
+<listitem>
+<para>
+If a single asterisk is given, Aspic looks back, starting with the previous
+item, for the most recent item of the same general type, visible or invisible.
+</para>
+</listitem>
+<listitem>
+<para>
+Alternatively, the word &#x2018;copy&#x2019; followed by a label can be given. This must
+reference an item of the same general type.
+</para>
+</listitem>
+</itemizedlist>
+<para>
+There are four general types: arcs, boxes, curves, and lines. Circles and
+ellipses are &#x2018;boxes&#x2019; whose width and depth are those of their bounding boxes.
+</para>
+<literallayout class="monospaced">
+circle radius 25; box depth *;
+</literallayout>
+<para>
+In this example, the depth of the box is 50 (twice the radius of the referenced
+circle). When copying a value for a circle&#x2019;s radius, half the width of the
+referenced item is used.
+</para>
+<literallayout class="monospaced">
+box width 40 depth 10; circle radius *;
+</literallayout>
+<para>
+In this example, the circle&#x2019;s radius is 20.
+</para>
+<para>
+When the referenced item is a line or an arrow, a reference by <emphasis role="bold">right</emphasis> or
+<emphasis role="bold">left</emphasis> uses the referenced horizontal length in the given direction, and
+similarly for <emphasis role="bold">up</emphasis> and <emphasis role="bold">down</emphasis>.
+</para>
+<literallayout class="monospaced">
+A: line right 30; line down 5; line left copy A;
+</literallayout>
+<para>
+In this example, the second line has length 30, drawn to the left.
+</para>
+</section>
 </chapter>
 
 <chapter id="CHAPOBJTEXT">
@@ -1400,7 +1461,8 @@ and the type of value that must follow each option keyword, where relevant. A
 value type that is followed by an asterisk is optional, and a vertical bar is
 used to separate alternative value types. Some combinations of options are
 mutually exclusive, and these are noted in the description of each command
-below.
+below. If an option is repeated or conflicts with an earlier option (for
+example, if both <emphasis role="bold">right</emphasis> and <emphasis role="bold">left</emphasis> are given), the later setting is used.
 </para>
 <para>
 When a command does not specify an option, a default value is used. There are
@@ -1452,11 +1514,11 @@ without a <emphasis role="bold">shapefilled</emphasis> option, in order to termi
 of length zero can be used for this.
 </para>
 <para>
-Options may be specified in any order, and may be followed by any number of
-strings enclosed in double quotes (with doubling for any double quotes within
-the string), followed optionally by a &lt;<emphasis>vector</emphasis>&gt; (as described above in the
-definition of &lt;<emphasis>position</emphasis>&gt;) and one of <literal>/l</literal> (the letter ell), <literal>/r</literal>, or
-<literal>/c</literal>. If present, the &lt;<emphasis>vector</emphasis>&gt; must come first. For example:
+Options may be specified in any order, and the sequence of options may be
+followed by any number of strings enclosed in double quotes (with doubling for
+any double quotes within the string), followed optionally by a &lt;<emphasis>vector</emphasis>&gt; (as
+described above) and one of <literal>/l</literal> (the letter ell), <literal>/r</literal>, or <literal>/c</literal>. If
+present, the &lt;<emphasis>vector</emphasis>&gt; must come first. For example:
 </para>
 <literallayout class="monospaced">
 "the quick brown fox"
@@ -1475,7 +1537,7 @@ be present, separated by slashes:
 <itemizedlist>
 <listitem>
 <para>
-An sequence of digits is interpreted as a font number for this string. A
+A sequence of digits is interpreted as a font number for this string. A
 default font, 12-point Times-Roman, is provided, numbered zero, The
 <emphasis role="bold">bindfont</emphasis> command can be used to define additional fonts, and the
 <emphasis role="bold">setfont</emphasis> command can be used to change the default font. For further details
@@ -2266,12 +2328,12 @@ This command draws a B&egrave;zier curve; the <emphasis role="bold">to</emphasis
 <emphasis role="bold">from</emphasis> is not given, it is deduced from the previous item. The <emphasis role="bold">c1</emphasis> and
 <emphasis role="bold">c2</emphasis> options define adjustments to the curve&#x2019;s control points. The first
 number moves parallel to the line joining the endpoints, positive values moving
-away from the relevant end. The second number moves in a perpendicular
-direction, positive values moving further away from the joining line. The
-<emphasis role="bold">cs</emphasis> option applies to both control points and is cumulative with <emphasis role="bold">c1</emphasis> and
-<emphasis role="bold">c2</emphasis>. The <emphasis role="bold">wavy</emphasis> option moves the second control point to an equal distance
-on the opposite side of the base line. Text items are placed at the middle of
-the base line.
+towards the end. The second number moves in a perpendicular direction, positive
+values moving further away from the joining line, towards the curve. The <emphasis role="bold">cs</emphasis>
+option applies the same values to both control points and is cumulative with
+<emphasis role="bold">c1</emphasis> and <emphasis role="bold">c2</emphasis>. The <emphasis role="bold">wavy</emphasis> option moves the second control point to an
+equal distance on the opposite side of the base line. Text items are placed at
+the middle of the base line.
 </para>
 </section>
 <section>
@@ -2546,12 +2608,9 @@ B: box "B";
 </para>
 <para>
 As always, a reference to an unqualified box edge implies the midpoint of that
-edge.
-</para>
-<para>
-For a horizontal line, text is positioned at the midpoint of the line, centred
-by default. If there is more than one string, they are positioned both above
-and below the line. For non-horizontal lines, text is left-justified (by
+edge. For a horizontal line, text is positioned at the midpoint of the line,
+centred by default. If there is more than one string, they are positioned both
+above and below the line. For non-horizontal lines, text is left-justified (by
 default) close to the midpoint of the line.
 </para>
 </section>
