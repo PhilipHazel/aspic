@@ -290,6 +290,21 @@ if (macactive != NULL)
           t += Ustrlen(t);                    /* 'cause other libraries are different */
           f += 2;
           }
+        else if (f[1] == '*' || f[1] == '"')
+          {
+          for (mac_arg *ap = m->args; ap != NULL; ap = ap->next)
+            {
+            if ((ap->text[0] == '"') == (f[1] == '"'))
+              {
+              Ustrcpy(t, ap->text);
+              t += Ustrlen(ap->text);
+              *t++ = ' ';
+              }
+            }
+          f += 2;
+          }
+
+
         else
           {
           mac_arg *ap = m->args;
@@ -302,6 +317,7 @@ if (macactive != NULL)
       else *t++ = *f++;
       }
     *t = 0;
+
     chptr = 0;
     m->nextline = (m->nextline)->next;
     }

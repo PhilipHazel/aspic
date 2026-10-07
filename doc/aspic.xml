@@ -11,12 +11,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>27 September 2026</date>
+<date>07 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>01 October 2026</date>
+  <date>07 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -1125,9 +1125,9 @@ that allows you to define compound commands. A macro is defined by the command
 the same as the name of any inbuilt command. If it is the same as a previously
 defined macro, the new macro overrides. The body consists of <emphasis>either</emphasis> all the
 following text up to the first non-quoted semicolon, <emphasis>or</emphasis>, if the first
-character after the name is an opening brace, all the text up to the next
-non-quoted closing brace, which must be followed by a semicolon to terminate
-the <emphasis role="bold">macro</emphasis> command. For example:
+non-space character after the name is an opening brace, all the text up to the
+next non-quoted closing brace, which must be followed by a semicolon to
+terminate the <emphasis role="bold">macro</emphasis> command. For example:
 </para>
 <literallayout class="monospaced">
 macro bigbox box width 100 depth 100;
@@ -1149,14 +1149,19 @@ double quotes. If double quotes are used, they are retained when the contents
 of an argument are substituted into the macro body.
 </para>
 <para>
-Macro arguments are referenced in the macro body by items of the form <literal>&amp;1</literal>,
-<literal>&amp;2</literal>, etc. These references are replaced by the actual argument values each
-time the macro is called. If the character <literal>&amp;</literal> is required for another
-purpose in a macro body, it must be doubled. If the special string <literal>&amp;$</literal>
-appears in a macro body, it is replaced throughout by a sequence number that is
-incremented for each macro call. This can be used to generate unique labels for
-shapes that are drawn in macro bodies. A nested macro call will have a
-different value for <literal>&amp;$</literal>.
+Individual macro arguments are referenced in the macro body by items of the
+form <literal>&amp;1</literal>, <literal>&amp;2</literal>, etc. These references are replaced by the actual
+argument values each time the macro is called. If the character <literal>&amp;</literal> is
+required for another purpose in a macro body, it must be doubled. There are two
+special sequences <literal>&amp;*</literal> and <literal>&amp;"</literal> which are replaced by multiple arguments,
+separated by white space. The first inserts all those arguments that do not
+start with a double quote and the second inserts all those arguments that do.
+</para>
+<para>
+If the special sequence <literal>&amp;$</literal> appears in a macro body, it is replaced
+throughout by a sequence number that is incremented for each macro call. This
+can be used to generate unique labels for shapes that are drawn in macro
+bodies. A nested macro call will have a different value for <literal>&amp;$</literal>.
 </para>
 <para>
 The following example starts with the definition of a macro that draws a box
@@ -1200,7 +1205,9 @@ single quotes could have been used if the arguments contained spaces.
 If an argument that has not been supplied is referenced, nothing is
 substituted; thus the second call of <emphasis role="bold">item</emphasis> above expands into a call to
 <emphasis role="bold">box</emphasis> with only a single string argument. If too many arguments are supplied,
-the surplus ones are left in the input following the substituted text.
+the surplus ones are left in the input following the substituted text. This
+cannot happen if <literal>&amp;*</literal> or <literal>&amp;"</literal> is present because they imply any number of 
+arguments.
 </para>
 <para>
 It is not necessary to include a semicolon before a terminating brace when

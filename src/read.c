@@ -4,7 +4,7 @@
 
 /* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: September 2026 */
+/* Last modified: October 2026 */
 
 /* This module contains the code for reading the input, with the exception of
 commands for drawing objects (see rditem.c) and a number of common subroutines
@@ -551,7 +551,9 @@ find_mac_end(int ptr, uschar term)
 {
 while (in_line[ptr] != term && in_line[ptr] != 0)
   {
-  if (in_line[++ptr] == '\"')
+  if (in_line[++ptr] == '&' && in_line[ptr+1] == '\"') ptr++;
+ 
+  else if (in_line[ptr] == '\"')
     {
     while (in_line[++ptr] != '\"' && in_line[ptr] != 0) {};
     if (in_line[ptr] == 0)
@@ -576,7 +578,13 @@ while (*s != 0)
   {
   if (*s++ == '&')
     {
-    if (*s == '&') s++; else
+    if (*s == '&') s++;   /* Literal & */
+    else if (*s == '*' || *s == '"')   /* No limit */
+      {
+      n = 100;
+      break;  
+      }
+    else
       {
       int m = 0;
       s--;
