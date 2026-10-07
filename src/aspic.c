@@ -138,7 +138,8 @@ static uschar *error_messages[] = {
   US"The \"align\" option is not valid for a sloping line", /* 42 */
   US"Variable name is too long in substitution",            /* 43 */
   US"No previous item of the same type exists",             /* 44 */ 
-  US"Item \"%s\" is not the same type as the current item", /* 45 */ 
+  US"Item \"%s\" is not the same type as the current item", /* 45 */
+  US"No previous item exists",                              /* 46 */  
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))

@@ -100,7 +100,7 @@ box filled;                           #11 colour or grey
 Aspic: blue value expected
 box filled 0.5,0.5;                   #11 blue
                   ^
-Aspic: integer expected
+Aspic: integer, *, or "copy <label>" expected
 box level;                            #11 integer
          ^
 Aspic: font name in quotes expected

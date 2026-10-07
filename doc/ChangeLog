@@ -26,7 +26,7 @@ component was not being diagnosed as an error (all these values should not be
 negative).
 
 8. Added the facility to reference a value from the previous item or by label
-reference for lengths, angles, and grey or colour settings.
+reference for integers, lengths, angles, and grey or colour settings.
 
 9. Add &* and &" in macros to insert all non-text or all text arguments, 
 respectively.

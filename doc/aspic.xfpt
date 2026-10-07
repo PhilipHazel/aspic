@@ -740,7 +740,7 @@ and therefore goes with the &*arrow*& command.
 
 
 
-.chapter "Types of value used in commands" CHAPTOV
+.chapter "Types of value used in drawing commands" CHAPTOV
 Unless explicitly stated to be an integer, a number may always be specified
 with an optional decimal point and fractional part. Negative numbers are
 preceded by a minus sign. Non-integer numbers are held in a fixed-point format
@@ -765,7 +765,7 @@ meaning none and 1.0 the maximum amount of each component.
 .section <greylevel>*
 A number in the range 0.0 to 1.0, where 0.0 is black and 1.0 is white.
 
-.section <integer>
+.section <integer>*
 A positive or negative integer.
 
 .section <label>
@@ -841,15 +841,18 @@ end of line1
 0.25 start of line3 plus (0,7)
 .endd
 
+
 .section "Referenced values" SECTREFVAR
 For those types of value marked with an asterisk above, instead of an actual
 value, a reference to a previous item can be given. There are two forms:
 .ilist
-If a single asterisk is given, Aspic looks back, starting with the previous
+If a single asterisk is given, Aspic references the previous item if the option 
+being set is &*level*&. Otherwise, it looks back, starting with the previous
 item, for the most recent item of the same general type, visible or invisible.
 .next
 Alternatively, the word `copy' followed by a label can be given. This must
-reference an item of the same general type.
+reference an item of the same general type unless the option being set is 
+&*level*& (all items have a &*level*& option).
 .endlist
 There are four general types: arcs, boxes, curves, and lines. Circles and
 ellipses are `boxes' whose width and depth are those of their bounding boxes.

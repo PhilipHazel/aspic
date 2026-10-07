@@ -1256,7 +1256,7 @@ and therefore goes with the <emphasis role="bold">arrow</emphasis> command.
 </chapter>
 
 <chapter id="CHAPTOV">
-<title>Types of value used in commands</title>
+<title>Types of value used in drawing commands</title>
 <para>
 Unless explicitly stated to be an integer, a number may always be specified
 with an optional decimal point and fractional part. Negative numbers are
@@ -1295,7 +1295,7 @@ A number in the range 0.0 to 1.0, where 0.0 is black and 1.0 is white.
 </para>
 </section>
 <section>
-<title>&lt;integer&gt;</title>
+<title>&lt;integer&gt;*</title>
 <para>
 A positive or negative integer.
 </para>
@@ -1416,14 +1416,16 @@ value, a reference to a previous item can be given. There are two forms:
 <itemizedlist>
 <listitem>
 <para>
-If a single asterisk is given, Aspic looks back, starting with the previous
+If a single asterisk is given, Aspic references the previous item if the option 
+being set is <emphasis role="bold">level</emphasis>. Otherwise, it looks back, starting with the previous
 item, for the most recent item of the same general type, visible or invisible.
 </para>
 </listitem>
 <listitem>
 <para>
 Alternatively, the word &#x2018;copy&#x2019; followed by a label can be given. This must
-reference an item of the same general type.
+reference an item of the same general type unless the option being set is 
+<emphasis role="bold">level</emphasis> (all items have a <emphasis role="bold">level</emphasis> option).
 </para>
 </listitem>
 </itemizedlist>
