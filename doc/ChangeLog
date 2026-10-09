@@ -31,6 +31,8 @@ reference for integers, lengths, angles, and grey or colour settings.
 9. Add &* and &" in macros to insert all non-text or all text arguments, 
 respectively.
 
+10. Add the "rlevel" option.
+
 
 Version 2.00  15 October 2022
 -----------------------------

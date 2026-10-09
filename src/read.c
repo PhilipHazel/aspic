@@ -23,8 +23,9 @@ commands for drawing objects (see rditem.c) and a number of common subroutines
 *************************************************/
 
 static arg_item text_args[] = {
-  { US"at",    opt_at,   oo(item_text, x), oo(item_text, y) },
-  { US"level", opt_int,  oo(item_text, level),           -1 },
+  { US"at",     opt_at,   oo(item_text, x), oo(item_text, y) },
+  { US"level",  opt_int,  oo(item_text, level),           -1 },
+  { US"rlevel", opt_int,  oo(item_text, rlevel),          -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -261,6 +262,7 @@ text->colour = env->textcolour;
 text->next = NULL;
 text->strings = NULL;
 text->level = env->level;
+text->rlevel = 0;
 
 if (text->level > max_level) max_level = text->level;
 if (text->level < min_level) min_level = text->level;
@@ -552,7 +554,7 @@ find_mac_end(int ptr, uschar term)
 while (in_line[ptr] != term && in_line[ptr] != 0)
   {
   if (in_line[++ptr] == '&' && in_line[ptr+1] == '\"') ptr++;
- 
+
   else if (in_line[ptr] == '\"')
     {
     while (in_line[++ptr] != '\"' && in_line[ptr] != 0) {};
@@ -582,7 +584,7 @@ while (*s != 0)
     else if (*s == '*' || *s == '"')   /* No limit */
       {
       n = 100;
-      break;  
+      break;
       }
     else
       {

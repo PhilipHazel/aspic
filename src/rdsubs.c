@@ -1644,14 +1644,15 @@ while (wordread || isalpha((int)in_line[chptr]))
           }
         break;
 
-        /* For the special case of "level", we allow find_ref to find any type
-        of previous item, because they all have a level variable at the same
-        offset. */
+        /* For the special cases of "level" and "rlevel", we allow find_ref to
+        find any type of previous item, because they all have level and rlevel
+        variables at the same offset. */
 
         case opt_int:      /* integer, +ve or -ve */
         if (!isdigit((int)in_line[chptr]) && in_line[chptr] != '-')
           {
-          item *ref = find_ref(p, arg1 == offsetof(item, level));
+          item *ref = find_ref(p, arg1 == offsetof(item, level) ||
+                                  arg1 == offsetof(item, rlevel));
           if (ref != NULL)
             *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
           else error_moan(11, "integer, *, or \"copy <label>\"");
@@ -1731,6 +1732,11 @@ while (wordread || isalpha((int)in_line[chptr]))
     while (in_line[chptr] != ';' && !endfile) nextch();
     }
   }
+
+/* All items have a "level" and "rlevel" parameters. We add the relative level
+into the absolute level here. */
+
+p->level += p->rlevel;
 }
 
 /* End of rdsubs.c */

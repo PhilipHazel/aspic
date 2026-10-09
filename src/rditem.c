@@ -44,6 +44,7 @@ static arg_item arrow_args[] = {
   { US"grey",        opt_grey,   oo(item_line, colour),                  -1 },
   { US"shapefilled", opt_colgrey,oo(item_line, shapefilled),             -1 },
   { US"level",       opt_int,    oo(item_line, level),                   -1 },
+  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -63,6 +64,7 @@ static arg_item box_args[] = {
   { US"colour",      opt_colour, oo(item_box, colour),                    -1 },
   { US"grey",        opt_grey, oo(item_box, colour),                      -1 },
   { US"level",       opt_int,  oo(item_box, level),                       -1 },
+  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -77,6 +79,7 @@ static arg_item circle_args[] = {
   { US"grey",        opt_grey, oo(item_box, colour),                      -1 },
   { US"filled",      opt_colgrey, oo(item_box, shapefilled),              -1 },
   { US"level",       opt_int,  oo(item_box, level),                       -1 },
+  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -107,6 +110,7 @@ static arg_item arcarrow_args[] = {
   { US"grey",        opt_grey, oo(item_arc, colour),                 -1 },
   { US"shapefilled", opt_colgrey, oo(item_arc, shapefilled),         -1 },
   { US"level",       opt_int,  oo(item_arc, level),                  -1 },
+  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -126,6 +130,7 @@ static arg_item curve_args[] = {
   { US"grey",        opt_grey, oo(item_curve, colour),               -1 },
   { US"shapefilled", opt_colgrey, oo(item_curve, shapefilled),       -1 },
   { US"level",       opt_int,  oo(item_curve, level),                -1 },
+  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -228,6 +233,7 @@ arc->arrow_y = env->arrow_y;
 arc->cw = FALSE;
 arc->strings = NULL;
 arc->level = env->level;
+arc->rlevel = 0;
 
 arc->radius = arc->angle = UNSET;
 arc->depth = arc->via_x = arc->via_y = UNSET;
@@ -621,6 +627,7 @@ curve->strings = NULL;
 curve->type = i_curve;
 curve->style = item_arg1;
 curve->level = env->level;
+curve->rlevel = 0;
 
 curve->linedepth = env->linedepth;
 curve->fontdepth = env->fontdepth;
@@ -771,6 +778,7 @@ box->fontdepth = env->fontdepth;
 box->strings = NULL;
 box->boxtype = boxtype;
 box->level = env->level;
+box->rlevel = 0;
 
 switch (boxtype)
   {
@@ -1173,6 +1181,7 @@ line->arrow_end = item_arg2;
 line->arrow_x = env->arrow_x;
 line->arrow_y = env->arrow_y;
 line->level = env->level;
+line->rlevel = 0;
 
 /* Mark various values as "unset" */
 

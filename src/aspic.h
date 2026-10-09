@@ -246,6 +246,7 @@ typedef struct environment {
   struct item *prev; \
   stringchain *strings; \
   int level; \
+  int rlevel; \
   int type; \
   int style; \
   int dash1; \

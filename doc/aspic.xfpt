@@ -405,12 +405,14 @@ lie between 0 and 1. For example:
 .pic 25
 In this example, visible closed shapes are used, so their outlines are drawn.
 If an invisible shape is filled, no outline is drawn.
-Filling a shape obliterates items that are `beneath'
-it. To make it easy to specify which filled shapes are `above' others, there is
-a &*level*& option that can be used on any drawing command. The default level
-is zero; items with a higher value are drawn `above' (later), whereas items
-with a lower (negative) level are drawn `below' (earlier). The order in which
-the items are defined does not matter. For example:
+Filling a shape obliterates items that are `beneath' it. To make it easy to
+specify which filled shapes are `above' others, there are &*level*& and
+&*rlevel*& options that can be used on any drawing command. The first sets an
+absolute level, while the second adds an adjustment and can be useful when a
+level is copied from another item. The default level is zero; items with a
+higher value are drawn `above' (later), whereas items with a lower (negative)
+level are drawn `below' (earlier). The order in which the items are defined
+does not matter. For example:
 .pic 29
 Arbitrary shapes can be filled by specifying the same &*shapefilled*& option on
 a sequence of lines and/or arcs/curves that are all at the same level and have
@@ -604,7 +606,7 @@ The &*include*& command may not appear inside a macro (see chapter
 
 .chapter "Aspic variables" CHAPVARIABLE
 Aspic supports simple variables, which can be used to save repetition in the
-input. See section &<<SECTREFVAR>>& for another way of avoiding repetition. The
+input. See section &<<SECTREFVAL>>& for another way of avoiding repetition. The
 use of variables can be disabled by use of the &*-nv*& command line option. If
 you are not using Aspic variables, but are making use of dollar ($) characters
 in strings, you should use &*-nv*&, because otherwise the dollars will be
@@ -842,18 +844,25 @@ end of line1
 .endd
 
 
-.section "Referenced values" SECTREFVAR
+.section "Referenced values" SECTREFVAL
 For those types of value marked with an asterisk above, instead of an actual
 value, a reference to a previous item can be given. There are two forms:
 .ilist
 If a single asterisk is given, Aspic references the previous item if the option 
-being set is &*level*&. Otherwise, it looks back, starting with the previous
-item, for the most recent item of the same general type, visible or invisible.
+being set is &*level*& or &*rlevel*&. Otherwise, it looks back, starting with
+the previous item, for the most recent item of the same general type, visible
+or invisible.
 .next
 Alternatively, the word `copy' followed by a label can be given. This must
 reference an item of the same general type unless the option being set is 
-&*level*& (all items have a &*level*& option).
+&*level*& or &*rlevel*& (all items have these two options).
 .endlist
+A reference to &*level*& is treated specially. What is copied is the sum of the 
+&*level*& and &*rlevel*& values from the referenced item. That is, it is the 
+actual level at which that item is drawn (see the next section below). A
+setting of &*rlevel*& on the current item can then be used to place it above or
+below the referenced item.
+
 There are four general types: arcs, boxes, curves, and lines. Circles and
 ellipses are `boxes' whose width and depth are those of their bounding boxes.
 .code
@@ -913,12 +922,28 @@ range 0.0. to 1.0 inclusive. They specify the amount of colour to be used. In
 the case of &*grey*&, a value of 0.0 is black and 1.0 is white. If no colour
 option is present, default values are used.
 
-The &*level*& option is common to all these commands (including &*text*&). It
-is useful when filled shapes are being drawn, because filling a shape
-obliterates items that are drawn `below' it. The default level is zero; items
-on levels greater than zero are drawn `above' and items with levels less than
-zero are drawn `below'. The default can be changed by the &*level*& command
-(see chapter &<<CHAPENV>>&).
+The &*level*& and &*rlevel*& options are also common to all these commands
+(including &*text*&). They are useful when filled shapes are being drawn,
+because filling a shape obliterates items that are drawn `below' it. The
+default level, which can be changed by the &*level*& command (see chapter
+&<<CHAPENV>>&), is zero; items on levels greater than zero are drawn `above'
+and items with levels less than zero are drawn `below'. This is achieved by 
+outputting the items at the lowest level first, in the order in which they are 
+defined, followed by the items at the next level, and so on.
+
+The &*level*& option sets an absolute level, which can be modified by the
+&*rlevel*& (`relative level') option. The actual level at which the item is
+drawn is the sum of the two. This arrangement makes it possible to copy a
+previous item's level (see section &<<SECTREFVAL>>&) and then modify it by
+setting &*rlevel*&. Here is an example that defines a macro command for a box
+that has a `shadow' beneath it:
+.pic 56
+The commands inside the macro first draw a box with the arguments given to the
+macro. Then a second box of the same size, but slightly offset and filled with
+grey is drawn one level below the first. Note that the option &`level *`&
+copies the final actual level (absolute plus relative) from the referenced
+item. Finally, the first box is set as the current item for any subsequent
+references.
 
 Many of the commands also have &*filled*& and &*shapefilled*& options. For
 closed shapes (&*box*&, &*circle*&, &*ellipse*&), &*filled*& specifies a colour
@@ -1001,6 +1026,7 @@ rotation of their predecessor.
 .o grey <&'greylevel'&>
 .o left
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o radius <&'length'&>
 .o right
 .o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
@@ -1092,6 +1118,7 @@ default. The following example illustrates various types of arc:
 .o grey <&'greylevel'&>
 .o left
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o radius <&'length'&>
 .o right
 .o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
@@ -1128,6 +1155,7 @@ but note that this extends beyond the end of the arc:
 .o grey <&'greylevel'&>
 .o left <&'length'&>*
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o right <&'length'&>*
 .o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o thickness <&'length'&>
@@ -1151,6 +1179,7 @@ given, an arrowhead is drawn at the end of the line.
 .o filled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o grey <&'greylevel'&>
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o join "<&'boxpoint'&> &~ to <&'position'&> &~ | &~ to <&'label'&>"
 .o thickness <&'length'&>
 .o width <&'length'&>
@@ -1206,6 +1235,7 @@ the box.
 .o filled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o grey <&'greylevel'&>
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o join "<&'boxpoint'&> &~ to &~ <&'position'&> &~ | &~ to <&'label'&>"
 .o radius <&'length'&>
 .o thickness <&'length'&>
@@ -1227,6 +1257,7 @@ items are centred at the centre of the circle.
 .o from "<&'position'&> &~ | &~ <&'label'&>"
 .o grey <&'greylevel'&>
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o thickness <&'length'&>
 .o to <&'position'&>
@@ -1253,6 +1284,7 @@ the middle of the base line.
 .o filled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o grey <&'greylevel'&>
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o join "<&'boxpoint'&> &~ to &~ <&'position'&> &~ | &~ to <&'label'&>"
 .o thickness <&'length'&>
 .o width <&'length'&>
@@ -1338,6 +1370,7 @@ it is part of a filled shape.
 .o grey <&'greylevel'&>
 .o left <&'length'&>*
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .o right <&'length'&>*
 .o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o thickness <&'length'&>
@@ -1383,6 +1416,7 @@ default) close to the midpoint of the line.
 .otable
 .o at <&'position'&>
 .o level <&'integer'&>
+.o rlevel <&'integer'&>
 .endtable
 This command does nothing unless it ends with at least one optional text
 string. It provides a means of outputting text without drawing a graphic shape.

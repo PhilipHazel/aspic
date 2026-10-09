@@ -742,12 +742,14 @@ box filled 0.5; circle filled 1 0 0;
 <para>
 In this example, visible closed shapes are used, so their outlines are drawn.
 If an invisible shape is filled, no outline is drawn.
-Filling a shape obliterates items that are &#x2018;beneath&#x2019;
-it. To make it easy to specify which filled shapes are &#x2018;above&#x2019; others, there is
-a <emphasis role="bold">level</emphasis> option that can be used on any drawing command. The default level
-is zero; items with a higher value are drawn &#x2018;above&#x2019; (later), whereas items
-with a lower (negative) level are drawn &#x2018;below&#x2019; (earlier). The order in which
-the items are defined does not matter. For example:
+Filling a shape obliterates items that are &#x2018;beneath&#x2019; it. To make it easy to
+specify which filled shapes are &#x2018;above&#x2019; others, there are <emphasis role="bold">level</emphasis> and
+<emphasis role="bold">rlevel</emphasis> options that can be used on any drawing command. The first sets an
+absolute level, while the second adds an adjustment and can be useful when a
+level is copied from another item. The default level is zero; items with a
+higher value are drawn &#x2018;above&#x2019; (later), whereas items with a lower (negative)
+level are drawn &#x2018;below&#x2019; (earlier). The order in which the items are defined
+does not matter. For example:
 </para>
 <literallayout class="monospaced">
 A: circle filled 0.5;
@@ -1065,7 +1067,7 @@ The <emphasis role="bold">include</emphasis> command may not appear inside a mac
 <title>Aspic variables</title>
 <para>
 Aspic supports simple variables, which can be used to save repetition in the
-input. See section <xref linkend="SECTREFVAR"/> for another way of avoiding repetition. The
+input. See section <xref linkend="SECTREFVAL"/> for another way of avoiding repetition. The
 use of variables can be disabled by use of the <emphasis role="bold">-nv</emphasis> command line option. If
 you are not using Aspic variables, but are making use of dollar ($) characters
 in strings, you should use <emphasis role="bold">-nv</emphasis>, because otherwise the dollars will be
@@ -1407,7 +1409,7 @@ end of line1
 0.25 start of line3 plus (0,7)
 </literallayout>
 </section>
-<section id="SECTREFVAR">
+<section id="SECTREFVAL">
 <title>Referenced values</title>
 <para>
 For those types of value marked with an asterisk above, instead of an actual
@@ -1417,18 +1419,26 @@ value, a reference to a previous item can be given. There are two forms:
 <listitem>
 <para>
 If a single asterisk is given, Aspic references the previous item if the option 
-being set is <emphasis role="bold">level</emphasis>. Otherwise, it looks back, starting with the previous
-item, for the most recent item of the same general type, visible or invisible.
+being set is <emphasis role="bold">level</emphasis> or <emphasis role="bold">rlevel</emphasis>. Otherwise, it looks back, starting with
+the previous item, for the most recent item of the same general type, visible
+or invisible.
 </para>
 </listitem>
 <listitem>
 <para>
 Alternatively, the word &#x2018;copy&#x2019; followed by a label can be given. This must
 reference an item of the same general type unless the option being set is 
-<emphasis role="bold">level</emphasis> (all items have a <emphasis role="bold">level</emphasis> option).
+<emphasis role="bold">level</emphasis> or <emphasis role="bold">rlevel</emphasis> (all items have these two options).
 </para>
 </listitem>
 </itemizedlist>
+<para>
+A reference to <emphasis role="bold">level</emphasis> is treated specially. What is copied is the sum of the 
+<emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> values from the referenced item. That is, it is the 
+actual level at which that item is drawn (see the next section below). A
+setting of <emphasis role="bold">rlevel</emphasis> on the current item can then be used to place it above or
+below the referenced item.
+</para>
 <para>
 There are four general types: arcs, boxes, curves, and lines. Circles and
 ellipses are &#x2018;boxes&#x2019; whose width and depth are those of their bounding boxes.
@@ -1495,12 +1505,47 @@ the case of <emphasis role="bold">grey</emphasis>, a value of 0.0 is black and 1
 option is present, default values are used.
 </para>
 <para>
-The <emphasis role="bold">level</emphasis> option is common to all these commands (including <emphasis role="bold">text</emphasis>). It
-is useful when filled shapes are being drawn, because filling a shape
-obliterates items that are drawn &#x2018;below&#x2019; it. The default level is zero; items
-on levels greater than zero are drawn &#x2018;above&#x2019; and items with levels less than
-zero are drawn &#x2018;below&#x2019;. The default can be changed by the <emphasis role="bold">level</emphasis> command
-(see chapter <xref linkend="CHAPENV"/>).
+The <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> options are also common to all these commands
+(including <emphasis role="bold">text</emphasis>). They are useful when filled shapes are being drawn,
+because filling a shape obliterates items that are drawn &#x2018;below&#x2019; it. The
+default level, which can be changed by the <emphasis role="bold">level</emphasis> command (see chapter
+<xref linkend="CHAPENV"/>), is zero; items on levels greater than zero are drawn &#x2018;above&#x2019;
+and items with levels less than zero are drawn &#x2018;below&#x2019;. This is achieved by 
+outputting the items at the lowest level first, in the order in which they are 
+defined, followed by the items at the next level, and so on.
+</para>
+<para>
+The <emphasis role="bold">level</emphasis> option sets an absolute level, which can be modified by the
+<emphasis role="bold">rlevel</emphasis> (&#x2018;relative level&#x2019;) option. The actual level at which the item is
+drawn is the sum of the two. This arrangement makes it possible to copy a
+previous item&#x2019;s level (see section <xref linkend="SECTREFVAL"/>) and then modify it by
+setting <emphasis role="bold">rlevel</emphasis>. Here is an example that defines a macro command for a box
+that has a &#x2018;shadow&#x2019; beneath it:
+</para>
+<literallayout class="monospaced">
+macro sbox {
+B&amp;$: box &amp;* &amp;";
+box width * depth * level * rlevel -1 
+  at centre plus (-2,-2) filled 0.2;
+goto B&amp;$; };
+sbox width 40 filled 1,0,0 "A"; iline right 10;
+sbox width 20 depth 20 level -1 filled 0,1,0 "Z";
+
+</literallayout>
+<figure>
+<mediaobject><imageobject>
+<imagedata fileref="./pic56.eps"  scale="80" align="center"></imagedata></imageobject></mediaobject>
+</figure>
+<para>
+&#x200b;
+</para>
+<para>
+The commands inside the macro first draw a box with the arguments given to the
+macro. Then a second box of the same size, but slightly offset and filled with
+grey is drawn one level below the first. Note that the option <literal>level *</literal>
+copies the final actual level (absolute plus relative) from the referenced
+item. Finally, the first box is set as the current item for any subsequent
+references.
 </para>
 <para>
 Many of the commands also have <emphasis role="bold">filled</emphasis> and <emphasis role="bold">shapefilled</emphasis> options. For
@@ -1659,6 +1704,11 @@ text "One"/1,0,0/+45/1 "Two"/2 "Three"/1/0,1,0;
 <row>
 <entry></entry>
 <entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
 <entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
 </row>
 <row>
@@ -1888,6 +1938,11 @@ arc clockwise to middle of C via middle of A "F";
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">radius</emphasis></entry>
 <entry>&lt;<emphasis>length</emphasis>&gt;</entry>
 </row>
@@ -2026,6 +2081,11 @@ arc; arrow left 10;
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">right</emphasis></entry>
 <entry>&lt;<emphasis>length</emphasis>&gt;*</entry>
 </row>
@@ -2101,6 +2161,11 @@ given, an arrowhead is drawn at the end of the line.
 <row>
 <entry></entry>
 <entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
 <entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
 </row>
 <row>
@@ -2233,6 +2298,11 @@ the box.
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">join</emphasis></entry>
 <entry>&lt;<emphasis>boxpoint</emphasis>&gt; &nbsp; to &nbsp; &lt;<emphasis>position</emphasis>&gt; &nbsp; | &nbsp; to &lt;<emphasis>label</emphasis>&gt;</entry>
 </row>
@@ -2307,6 +2377,11 @@ items are centred at the centre of the circle.
 <row>
 <entry></entry>
 <entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
 <entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
 </row>
 <row>
@@ -2386,6 +2461,11 @@ the middle of the base line.
 <row>
 <entry></entry>
 <entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
 <entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
 </row>
 <row>
@@ -2540,6 +2620,11 @@ it is part of a filled shape.
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">right</emphasis></entry>
 <entry>&lt;<emphasis>length</emphasis>&gt;*</entry>
 </row>
@@ -2639,6 +2724,11 @@ default) close to the midpoint of the line.
 <row>
 <entry></entry>
 <entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
 <entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
 </row>
 </tbody>

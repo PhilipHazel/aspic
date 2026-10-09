@@ -4,7 +4,7 @@
 
 /* Copyright (c) University of Cambridge 1991 - 2026 */
 /* Created: February 1991 */
-/* Last modified: September 2026 */
+/* Last modified: October 2026 */
 
 /* This module generates output as encapsulated PostScript.*/
 

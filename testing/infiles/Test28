@@ -26,4 +26,16 @@ circle radius *;
 box width 10;
 circle radius *;
 box depth *;
+line down 20;
+
+macro sbox {
+B&$: box &* &";
+box width * depth * level * rlevel -1 at centre plus (-2,-2) filled 0.2;
+goto B&$;
+};
+
+sbox width 40 filled 1,0,0 "abc";
+arrow right 15 filled 0,0,1;
+
+sbox width 20 depth 20 level -1 filled 0,1,0 "Z";
 
