@@ -289,7 +289,13 @@ on one or both ends.
 The dash parameters (lengths of lines and gaps) are adjustable (see chapter
 &<<CHAPENV>>&). By default, &*arrow*& requests an arrowhead on the end of the
 line. The option &*both*& gives arrowheads on both ends, whereas &*back*& gives
-a backward-pointing arrowhead only.
+a backward-pointing arrowhead only. The &*gap*& option on lines and arrows sets
+the length, along the line, of a gap that is left at each end, meaning that the
+line or arrow does not touch its adjacent items.
+.pic 57 nospace
+The actual length of the item includes both gaps; the only effect of a non-zero
+gap is not to draw the gap length at the start and end, and, for arrows, to
+move any arrowheads to the ends of the section that is drawn.
 
 Circular arcs are another form of non-closed shape that Aspic supports. By
 default an arc is drawn in an anti-clockwise direction, for 90 degrees, and at
@@ -716,7 +722,7 @@ If an argument that has not been supplied is referenced, nothing is
 substituted; thus the second call of &*item*& above expands into a call to
 &*box*& with only a single string argument. If too many arguments are supplied,
 the surplus ones are left in the input following the substituted text. This
-cannot happen if &`&&*`& or &`&&"`& is present because they imply any number of 
+cannot happen if &`&&*`& or &`&&"`& is present because they imply any number of
 arguments.
 
 It is not necessary to include a semicolon before a terminating brace when
@@ -848,17 +854,17 @@ end of line1
 For those types of value marked with an asterisk above, instead of an actual
 value, a reference to a previous item can be given. There are two forms:
 .ilist
-If a single asterisk is given, Aspic references the previous item if the option 
+If a single asterisk is given, Aspic references the previous item if the option
 being set is &*level*& or &*rlevel*&. Otherwise, it looks back, starting with
 the previous item, for the most recent item of the same general type, visible
 or invisible.
 .next
 Alternatively, the word `copy' followed by a label can be given. This must
-reference an item of the same general type unless the option being set is 
+reference an item of the same general type unless the option being set is
 &*level*& or &*rlevel*& (all items have these two options).
 .endlist
-A reference to &*level*& is treated specially. What is copied is the sum of the 
-&*level*& and &*rlevel*& values from the referenced item. That is, it is the 
+A reference to &*level*& is treated specially. What is copied is the sum of the
+&*level*& and &*rlevel*& values from the referenced item. That is, it is the
 actual level at which that item is drawn (see the next section below). A
 setting of &*rlevel*& on the current item can then be used to place it above or
 below the referenced item.
@@ -927,8 +933,8 @@ The &*level*& and &*rlevel*& options are also common to all these commands
 because filling a shape obliterates items that are drawn `below' it. The
 default level, which can be changed by the &*level*& command (see chapter
 &<<CHAPENV>>&), is zero; items on levels greater than zero are drawn `above'
-and items with levels less than zero are drawn `below'. This is achieved by 
-outputting the items at the lowest level first, in the order in which they are 
+and items with levels less than zero are drawn `below'. This is achieved by
+outputting the items at the lowest level first, in the order in which they are
 defined, followed by the items at the next level, and so on.
 
 The &*level*& option sets an absolute level, which can be modified by the
@@ -1121,20 +1127,18 @@ default. The following example illustrates various types of arc:
 .o rlevel <&'integer'&>
 .o radius <&'length'&>
 .o right
-.o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o thickness <&'length'&>
 .o to <&'position'&>
 .o up
 .o via <&'position'&>
 .endtable
-The options for &*arcarrow*& are exactly as for &*arc*&, but with the addition
-of &*filled*& (specifying a filled arrowhead), &*both*& (which specifies a
-double-headed arrow) and &*back*& (which specifies a backwards-pointing arrow).
-If neither &*both*& nor &*back*& is given, an arrowhead is drawn at the end of
-the arc.
-Arrowheads are drawn within the length of the arc so if, for example, a
-90-degree arc is drawn from absolute angle zero, the arrow head is not
-horizontal:
+The options for &*arcarrow*& are the same as for &*arc*&, but without
+&*shapefilled*&, and with the addition of &*filled*& (specifying a filled
+arrowhead), &*both*& (which specifies a double-headed arrow) and &*back*&
+(which specifies a backwards-pointing arrow). If neither &*both*& nor &*back*&
+is given, an arrowhead is drawn at the end of the arc. Arrowheads are drawn
+within the length of the arc so if, for example, a 90-degree arc is drawn from
+absolute angle zero, the arrow head is not horizontal:
 .pic 35
 A horizontal arrowhead can be drawn by adding a short linear arrow afterwards,
 but note that this extends beyond the end of the arc:
@@ -1152,21 +1156,23 @@ but note that this extends beyond the end of the arc:
 .o down <&'length'&>*
 .o filled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o from "<&'position'&> &~ | &~ <&'label'&>"
+.o gap <&'length'&>
 .o grey <&'greylevel'&>
 .o left <&'length'&>*
 .o level <&'integer'&>
 .o rlevel <&'integer'&>
 .o right <&'length'&>*
-.o shapefilled "<&'colour'&> &~ | &~ <&'greylevel'&>"
 .o thickness <&'length'&>
 .o to <&'position'&>
 .o up <&'length'&>*
 .endtable
-The &*arrow*& command has exactly the same options as &*line*& (see section
-&<<SECTLINE>>& below), but with the addition of &*filled*& (specifying a filled
-arrowhead), &*both*& (specifying a double-headed arrow), and &*back*&
-(specifying a backwards-pointing arrow). If neither &*both*& nor &*back*& is
-given, an arrowhead is drawn at the end of the line.
+The &*arrow*& command has the same options as &*line*& (see section
+&<<SECTLINE>>& below), but without &*shapefilled*&, and with the addition of
+&*filled*& (specifying a filled arrowhead), &*both*& (specifying a
+double-headed arrow), and &*back*& (specifying a backwards-pointing arrow). If
+neither &*both*& nor &*back*& is given, an arrowhead is drawn at the end of the
+line. When the &*gap*& option is used, space is left at each end of the arrow
+so that it does not touch its adjacent items.
 
 
 
@@ -1367,6 +1373,7 @@ it is part of a filled shape.
 .o dashed
 .o down <&'length'&>*
 .o from "<&'position'&> &~ | &~ <&'label'&>"
+.o gap <&'length'&>
 .o grey <&'greylevel'&>
 .o left <&'length'&>*
 .o level <&'integer'&>
@@ -1401,6 +1408,12 @@ line up right;
 line down 20 left;
 line down 40 right 60;
 .endd
+The &*gap*& option sets the length, along the line, of a gap that is left at
+each end, meaning that the line does not touch its adjacent items. The actual
+length of the line includes both gaps; the only effect of a non-zero gap is not
+to draw the gap length at the start and end. The &*gap*& and &*shapefilled*&
+options are mutually exclusive.
+
 The &*align*& option can be used only with horizontal or vertical lines. The
 vertical or horizontal coordinate of the <&'position'&> specified by &*align*&
 is used, as appropriate, overriding any other value. For example:

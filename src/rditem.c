@@ -45,6 +45,7 @@ static arg_item arrow_args[] = {
   { US"shapefilled", opt_colgrey,oo(item_line, shapefilled),             -1 },
   { US"level",       opt_int,    oo(item_line, level),                   -1 },
   { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
+  { US"gap",         opt_dim,    oo(item_line, gap),                     -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -240,12 +241,19 @@ arc->depth = arc->via_x = arc->via_y = UNSET;
 arc->direction = unset_dirpos;
 arc->x0 = arc->y0 = arc->x1 = arc->y1 = UNSET;
 
-/* Read optional parameters and sort out dashing */
+/* Read optional parameters and complain for any that are mutually exclusive. */
 
 options((item *)arc, item_arg2? arcarrow_args : arc_args);
-if (arc->dash1) { arc->dash1 = env->linedash1; arc->dash2 = env->linedash2; }
 if (arc->level > max_level) max_level = arc->level;
 if (arc->level < min_level) min_level = arc->level;
+
+if (!samecolour(arc->shapefilled, unfilled) &&
+    (arc->arrow_start || arc->arrow_end))
+  error_moan(47, "with an arrow");
+
+/* Sort out dashing */
+
+if (arc->dash1) { arc->dash1 = env->linedash1; arc->dash2 = env->linedash2; }
 
 /* Convert angle to radians and adjust for clockwise */
 
@@ -644,7 +652,7 @@ curve->x0 = curve->y0 = curve->x1 = curve->y1 = UNSET;
 curve->cx1 = curve->cy1 = curve->cx2 = curve->cy2 = 0;
 curve->cxs = curve->cys = 0;
 
-/* Read optional parameters and sort out dashing */
+/* Read optional parameters */
 
 options((item *)curve, curve_args);
 if (curve->dash1) { curve->dash1 = env->linedash1; curve->dash2 = env->linedash2; }
@@ -1182,18 +1190,28 @@ line->arrow_x = env->arrow_x;
 line->arrow_y = env->arrow_y;
 line->level = env->level;
 line->rlevel = 0;
+line->gap = 0;
 
 /* Mark various values as "unset" */
 
 line->width = line->depth = line->x = line->y = UNSET;
 line->endx = line->endy = line->alignx = line->aligny = UNSET;
 
-/* Read optional parameters and sort out dashing */
+/* Read optional parameters and complain for any that are mutually exclusive. */
 
 options((item *)line, item_arg2? arrow_args : line_args);
-if (line->dash1) { line->dash1 = env->linedash1; line->dash2 = env->linedash2; }
 if (line->level > max_level) max_level = line->level;
 if (line->level < min_level) min_level = line->level;
+
+if (!samecolour(line->shapefilled, unfilled))
+  {
+  if (line->arrow_start || line->arrow_end) error_moan(47, "with an arrow");
+  if (line->gap != 0) error_moan(47, "with the gap option");
+  }
+
+/* Sort out the dashing */
+
+if (line->dash1) { line->dash1 = env->linedash1; line->dash2 = env->linedash2; }
 
 /* If no end point is given set the default size if required; if any option was
 encountered, both dimensions will have been set, so we test only one. */

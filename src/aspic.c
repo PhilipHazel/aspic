@@ -137,9 +137,10 @@ static uschar *error_messages[] = {
   US"Recursive macro call not allowed - processing abandoned", /* 41 */
   US"The \"align\" option is not valid for a sloping line", /* 42 */
   US"Variable name is too long in substitution",            /* 43 */
-  US"No previous item of the same type exists",             /* 44 */ 
+  US"No previous item of the same type exists",             /* 44 */
   US"Item \"%s\" is not the same type as the current item", /* 45 */
-  US"No previous item exists",                              /* 46 */  
+  US"No previous item exists",                              /* 46 */
+  US"The shapefilled option is not allowed %s",             /* 47 */
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))

@@ -398,7 +398,26 @@ arrow down back dashed;
 The dash parameters (lengths of lines and gaps) are adjustable (see chapter
 <xref linkend="CHAPENV"/>). By default, <emphasis role="bold">arrow</emphasis> requests an arrowhead on the end of the
 line. The option <emphasis role="bold">both</emphasis> gives arrowheads on both ends, whereas <emphasis role="bold">back</emphasis> gives
-a backward-pointing arrowhead only.
+a backward-pointing arrowhead only. The <emphasis role="bold">gap</emphasis> option on lines and arrows sets
+the length, along the line, of a gap that is left at each end, meaning that the
+line or arrow does not touch its adjacent items.
+</para>
+<literallayout class="monospaced">
+box width 50 depth 30;
+arrow down 10 right 40 gap 5; 
+circle radius 10;
+</literallayout>
+<figure>
+<mediaobject><imageobject>
+<imagedata fileref="./pic57.eps"  scale="80" align="center"></imagedata></imageobject></mediaobject>
+</figure>
+<para>
+&#x200b;
+</para>
+<para>
+The actual length of the item includes both gaps; the only effect of a non-zero
+gap is not to draw the gap length at the start and end, and, for arrows, to
+move any arrowheads to the ends of the section that is drawn.
 </para>
 <para>
 Circular arcs are another form of non-closed shape that Aspic supports. By
@@ -1208,7 +1227,7 @@ If an argument that has not been supplied is referenced, nothing is
 substituted; thus the second call of <emphasis role="bold">item</emphasis> above expands into a call to
 <emphasis role="bold">box</emphasis> with only a single string argument. If too many arguments are supplied,
 the surplus ones are left in the input following the substituted text. This
-cannot happen if <literal>&amp;*</literal> or <literal>&amp;"</literal> is present because they imply any number of 
+cannot happen if <literal>&amp;*</literal> or <literal>&amp;"</literal> is present because they imply any number of
 arguments.
 </para>
 <para>
@@ -1418,7 +1437,7 @@ value, a reference to a previous item can be given. There are two forms:
 <itemizedlist>
 <listitem>
 <para>
-If a single asterisk is given, Aspic references the previous item if the option 
+If a single asterisk is given, Aspic references the previous item if the option
 being set is <emphasis role="bold">level</emphasis> or <emphasis role="bold">rlevel</emphasis>. Otherwise, it looks back, starting with
 the previous item, for the most recent item of the same general type, visible
 or invisible.
@@ -1427,14 +1446,14 @@ or invisible.
 <listitem>
 <para>
 Alternatively, the word &#x2018;copy&#x2019; followed by a label can be given. This must
-reference an item of the same general type unless the option being set is 
+reference an item of the same general type unless the option being set is
 <emphasis role="bold">level</emphasis> or <emphasis role="bold">rlevel</emphasis> (all items have these two options).
 </para>
 </listitem>
 </itemizedlist>
 <para>
-A reference to <emphasis role="bold">level</emphasis> is treated specially. What is copied is the sum of the 
-<emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> values from the referenced item. That is, it is the 
+A reference to <emphasis role="bold">level</emphasis> is treated specially. What is copied is the sum of the
+<emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> values from the referenced item. That is, it is the
 actual level at which that item is drawn (see the next section below). A
 setting of <emphasis role="bold">rlevel</emphasis> on the current item can then be used to place it above or
 below the referenced item.
@@ -1510,8 +1529,8 @@ The <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emp
 because filling a shape obliterates items that are drawn &#x2018;below&#x2019; it. The
 default level, which can be changed by the <emphasis role="bold">level</emphasis> command (see chapter
 <xref linkend="CHAPENV"/>), is zero; items on levels greater than zero are drawn &#x2018;above&#x2019;
-and items with levels less than zero are drawn &#x2018;below&#x2019;. This is achieved by 
-outputting the items at the lowest level first, in the order in which they are 
+and items with levels less than zero are drawn &#x2018;below&#x2019;. This is achieved by
+outputting the items at the lowest level first, in the order in which they are
 defined, followed by the items at the next level, and so on.
 </para>
 <para>
@@ -1953,11 +1972,6 @@ arc clockwise to middle of C via middle of A "F";
 </row>
 <row>
 <entry></entry>
-<entry><emphasis role="bold">shapefilled</emphasis></entry>
-<entry>&lt;<emphasis>colour</emphasis>&gt; &nbsp; | &nbsp; &lt;<emphasis>greylevel</emphasis>&gt;</entry>
-</row>
-<row>
-<entry></entry>
 <entry><emphasis role="bold">thickness</emphasis></entry>
 <entry>&lt;<emphasis>length</emphasis>&gt;</entry>
 </row>
@@ -1980,14 +1994,13 @@ arc clockwise to middle of C via middle of A "F";
 </tgroup>
 </informaltable>
 <para>
-The options for <emphasis role="bold">arcarrow</emphasis> are exactly as for <emphasis role="bold">arc</emphasis>, but with the addition
-of <emphasis role="bold">filled</emphasis> (specifying a filled arrowhead), <emphasis role="bold">both</emphasis> (which specifies a
-double-headed arrow) and <emphasis role="bold">back</emphasis> (which specifies a backwards-pointing arrow).
-If neither <emphasis role="bold">both</emphasis> nor <emphasis role="bold">back</emphasis> is given, an arrowhead is drawn at the end of
-the arc.
-Arrowheads are drawn within the length of the arc so if, for example, a
-90-degree arc is drawn from absolute angle zero, the arrow head is not
-horizontal:
+The options for <emphasis role="bold">arcarrow</emphasis> are the same as for <emphasis role="bold">arc</emphasis>, but without
+<emphasis role="bold">shapefilled</emphasis>, and with the addition of <emphasis role="bold">filled</emphasis> (specifying a filled
+arrowhead), <emphasis role="bold">both</emphasis> (which specifies a double-headed arrow) and <emphasis role="bold">back</emphasis>
+(which specifies a backwards-pointing arrow). If neither <emphasis role="bold">both</emphasis> nor <emphasis role="bold">back</emphasis>
+is given, an arrowhead is drawn at the end of the arc. Arrowheads are drawn
+within the length of the arc so if, for example, a 90-degree arc is drawn from
+absolute angle zero, the arrow head is not horizontal:
 </para>
 <literallayout class="monospaced">
 arcarrow;
@@ -2066,6 +2079,11 @@ arc; arrow left 10;
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">gap</emphasis></entry>
+<entry>&lt;<emphasis>length</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">grey</emphasis></entry>
 <entry>&lt;<emphasis>greylevel</emphasis>&gt;</entry>
 </row>
@@ -2091,11 +2109,6 @@ arc; arrow left 10;
 </row>
 <row>
 <entry></entry>
-<entry><emphasis role="bold">shapefilled</emphasis></entry>
-<entry>&lt;<emphasis>colour</emphasis>&gt; &nbsp; | &nbsp; &lt;<emphasis>greylevel</emphasis>&gt;</entry>
-</row>
-<row>
-<entry></entry>
 <entry><emphasis role="bold">thickness</emphasis></entry>
 <entry>&lt;<emphasis>length</emphasis>&gt;</entry>
 </row>
@@ -2113,11 +2126,13 @@ arc; arrow left 10;
 </tgroup>
 </informaltable>
 <para>
-The <emphasis role="bold">arrow</emphasis> command has exactly the same options as <emphasis role="bold">line</emphasis> (see section
-<xref linkend="SECTLINE"/> below), but with the addition of <emphasis role="bold">filled</emphasis> (specifying a filled
-arrowhead), <emphasis role="bold">both</emphasis> (specifying a double-headed arrow), and <emphasis role="bold">back</emphasis>
-(specifying a backwards-pointing arrow). If neither <emphasis role="bold">both</emphasis> nor <emphasis role="bold">back</emphasis> is
-given, an arrowhead is drawn at the end of the line.
+The <emphasis role="bold">arrow</emphasis> command has the same options as <emphasis role="bold">line</emphasis> (see section
+<xref linkend="SECTLINE"/> below), but without <emphasis role="bold">shapefilled</emphasis>, and with the addition of
+<emphasis role="bold">filled</emphasis> (specifying a filled arrowhead), <emphasis role="bold">both</emphasis> (specifying a
+double-headed arrow), and <emphasis role="bold">back</emphasis> (specifying a backwards-pointing arrow). If
+neither <emphasis role="bold">both</emphasis> nor <emphasis role="bold">back</emphasis> is given, an arrowhead is drawn at the end of the
+line. When the <emphasis role="bold">gap</emphasis> option is used, space is left at each end of the arrow
+so that it does not touch its adjacent items.
 </para>
 </section>
 <section id="SECTBOX">
@@ -2605,6 +2620,11 @@ it is part of a filled shape.
 </row>
 <row>
 <entry></entry>
+<entry><emphasis role="bold">gap</emphasis></entry>
+<entry>&lt;<emphasis>length</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
 <entry><emphasis role="bold">grey</emphasis></entry>
 <entry>&lt;<emphasis>greylevel</emphasis>&gt;</entry>
 </row>
@@ -2679,6 +2699,13 @@ line up right;
 line down 20 left;
 line down 40 right 60;
 </literallayout>
+<para>
+The <emphasis role="bold">gap</emphasis> option sets the length, along the line, of a gap that is left at
+each end, meaning that the line does not touch its adjacent items. The actual
+length of the line includes both gaps; the only effect of a non-zero gap is not
+to draw the gap length at the start and end. The <emphasis role="bold">gap</emphasis> and <emphasis role="bold">shapefilled</emphasis>
+options are mutually exclusive.
+</para>
 <para>
 The <emphasis role="bold">align</emphasis> option can be used only with horizontal or vertical lines. The
 vertical or horizontal coordinate of the &lt;<emphasis>position</emphasis>&gt; specified by <emphasis role="bold">align</emphasis>

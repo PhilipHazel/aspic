@@ -585,10 +585,32 @@ int x1 = p->x, y1 = p->y;
 int xw = p->width, yd = p->depth;
 int xx = 0, yy = 0;
 
-/* Filling: generate the line even if it is invisible; no arrow can be
+/* If the "gap" option has been set, do the geometric calculation to find the
+adjustments to the starting point and the width and depth. The numbers can be 
+too big for integer arithmetic and anyway, we have to use double for the square 
+root. */
+
+if (p->gap != 0)
+  {
+  double g2 = ((double)p->gap)/1000.0 * ((double)p->gap)/1000.0;
+  double xw2 = ((double)xw)/1000.0 * ((double)xw)/1000.0;
+  double yd2 = ((double)yd)/1000.0 * ((double)yd)/1000.0;
+  double dy2 = (g2 * yd2)/(xw2 + yd2);
+  double dx2 = g2 - dy2;
+  int dx = (int)(sqrt(dx2) * 1000.0);
+  int dy = (int)(sqrt(dy2) * 1000.0);
+  if (xw < 0) dx = -dx;
+  if (yd < 0) dy = -dy;
+  x1 += dx;
+  y1 += dy;
+  xw -= 2*dx;
+  yd -= 2*dy;
+  }
+
+/* Filling: generate the line even if it is invisible; no arrow or gap can be
 involved. */
 
-if (fillpending)
+else if (fillpending)
   {
   if (move_needed) move(x1, y1);
   rline(xw, yd);
@@ -691,7 +713,7 @@ fprintf(out_file, "%%!PS-Adobe-2.0 EPSF-2.0\n");
 tn = tree_search(varroot, US"title");
 fprintf(out_file, "%%%%Title: %s\n", tn->value);
 tn = tree_search(varroot, US"creator");
-fprintf(out_file, "%%%%Creator: %s, using Aspic %s\n", tn->value, 
+fprintf(out_file, "%%%%Creator: %s, using Aspic %s\n", tn->value,
   Version_String);
 tn = tree_search(varroot, US"date");
 fprintf(out_file, "%%%%CreationDate: %s\n", tn->value);

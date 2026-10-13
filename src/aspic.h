@@ -325,6 +325,7 @@ typedef struct {
   itemhdr;
   int width;
   int depth;
+  int gap; 
   int endx;
   int endy;
   int alignx;

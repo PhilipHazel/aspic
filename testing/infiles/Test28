@@ -38,4 +38,10 @@ sbox width 40 filled 1,0,0 "abc";
 arrow right 15 filled 0,0,1;
 
 sbox width 20 depth 20 level -1 filled 0,1,0 "Z";
-
+iline left down 10;
+box width 36; text at bottom "|";
+line down 20 right 20 gap 5; 
+box width *; text at top "|";
+arrow right 36 gap 5; box width *;
+arrow both down gap *; line left 36 gap *;
+arrow left * gap *; line down 10;

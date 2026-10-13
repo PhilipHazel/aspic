@@ -260,6 +260,7 @@ text->linedepth = env->linedepth;
 text->fontdepth = env->fontdepth;
 text->colour = env->textcolour;
 text->next = NULL;
+text->prev = lastitem;
 text->strings = NULL;
 text->level = env->level;
 text->rlevel = 0;
