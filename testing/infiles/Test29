@@ -1,0 +1,9 @@
+A: box width 122 depth 113;
+text at bottom plus (0,-10) "1220";
+text at right plus (14, 0) "1130";
+B: arrow both dashed up 61 from top of A "610";
+curve from top right of A to end of B cs (0,-10);
+curve to top left of A cs *;
+iline left 25 from left of A "";
+iline up 10 from end of B "";
+

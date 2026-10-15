@@ -35,6 +35,11 @@ respectively.
 
 11. Add the "gap" option to lines and arrows.
 
+12. Some Bezier curves were being drawn in the wrong direction - clockwise 
+instead of anticlockwise, or vice versa. This happened when the line joining 
+the end points was neither horizontal nor vertical and the relative width was 
+negative.
+
 
 Version 2.00  15 October 2022
 -----------------------------

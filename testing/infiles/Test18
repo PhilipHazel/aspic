@@ -2,7 +2,7 @@ iline down;
 A: curve to start c1 (0,200);
 curve to end plus (200,0) wavy;
 
-curve to start of A;
+curve to start of A clockwise;
 line left up 36;
 curve to start;
 

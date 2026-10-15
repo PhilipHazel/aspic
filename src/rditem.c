@@ -716,7 +716,12 @@ to get the correct signs for cos and sin. */
 
 if (w == 0) angle = (h > 0)? pi/2.0 : (3.0*pi)/2;
 else if (h == 0) angle = (w < 0)? pi : 0;
-else angle = atan(h/w);
+else 
+  {
+  angle = fabs(atan(h/w));
+  if (h > 0) angle = (w > 0)? angle : pi - angle;
+    else angle = (w > 0)? -angle : pi + angle; 
+  } 
 
 /* flen is the basic fraction of the baseline length; ylen defaults to the same
 length but can be adjusted. */

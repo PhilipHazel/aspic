@@ -586,8 +586,8 @@ int xw = p->width, yd = p->depth;
 int xx = 0, yy = 0;
 
 /* If the "gap" option has been set, do the geometric calculation to find the
-adjustments to the starting point and the width and depth. The numbers can be 
-too big for integer arithmetic and anyway, we have to use double for the square 
+adjustments to the starting point and the width and depth. The numbers can be
+too big for integer arithmetic and anyway, we have to use double for the square
 root. */
 
 if (p->gap != 0)
@@ -936,7 +936,7 @@ for (level = min_level; level <= max_level; level++)
     item_arc *ppa;
     item_curve *ppc;
     item_line *ppl;
-
+    
     if (p->level == level) switch (p->type)
       {
       case i_arc:

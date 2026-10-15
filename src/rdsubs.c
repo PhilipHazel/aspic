@@ -561,6 +561,7 @@ readword(void)
 int n = 0;
 if (!wordread)
   {
+  nextsigch();
   while (isalpha((int)in_line[chptr]) || isdigit((int)in_line[chptr]))
     {
     if (n > WORD_SIZE - 2) { error_moan(36); exit(EXIT_FAILURE); }
@@ -1400,17 +1401,18 @@ return TRUE;
 *************************************************/
 
 /* If next character is '*', look back for item of the same type, unless the
-'any' argument is true.
+'any' argument is true. Otherwise, look for "copy <name>". 
 
 Argument:
-  p       the item currently being set up
-  any     TRUE if any type of item is OK
+  p         the item currently being set up
+  any       TRUE if any type of item is OK
+  required  TRUE if returning NULL will provoke an error
 
 Returns:  reference item or NULL if not found
 */
 
 static item *
-find_ref(item *p, BOOL any)
+find_ref(item *p, BOOL any, BOOL required)
 {
 item *ref;
 int save_chptr = chptr;
@@ -1430,11 +1432,15 @@ if (in_line[chptr] == '*')
   if (ref == NULL) error_moan(errnumber); else chptr ++;  /* Move past '*' */
   return ref;
   }
-
+  
+/* Look for "copy <label>". If the next word is not "copy" and the reference is 
+mandatory, reset the character position for a better error message. */ 
+  
+if (!isalpha(in_line[chptr])) return NULL; 
 readword();
 if (Ustrcmp(word, "copy") != 0)
   {
-  chptr = save_chptr;
+  if (required) chptr = save_chptr; else wordread = word[0] != 0;
   return NULL;
   }
 
@@ -1478,7 +1484,7 @@ while (wordread || isalpha((int)in_line[chptr]))
   readword();
   standardize_word();   /* Allows for spelling variations */
 
-  /* Search the list for this command */
+  /* Search the list for this option */
 
   for (; (pp->name)[0] != 0; pp++)
     {
@@ -1512,7 +1518,7 @@ while (wordread || isalpha((int)in_line[chptr]))
             }
           else
             {
-            item *ref = find_ref(p, FALSE);
+            item *ref = find_ref(p, FALSE, FALSE);
             if (ref != NULL) value = abs(*(int *)(((uschar *)ref) + arg1));
             }
 	  *(int *)(((uschar *)p) + arg1) = value * sign;
@@ -1528,7 +1534,7 @@ while (wordread || isalpha((int)in_line[chptr]))
           }
         else
           {
-          item *ref = find_ref(p, FALSE);
+          item *ref = find_ref(p, FALSE, TRUE);
           if (ref != NULL)
             {
             *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
@@ -1551,7 +1557,7 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_angle:    /* single angle -- don't magnify! */
 	if (!isdigit((int)in_line[chptr]))
           {
-          item *ref = find_ref(p, FALSE);
+          item *ref = find_ref(p, FALSE, TRUE);
           if (ref != NULL) *(int *)(((uschar *)p) + arg1) =
             *(int *)(((uschar *)ref) + arg1);
           else error_moan(11, "unsigned angle, *, or \"copy <label>\"");
@@ -1562,7 +1568,7 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_grey:     /* grey level -- don't magnify! */
 	if (!isdigit((int)in_line[chptr]))
           {
-          item *ref = find_ref(p, FALSE);
+          item *ref = find_ref(p, FALSE, TRUE);
           if (ref != NULL) *(colour *)(((uschar *)p) + arg1) =
             *(colour *)(((uschar *)ref) + arg1);
           else error_moan(11, "grey level, *, or \"copy <label>\"");
@@ -1579,7 +1585,7 @@ while (wordread || isalpha((int)in_line[chptr]))
           colour *c = (colour *)(((uschar *)p) + arg1);
           if (!isdigit((int)in_line[chptr]))
             {
-            item *ref = find_ref(p, FALSE);
+            item *ref = find_ref(p, FALSE, TRUE);
             if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
               else error_moan(11, "colour values, *, or \"copy <label>\"");
             }
@@ -1617,7 +1623,7 @@ while (wordread || isalpha((int)in_line[chptr]))
           colour *c = (colour *)(((uschar *)p) + arg1);
           if (!isdigit((int)in_line[chptr]))
             {
-            item *ref = find_ref(p, FALSE);
+            item *ref = find_ref(p, FALSE, TRUE);
             if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
               else error_moan(11, "grey level, colour values, *, or \"copy <label>\"");
             }
@@ -1652,7 +1658,7 @@ while (wordread || isalpha((int)in_line[chptr]))
         if (!isdigit((int)in_line[chptr]) && in_line[chptr] != '-')
           {
           item *ref = find_ref(p, arg1 == offsetof(item, level) ||
-                                  arg1 == offsetof(item, rlevel));
+                                  arg1 == offsetof(item, rlevel), TRUE);
           if (ref != NULL)
             *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
           else error_moan(11, "integer, *, or \"copy <label>\"");
@@ -1666,7 +1672,7 @@ while (wordread || isalpha((int)in_line[chptr]))
                      (int *)(((uschar *)p) + arg2));
         else
           {
-          item *ref = find_ref(p, FALSE);
+          item *ref = find_ref(p, FALSE, TRUE);
           if (ref != NULL)
             {
             *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
@@ -1679,7 +1685,7 @@ while (wordread || isalpha((int)in_line[chptr]))
         case opt_at:       /* absolute position */
           {
 	  int x, y;
-          item *ref = find_ref(p, FALSE);
+          item *ref = find_ref(p, FALSE, FALSE);
           if (ref != NULL)
             {
             *(int *)(((uschar *)p) + arg1) = *(int *)(((uschar *)ref) + arg1);
