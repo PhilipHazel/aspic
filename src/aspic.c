@@ -141,6 +141,7 @@ static uschar *error_messages[] = {
   US"Item \"%s\" is not the same type as the current item", /* 45 */
   US"No previous item exists",                              /* 46 */
   US"The shapefilled option is not allowed %s",             /* 47 */
+  US"Unrecognized colour name \"%s\"",                      /* 48 */ 
   };
 
 #define ERROR_COUNT (sizeof(error_messages)/sizeof(char *))

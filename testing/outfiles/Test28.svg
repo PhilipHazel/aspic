@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="155.502" height="346.426" version="1.1"
+<svg width="286.5" height="346.426" version="1.1"
      xmlns="http://www.w3.org/2000/svg">
 
 <!-- created by Unknown on <date>, using Aspic (version omitted) -->
@@ -19,6 +19,15 @@ l 10 0
 <rect x="20.25" y="-314.176" width="10" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
 <rect x="30.25" y="-314.176" width="72" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
 <rect x="102.25" y="-314.176" width="10" height="36" fill="none" stroke="#000000" stroke-width="0.5"/>
+<rect x="122.25" y="-314.176" width="72" height="36" fill="none" stroke="#00FF00" stroke-width="0.5"/>
+<text x="158.25" y="-293.176" text-anchor="middle" fill="#FF0000">Red</text>
+<rect x="194.25" y="-314.176" width="72" height="36" fill="none" stroke="#00FF00" stroke-width="0.5"/>
+<text x="230.25" y="-293.176" text-anchor="middle" fill="#FF00FF">magenta</text>
+<rect x="266.25" y="-306.176" width="20" height="20" fill="#FFFF00" stroke="#00FF00" stroke-width="0.5"/>
+<path d="M 276.25 -286.176
+l 0 20
+" fill="none" stroke="#FF0000" stroke-width="0.4"/>
+<rect x="266.25" y="-266.176" width="20" height="20" fill="#9F1FEF" stroke="#00FF00" stroke-width="0.5"/>
 <rect x="10.25" y="-346.176" width="72" height="100" fill="none" stroke="#000000" stroke-width="0.5"/>
 <path d="M 46.25 -246.176
 l 0 10

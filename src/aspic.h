@@ -488,6 +488,7 @@ void init_sv(void);
 void nextch(void);
 void nextsigch(void);
 void options(item *, arg_item *);
+void readcolourname(colour *);
 int  readint(void);
 int  readnumber(void);
 void readstringchain(item *, int);

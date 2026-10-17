@@ -20,7 +20,7 @@ bindfont 11 "missing closing quote    #11
 text at (start);                      #11 number
 text at (10);                         #11 comma
 text at (10,11;                       #11 closing parens
-text "abc"/z;                         #11 invalid option
+text "abc"/~;                         #11 invalid option
 box; box join;                        #11 word
 box; box join front;                  #11 top, bottom, etc
 line; arc to 2/x start;               #11 number

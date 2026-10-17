@@ -436,13 +436,17 @@ static void
 c_env5(void)
 {
 colour *c = (colour *)(((uschar *)env) + item_arg1);
-c->red = readnumber();
-if (in_line[chptr] == ',') chptr++;
-nextsigch();
-c->green = readnumber();
-if (in_line[chptr] == ',') chptr++;
-nextsigch();
-c->blue = readnumber();
+if (isdigit(in_line[chptr]))
+  {
+  c->red = readnumber();
+  if (in_line[chptr] == ',') chptr++;
+  nextsigch();
+  c->green = readnumber();
+  if (in_line[chptr] == ',') chptr++;
+  nextsigch();
+  c->blue = readnumber();
+  }
+else readcolourname(c);
 }
 
 /* Grey level or colour; -1 means "not filled" for filling values. */
@@ -451,14 +455,18 @@ static void
 c_env6(void)
 {
 colour *c = (colour *)(((uschar *)env) + item_arg1);
-c->red = c->green = c->blue = readnumber();
-if (in_line[chptr] == ',') chptr++;
-while (isspace((int)in_line[chptr])) chptr++;
-if (!isdigit((int)in_line[chptr])) return;
-c->green = readnumber();
-if (in_line[chptr] == ',') chptr++;
-while (isspace((int)in_line[chptr])) chptr++;
-c->blue = readnumber();
+if (isdigit(in_line[chptr]))
+  {
+  c->red = c->green = c->blue = readnumber();
+  if (in_line[chptr] == ',') chptr++;
+  while (isspace((int)in_line[chptr])) chptr++;
+  if (!isdigit((int)in_line[chptr])) return;
+  c->green = readnumber();
+  if (in_line[chptr] == ',') chptr++;
+  while (isspace((int)in_line[chptr])) chptr++;
+  c->blue = readnumber();
+  } 
+else readcolourname(c);
 }
 
 

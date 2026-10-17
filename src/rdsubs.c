@@ -22,6 +22,38 @@ static BOOL wordread;   /* Set TRUE when a word has been read but not used. */
 
 
 /*************************************************
+*           Table of named colours               *
+*************************************************/
+
+typedef struct colourname {
+  const char *name;
+  int red;
+  int green;
+  int blue;
+} colourname;
+
+static colourname colourlist[] = {
+  { "black",      0,    0,    0 },
+  { "brown",   650,   165,  165 },
+  { "blue",       0,    0, 1000 },
+  { "cyan",       0, 1000, 1000 },
+  { "gray",     745,  745,  745 },
+  { "green",      0, 1000,    0 },
+  { "grey",     745,  745,  745 },
+  { "magenta", 1000,    0, 1000 },
+  { "orange",  1000,  650,    0 },
+  { "pink",    1000,  745,  795 },
+  { "purple",   625,  125,  940 },
+  { "red",     1000,    0,    0 },
+  { "violet",   930,  500,  930 },
+  { "white",   1000, 1000, 1000 },
+  { "yellow",  1000, 1000,    0 },
+  { NULL,         0,    0,    0 }
+};
+
+
+
+/*************************************************
 *           Find a position on a curve           *
 *************************************************/
 
@@ -761,6 +793,37 @@ return i + 1;
 
 
 /*************************************************
+*           Read a colour by name                *
+*************************************************/
+
+/* Called when the current charact is known to be alphabetic. This function is
+global because it is also called from within read.c.
+
+Argument:  where to put the colour values
+Returns:   nothing
+*/
+
+void
+readcolourname(colour *rgb)
+{
+readword();
+for (colourname *c = colourlist; c->name != NULL; c ++)
+  {
+  if (Ustrcmp(word, c->name) == 0)
+    {
+    rgb->red = c->red;
+    rgb->green = c->green;
+    rgb->blue = c->blue;
+    return;
+    }
+  }
+error_moan(48, word);
+}
+
+
+
+
+/*************************************************
 *           Read string and its options          *
 *************************************************/
 
@@ -855,11 +918,12 @@ while (in_line[chptr] == '/')
   int ch = in_line[++chptr];
 
   if (strchr("lrc", ch) != NULL &&
-       (in_line[++chptr] == '/' ||
-        in_line[chptr] == ';' ||
-        isspace(in_line[chptr])))
+       (in_line[chptr+1] == '/' ||
+        in_line[chptr+1] == ';' ||
+        isspace(in_line[chptr+1])))
     {
     justify = (ch == 'l')? just_left : (ch == 'r')? just_right : just_centre;
+    chptr++;
     }
   else if (ch == '+' || ch == '-')
     {
@@ -897,7 +961,7 @@ while (in_line[chptr] == '/')
         error_moan(20);
       }
     }
-
+  else if (isalpha(ch)) readcolourname(&rgb);
   else error_moan(11, "/l, /r, /c, /<font>, /{+-}<rotate>, or /<r>,<g>,<b>");
   }
 
@@ -1401,7 +1465,7 @@ return TRUE;
 *************************************************/
 
 /* If next character is '*', look back for item of the same type, unless the
-'any' argument is true. Otherwise, look for "copy <name>". 
+'any' argument is true. Otherwise, look for "copy <name>".
 
 Argument:
   p         the item currently being set up
@@ -1432,11 +1496,11 @@ if (in_line[chptr] == '*')
   if (ref == NULL) error_moan(errnumber); else chptr ++;  /* Move past '*' */
   return ref;
   }
-  
-/* Look for "copy <label>". If the next word is not "copy" and the reference is 
-mandatory, reset the character position for a better error message. */ 
-  
-if (!isalpha(in_line[chptr])) return NULL; 
+
+/* Look for "copy <label>". If the next word is not "copy" and the reference is
+mandatory, reset the character position for a better error message. */
+
+if (!isalpha(in_line[chptr])) return NULL;
 readword();
 if (Ustrcmp(word, "copy") != 0)
   {
@@ -1580,14 +1644,18 @@ while (wordread || isalpha((int)in_line[chptr]))
           }
         break;
 
-        case opt_colour:   /* colour rgb -- don't magnify! */
+        case opt_colour:   /* colour -- don't magnify! */
           {
           colour *c = (colour *)(((uschar *)p) + arg1);
           if (!isdigit((int)in_line[chptr]))
             {
             item *ref = find_ref(p, FALSE, TRUE);
-            if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
-              else error_moan(11, "colour values, *, or \"copy <label>\"");
+            if (ref != NULL)
+              *c = *(colour *)(((uschar *)ref) + arg1);
+            else if (isalpha((int)in_line[chptr]))
+              readcolourname(c);
+            else
+              error_moan(11, "colour name or values, *, or \"copy <label>\"");
             }
           else
             {
@@ -1618,14 +1686,18 @@ while (wordread || isalpha((int)in_line[chptr]))
           }
         break;
 
-        case opt_colgrey:   /* colour rgb or grey level -- don't magnify! */
+        case opt_colgrey:   /* colour or grey level -- don't magnify! */
           {
           colour *c = (colour *)(((uschar *)p) + arg1);
           if (!isdigit((int)in_line[chptr]))
             {
             item *ref = find_ref(p, FALSE, TRUE);
-            if (ref != NULL) *c = *(colour *)(((uschar *)ref) + arg1);
-              else error_moan(11, "grey level, colour values, *, or \"copy <label>\"");
+            if (ref != NULL)
+              *c = *(colour *)(((uschar *)ref) + arg1);
+            else if (isalpha((int)in_line[chptr]))
+              readcolourname(c);
+            else
+              error_moan(11, "grey level, colour name or values, *, or \"copy <label>\"");
             }
           else
             {
