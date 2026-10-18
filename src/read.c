@@ -455,7 +455,7 @@ static void
 c_env6(void)
 {
 colour *c = (colour *)(((uschar *)env) + item_arg1);
-if (isdigit(in_line[chptr]))
+if (isdigit(in_line[chptr]) || in_line[chptr] == '-')
   {
   c->red = c->green = c->blue = readnumber();
   if (in_line[chptr] == ',') chptr++;
