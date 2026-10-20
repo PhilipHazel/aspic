@@ -40,6 +40,8 @@ instead of anticlockwise, or vice versa. This happened when the line joining
 the end points was neither horizontal nor vertical and the relative width was 
 negative.
 
+13. Add support for some standard colour names.
+
 
 Version 2.00  15 October 2022
 -----------------------------

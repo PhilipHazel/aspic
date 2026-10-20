@@ -11,12 +11,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>07 October 2026</date>
+<date>17 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>07 October 2026</date>
+  <date>17 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -742,13 +742,14 @@ The shapes in the examples shown so far have all been just outlines, but Aspic
 also contains facilities for causing closed shapes to be filled with colour or
 shaded with grey. The commands that define closed shapes (<emphasis role="bold">box</emphasis>, <emphasis role="bold">circle</emphasis>,
 and <emphasis role="bold">ellipse</emphasis>) can be specified with a <emphasis role="bold">filled</emphasis> option. If it is followed
-by one number, that specifies a grey level. Otherwise, it must be followed by
+by one number, that specifies a grey level. Otherwise, it must be followed
+either by the name of a built-in colour (see section <xref linkend="SECTCOLOUR"/>) or by
 three numbers that specify a colour in terms of red, green, and blue levels.
-The numbers are separated by commas and/or spaces. In all cases, the numbers
-lie between 0 and 1. For example:
+The numbers are separated by commas and/or spaces and must lie between 0 and 1.
+For example:
 </para>
 <literallayout class="monospaced">
-box filled 0.5; circle filled 1 0 0;
+box filled 0.5; circle filled red; box filled 0 1 0;
 
 </literallayout>
 <figure>
@@ -760,15 +761,15 @@ box filled 0.5; circle filled 1 0 0;
 </para>
 <para>
 In this example, visible closed shapes are used, so their outlines are drawn.
-If an invisible shape is filled, no outline is drawn.
-Filling a shape obliterates items that are &#x2018;beneath&#x2019; it. To make it easy to
-specify which filled shapes are &#x2018;above&#x2019; others, there are <emphasis role="bold">level</emphasis> and
-<emphasis role="bold">rlevel</emphasis> options that can be used on any drawing command. The first sets an
-absolute level, while the second adds an adjustment and can be useful when a
-level is copied from another item. The default level is zero; items with a
-higher value are drawn &#x2018;above&#x2019; (later), whereas items with a lower (negative)
-level are drawn &#x2018;below&#x2019; (earlier). The order in which the items are defined
-does not matter. For example:
+If an invisible shape is filled, no outline is drawn. Filling a shape
+obliterates items that are &#x2018;beneath&#x2019; it. To make it easy to specify which
+filled shapes are &#x2018;above&#x2019; others, there are <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> options
+that can be used on any drawing command. The first sets an absolute level,
+while the second adds an adjustment and can be useful when a level is copied
+from another item. The default level is zero; items with a higher value are
+drawn &#x2018;above&#x2019; (later), whereas items with a lower (negative) level are drawn
+&#x2018;below&#x2019; (earlier). The order in which the items are defined does not matter.
+For example:
 </para>
 <literallayout class="monospaced">
 A: circle filled 0.5;
@@ -1301,12 +1302,15 @@ right, top left</emphasis>, or <emphasis>top right</emphasis>. The first four re
 the respective sides of a box; the last four refer to the corners.
 </para>
 </section>
-<section>
+<section id="SECTCOLOUR">
 <title>&lt;colour&gt;*</title>
 <para>
-Three numbers in the range 0.0 to 1.0, separated by spaces and/or commas. They
-specify a colour by the amount of red, green, and blue, respectively, with 0.0
-meaning none and 1.0 the maximum amount of each component.
+Either the name of one of the built-in colours, or three numbers in the range
+0.0 to 1.0, separated by spaces and/or commas. They specify a colour by the
+amount of red, green, and blue, respectively, with 0.0 meaning none and 1.0 the
+maximum amount of each component. The built-in colour names are: black, brown,
+blue, cyan, green, grey, magenta, orange, pink, purple, red, violet, white, and
+yellow.
 </para>
 </section>
 <section>
@@ -1515,13 +1519,13 @@ all these commands except <emphasis role="bold">text</emphasis>. The first speci
 that are drawn. If <emphasis role="bold">dashed</emphasis> is specified, lines are drawn dashed, with the
 lengths of dashes and spaces controlled by the relevent setting in the current
 environment (see chapter <xref linkend="CHAPENV"/>). The colour of lines is specified
-either by <emphasis role="bold">colour</emphasis>, which must be followed by three numbers (for red, blue,
-and green components), or by <emphasis role="bold">grey</emphasis>, which must be followed by a single
-number. This is a shorthand for <emphasis role="bold">colour</emphasis> followed by three identical numbers.
-The obsolete synonym <emphasis role="bold">greyness</emphasis> is also supported. Colour numbers lie in the
-range 0.0. to 1.0 inclusive. They specify the amount of colour to be used. In
-the case of <emphasis role="bold">grey</emphasis>, a value of 0.0 is black and 1.0 is white. If no colour
-option is present, default values are used.
+either by <emphasis role="bold">colour</emphasis>, which must be followed by a built-in colour name or three
+numbers (for red, blue, and green components), or by <emphasis role="bold">grey</emphasis>, which must be
+followed by a single number. This is a shorthand for <emphasis role="bold">colour</emphasis> followed by
+three identical numbers. The obsolete synonym <emphasis role="bold">greyness</emphasis> is also supported.
+Colour numbers lie in the range 0.0. to 1.0 inclusive. They specify the amount
+of colour to be used. In the case of <emphasis role="bold">grey</emphasis>, a value of 0.0 is black and 1.0
+is white. If no colour option is present, default values are used.
 </para>
 <para>
 The <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> options are also common to all these commands
@@ -1569,15 +1573,15 @@ references.
 <para>
 Many of the commands also have <emphasis role="bold">filled</emphasis> and <emphasis role="bold">shapefilled</emphasis> options. For
 closed shapes (<emphasis role="bold">box</emphasis>, <emphasis role="bold">circle</emphasis>, <emphasis role="bold">ellipse</emphasis>), <emphasis role="bold">filled</emphasis> specifies a colour
-with which to fill the shape. It can be followed either by three numbers to
-specify red, green, and blue components, or by a single number, to specify a
-grey level. For lines or arcs that start or end with arrowheads, <emphasis role="bold">filled</emphasis>
-specifies the colour with which the arrowhead is filled.
+with which to fill the shape. It can be followed by a built-in colour name, or
+three numbers to specify red, green, and blue components, or by a single
+number, to specify a grey level. For lines or arcs that start or end with
+arrowheads, <emphasis role="bold">filled</emphasis> specifies the colour with which the arrowhead is filled.
 </para>
 <para>
-The <emphasis role="bold">shapefilled</emphasis> option also takes either one or three numbers as its
-argument. It is available on commands for drawing lines, arcs, and curves. A
-sequence of such commands with the same <emphasis role="bold">shapefilled</emphasis> values, and also the
+The <emphasis role="bold">shapefilled</emphasis> option also takes a colour name or one or three numbers as
+its argument. It is available on commands for drawing lines, arcs, and curves.
+A sequence of such commands with the same <emphasis role="bold">shapefilled</emphasis> values, and also the
 same thickness, dash, colour, and level parameters, is interpreted as a closed
 shape that is to be filled with the appropriate colour. If the lines do not
 define a closed shape, an invisible straight line from the end to the start
@@ -1635,8 +1639,15 @@ level for the text. The value must not be greater than 1.0.
 </listitem>
 <listitem>
 <para>
-Three comma-separated numbers are interpreted as the red, green, and blue
-components of a colour for the text. The values must not be greater than 1.0.
+Three unsigned comma-separated numbers are interpreted as the red, green, and
+blue components of a colour for the text. The values must not be greater than
+1.0.
+</para>
+</listitem>
+<listitem>
+<para>
+Otherwise the text that follows a slash must be one of the built-in colour
+names (see section <xref linkend="SECTCOLOUR"/>).
 </para>
 </listitem>
 </itemizedlist>
@@ -1644,7 +1655,7 @@ components of a colour for the text. The values must not be greater than 1.0.
 Here are some examples:
 </para>
 <literallayout class="monospaced">
-"the quick (font 2)"/2 "brown fox (font 5)"/5
+"the quick (font 2)"/2 "brown fox (font 5)"/5/brown
 "move left and centre (font 3)"(-20,0)/c/3
 "coloured and rotated"/1,0.5,0.4/+45
 </literallayout>
@@ -3564,9 +3575,10 @@ necessary. The entire environment can be saved and restored by means of the
 Most of these commands take a single numerical argument. The exceptions are
 those that set dashed line parameters, and those that specify a colour. The
 former take two arguments, specifying the length of dashes and the length of
-gaps, respectively, and the latter take three arguments, specifying the red,
-green, and blue components of the colour. Setting a grey value is equivalent to
-setting a colour with three identical values.
+gaps, respectively, and the latter take either a built-in colour name or three
+arguments, specifying the red, green, and blue components of the colour.
+Setting a grey value is equivalent to setting a colour with three identical
+values.
 </para>
 <informaltable frame="none">
 <tgroup cols="3" colsep="0" rowsep="0">
@@ -3780,9 +3792,10 @@ arc left; line; box; line; arc up;
 &#x200b;
 </para>
 <para>
-Those commands that specify filling can be followed either by a single number,
-to specify a shade of grey, or by three numbers for a general colour. To turn
-off filling, a single negative number should be given. For example:
+Those commands that specify filling can be followed by a built-in colour name,
+a single number, to specify a shade of grey, or by three numbers for a general
+colour. To turn off filling, a single negative number should be given. For
+example:
 </para>
 <literallayout class="monospaced">
 circlefill 0.5; circle; circlefill 0.8 0.2 0.1; 

@@ -87,12 +87,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>07 October 2026</date>
+<date>17 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>07 October 2026</date>
+  <date>17 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -404,21 +404,22 @@ The shapes in the examples shown so far have all been just outlines, but Aspic
 also contains facilities for causing closed shapes to be filled with colour or
 shaded with grey. The commands that define closed shapes (&*box*&, &*circle*&,
 and &*ellipse*&) can be specified with a &*filled*& option. If it is followed
-by one number, that specifies a grey level. Otherwise, it must be followed by
+by one number, that specifies a grey level. Otherwise, it must be followed
+either by the name of a built-in colour (see section &<<SECTCOLOUR>>&) or by
 three numbers that specify a colour in terms of red, green, and blue levels.
-The numbers are separated by commas and/or spaces. In all cases, the numbers
-lie between 0 and 1. For example:
+The numbers are separated by commas and/or spaces and must lie between 0 and 1.
+For example:
 .pic 25
 In this example, visible closed shapes are used, so their outlines are drawn.
-If an invisible shape is filled, no outline is drawn.
-Filling a shape obliterates items that are `beneath' it. To make it easy to
-specify which filled shapes are `above' others, there are &*level*& and
-&*rlevel*& options that can be used on any drawing command. The first sets an
-absolute level, while the second adds an adjustment and can be useful when a
-level is copied from another item. The default level is zero; items with a
-higher value are drawn `above' (later), whereas items with a lower (negative)
-level are drawn `below' (earlier). The order in which the items are defined
-does not matter. For example:
+If an invisible shape is filled, no outline is drawn. Filling a shape
+obliterates items that are `beneath' it. To make it easy to specify which
+filled shapes are `above' others, there are &*level*& and &*rlevel*& options
+that can be used on any drawing command. The first sets an absolute level,
+while the second adds an adjustment and can be useful when a level is copied
+from another item. The default level is zero; items with a higher value are
+drawn `above' (later), whereas items with a lower (negative) level are drawn
+`below' (earlier). The order in which the items are defined does not matter.
+For example:
 .pic 29
 Arbitrary shapes can be filled by specifying the same &*shapefilled*& option on
 a sequence of lines and/or arcs/curves that are all at the same level and have
@@ -765,10 +766,13 @@ One of the phrases &'top, bottom, left, right, centre, bottom left, bottom
 right, top left'&, or &'top right'&. The first four refer to the midpoints of
 the respective sides of a box; the last four refer to the corners.
 
-.section <colour>*
-Three numbers in the range 0.0 to 1.0, separated by spaces and/or commas. They
-specify a colour by the amount of red, green, and blue, respectively, with 0.0
-meaning none and 1.0 the maximum amount of each component.
+.section <colour>* SECTCOLOUR
+Either the name of one of the built-in colours, or three numbers in the range
+0.0 to 1.0, separated by spaces and/or commas. They specify a colour by the
+amount of red, green, and blue, respectively, with 0.0 meaning none and 1.0 the
+maximum amount of each component. The built-in colour names are: black, brown,
+blue, cyan, green, grey, magenta, orange, pink, purple, red, violet, white, and
+yellow.
 
 .section <greylevel>*
 A number in the range 0.0 to 1.0, where 0.0 is black and 1.0 is white.
@@ -920,13 +924,13 @@ all these commands except &*text*&. The first specifies the thickness of lines
 that are drawn. If &*dashed*& is specified, lines are drawn dashed, with the
 lengths of dashes and spaces controlled by the relevent setting in the current
 environment (see chapter &<<CHAPENV>>&). The colour of lines is specified
-either by &*colour*&, which must be followed by three numbers (for red, blue,
-and green components), or by &*grey*&, which must be followed by a single
-number. This is a shorthand for &*colour*& followed by three identical numbers.
-The obsolete synonym &*greyness*& is also supported. Colour numbers lie in the
-range 0.0. to 1.0 inclusive. They specify the amount of colour to be used. In
-the case of &*grey*&, a value of 0.0 is black and 1.0 is white. If no colour
-option is present, default values are used.
+either by &*colour*&, which must be followed by a built-in colour name or three
+numbers (for red, blue, and green components), or by &*grey*&, which must be
+followed by a single number. This is a shorthand for &*colour*& followed by
+three identical numbers. The obsolete synonym &*greyness*& is also supported.
+Colour numbers lie in the range 0.0. to 1.0 inclusive. They specify the amount
+of colour to be used. In the case of &*grey*&, a value of 0.0 is black and 1.0
+is white. If no colour option is present, default values are used.
 
 The &*level*& and &*rlevel*& options are also common to all these commands
 (including &*text*&). They are useful when filled shapes are being drawn,
@@ -953,14 +957,14 @@ references.
 
 Many of the commands also have &*filled*& and &*shapefilled*& options. For
 closed shapes (&*box*&, &*circle*&, &*ellipse*&), &*filled*& specifies a colour
-with which to fill the shape. It can be followed either by three numbers to
-specify red, green, and blue components, or by a single number, to specify a
-grey level. For lines or arcs that start or end with arrowheads, &*filled*&
-specifies the colour with which the arrowhead is filled.
+with which to fill the shape. It can be followed by a built-in colour name, or
+three numbers to specify red, green, and blue components, or by a single
+number, to specify a grey level. For lines or arcs that start or end with
+arrowheads, &*filled*& specifies the colour with which the arrowhead is filled.
 
-The &*shapefilled*& option also takes either one or three numbers as its
-argument. It is available on commands for drawing lines, arcs, and curves. A
-sequence of such commands with the same &*shapefilled*& values, and also the
+The &*shapefilled*& option also takes a colour name or one or three numbers as
+its argument. It is available on commands for drawing lines, arcs, and curves.
+A sequence of such commands with the same &*shapefilled*& values, and also the
 same thickness, dash, colour, and level parameters, is interpreted as a closed
 shape that is to be filled with the appropriate colour. If the lines do not
 define a closed shape, an invisible straight line from the end to the start
@@ -1003,12 +1007,16 @@ and for right-justified strings at the right.
 A single unsigned number that contains a decimal point is interpreted as a grey
 level for the text. The value must not be greater than 1.0.
 .next
-Three comma-separated numbers are interpreted as the red, green, and blue
-components of a colour for the text. The values must not be greater than 1.0.
+Three unsigned comma-separated numbers are interpreted as the red, green, and
+blue components of a colour for the text. The values must not be greater than
+1.0.
+.next
+Otherwise the text that follows a slash must be one of the built-in colour
+names (see section &<<SECTCOLOUR>>&).
 .endlist
 Here are some examples:
 .code
-"the quick (font 2)"/2 "brown fox (font 5)"/5
+"the quick (font 2)"/2 "brown fox (font 5)"/5/brown
 "move left and centre (font 3)"(-20,0)/c/3
 "coloured and rotated"/1,0.5,0.4/+45
 .endd
@@ -1861,9 +1869,10 @@ necessary. The entire environment can be saved and restored by means of the
 Most of these commands take a single numerical argument. The exceptions are
 those that set dashed line parameters, and those that specify a colour. The
 former take two arguments, specifying the length of dashes and the length of
-gaps, respectively, and the latter take three arguments, specifying the red,
-green, and blue components of the colour. Setting a grey value is equivalent to
-setting a colour with three identical values.
+gaps, respectively, and the latter take either a built-in colour name or three
+arguments, specifying the red, green, and blue components of the colour.
+Setting a grey value is equivalent to setting a colour with three identical
+values.
 .
 .itable none 0 0 3 20 left 160 left 200 left
 .row "" "&`arcradius`&"        "default radius for arcs"
@@ -1912,9 +1921,10 @@ command. The default thickness, dashedness, and colour of arcs and curves is
 the same as that for straight lines; hence there are no separate commands. For
 example:
 .pic 45
-Those commands that specify filling can be followed either by a single number,
-to specify a shade of grey, or by three numbers for a general colour. To turn
-off filling, a single negative number should be given. For example:
+Those commands that specify filling can be followed by a built-in colour name,
+a single number, to specify a shade of grey, or by three numbers for a general
+colour. To turn off filling, a single negative number should be given. For
+example:
 .pic 46
 Note that turning off filling is not the same as filling with white. If the
 third circle above is filled with white, it would hide the horizontal line.
