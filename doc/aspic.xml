@@ -11,12 +11,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>17 October 2026</date>
+<date>21 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>17 October 2026</date>
+  <date>21 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -787,10 +787,11 @@ line left from centre of A level -1;
 <para>
 Arbitrary shapes can be filled by specifying the same <emphasis role="bold">shapefilled</emphasis> option on
 a sequence of lines and/or arcs/curves that are all at the same level and have
-the same thickness, colour, and dash characteristics. The end of the shape is
-marked by an item with different characteristics (or the end of the input). The
-shape is automatically closed, if necessary, by an invisible straight edge from
-the endpoint to the startpoint. For example:
+the same visibility, thickness, colour, and dash characteristics. The end of
+the shape is marked by an item with different characteristics (or the end of
+the input). The shape is automatically closed, if necessary, by a straight line
+from the endpoint to the startpoint. This line itself is never drawn. For
+example:
 </para>
 <literallayout class="monospaced">
 line shapefilled 0.5; arc shapefilled 0.5;
@@ -1582,13 +1583,13 @@ arrowheads, <emphasis role="bold">filled</emphasis> specifies the colour with wh
 The <emphasis role="bold">shapefilled</emphasis> option also takes a colour name or one or three numbers as
 its argument. It is available on commands for drawing lines, arcs, and curves.
 A sequence of such commands with the same <emphasis role="bold">shapefilled</emphasis> values, and also the
-same thickness, dash, colour, and level parameters, is interpreted as a closed
-shape that is to be filled with the appropriate colour. If the lines do not
-define a closed shape, an invisible straight line from the end to the start
-bounds the area that is filled. If one such closed shape immediately follows
-another with the same characteristics, you may need to insert a dummy command
-without a <emphasis role="bold">shapefilled</emphasis> option, in order to terminate the first shape. A line
-of length zero can be used for this.
+same visibility, thickness, dash, colour, and level parameters, is interpreted
+as a closed shape that is to be filled with the appropriate colour. If the
+lines do not define a closed shape, a straight line from the end to the start
+bounds the area that is filled. This line itself is never drawn. If one such
+closed shape immediately follows another with the same characteristics, you may
+need to insert a dummy command without a <emphasis role="bold">shapefilled</emphasis> option, in order to
+terminate the first shape. A line of length zero can be used for this.
 </para>
 <para>
 Options may be specified in any order, and the sequence of options may be
@@ -2843,11 +2844,11 @@ box grey 0.5 filled 0.8; iline right 10; ibox filled 0.8;
 </para>
 <para>
 A sequence of lines, arcs, and B&egrave;zier curves with the same
-<emphasis role="bold">shapefilled</emphasis> values and the same general characteristics (line width,
-colour, dash parameters, and level) is turned into a closed outline (if
-necessary) and filled. The lines and arcs themselves are drawn as normal,
-unless they are invisible. The automatically supplied line that closes such a
-shape is not drawn. A dummy command such as:
+<emphasis role="bold">shapefilled</emphasis> values and the same general characteristics (visibility, line
+width, colour, dash parameters, and level) is turned into a closed outline (if
+necessary) and filled. The lines, arcs, and curves themselves are drawn as
+normal, unless they are all invisible. The automatically supplied line that
+closes such a shape is not drawn. A dummy command such as:
 </para>
 <literallayout class="monospaced">
 line left 0;
@@ -2909,7 +2910,7 @@ set by means of the <emphasis role="bold">level</emphasis> command (see chapter 
 </chapter>
 
 <chapter>
-<title>Altering the &#x2018;last&#x2019; item</title>
+<title>Altering the &#x2018;last drawn&#x2019; item</title>
 <para>
 Occasionally it is useful to be able to change which shape is considered to be
 the previous shape when the next shape is drawn. The <emphasis role="bold">goto</emphasis> command, which is

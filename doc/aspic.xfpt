@@ -87,12 +87,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>17 October 2026</date>
+<date>21 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>17 October 2026</date>
+  <date>21 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -423,10 +423,11 @@ For example:
 .pic 29
 Arbitrary shapes can be filled by specifying the same &*shapefilled*& option on
 a sequence of lines and/or arcs/curves that are all at the same level and have
-the same thickness, colour, and dash characteristics. The end of the shape is
-marked by an item with different characteristics (or the end of the input). The
-shape is automatically closed, if necessary, by an invisible straight edge from
-the endpoint to the startpoint. For example:
+the same visibility, thickness, colour, and dash characteristics. The end of
+the shape is marked by an item with different characteristics (or the end of
+the input). The shape is automatically closed, if necessary, by a straight line
+from the endpoint to the startpoint. This line itself is never drawn. For
+example:
 .pic 26 nospace
 Sometimes it is necessary to supply a dummy item to terminate one shape when
 another with the same characteristics follows immediately afterwards. A line of
@@ -965,13 +966,13 @@ arrowheads, &*filled*& specifies the colour with which the arrowhead is filled.
 The &*shapefilled*& option also takes a colour name or one or three numbers as
 its argument. It is available on commands for drawing lines, arcs, and curves.
 A sequence of such commands with the same &*shapefilled*& values, and also the
-same thickness, dash, colour, and level parameters, is interpreted as a closed
-shape that is to be filled with the appropriate colour. If the lines do not
-define a closed shape, an invisible straight line from the end to the start
-bounds the area that is filled. If one such closed shape immediately follows
-another with the same characteristics, you may need to insert a dummy command
-without a &*shapefilled*& option, in order to terminate the first shape. A line
-of length zero can be used for this.
+same visibility, thickness, dash, colour, and level parameters, is interpreted
+as a closed shape that is to be filled with the appropriate colour. If the
+lines do not define a closed shape, a straight line from the end to the start
+bounds the area that is filled. This line itself is never drawn. If one such
+closed shape immediately follows another with the same characteristics, you may
+need to insert a dummy command without a &*shapefilled*& option, in order to
+terminate the first shape. A line of length zero can be used for this.
 
 Options may be specified in any order, and the sequence of options may be
 followed by any number of strings enclosed in double quotes (with doubling for
@@ -1475,11 +1476,11 @@ is invisible, no outline is drawn, and only the filling is shown. Otherwise,
 the outline is drawn in the line-drawing colour. For example:
 .pic 40
 A sequence of lines, arcs, and B&egrave;zier curves with the same
-&*shapefilled*& values and the same general characteristics (line width,
-colour, dash parameters, and level) is turned into a closed outline (if
-necessary) and filled. The lines and arcs themselves are drawn as normal,
-unless they are invisible. The automatically supplied line that closes such a
-shape is not drawn. A dummy command such as:
+&*shapefilled*& values and the same general characteristics (visibility, line
+width, colour, dash parameters, and level) is turned into a closed outline (if
+necessary) and filled. The lines, arcs, and curves themselves are drawn as
+normal, unless they are all invisible. The automatically supplied line that
+closes such a shape is not drawn. A dummy command such as:
 .code
 line left 0;
 .endd
@@ -1514,7 +1515,7 @@ set by means of the &*level*& command (see chapter &<<CHAPENV>>&).
 
 
 
-.chapter "Altering the `last' item"
+.chapter "Altering the `last drawn' item"
 Occasionally it is useful to be able to change which shape is considered to be
 the previous shape when the next shape is drawn. The &*goto*& command, which is
 followed by a label, is used to do this. It can be useful in macros. Consider a
