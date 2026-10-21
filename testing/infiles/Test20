@@ -1,6 +1,9 @@
 # This input tests most error messages. See also Test21.
 
 arc to start;                         #12 no previous item (must be first)
+line right *;                         #44 no previous item of same type
+goto *;                               #Set no previous item
+line level *;                         #46 no previous item
 
 include /non-existent superfluous;    #1, 3
 unknown command;                      #2
@@ -86,7 +89,12 @@ macro linecolor xxx;                  #39
 # 40 is EOF while reading macro
 # 41 is recursive macro call
 line up left align center of A;       #42
-$SubstituteAveryLongVariableNameThatWillNotFitInTheRelevantBuffer
+$SubstituteAveryLongVariableNameThatWillNotFitInTheRelevantBuffer #43
+# 44 is at the top (no previous item of same type)
+line left copy A;                     #45
+# 46 is "no previous item"
+arrow right shapefilled red;          #47
+line colour undefined;                #48 
 
 "command word expected";              #16 must be last because it is hard
 # End
