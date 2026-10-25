@@ -25,9 +25,9 @@ added to the item list. */
 
 static arg_item arrow_args[] = {
   { US"back",        opt_bool,  oo(item_line, arrow_start),
-                                      oo(item_line, arrow_end) },
-  { US"both",        opt_bool,  oo(item_line, arrow_start),   -1 },
-  { US"filled",      opt_colgrey, oo(item_line, arrow_filled),  -1 },
+                                      oo(item_line, arrow_end)    },
+  { US"both",        opt_bool,  oo(item_line, arrow_start), -1    },
+  { US"filled",      opt_colgrey, oo(item_line, arrow_filled), -1 },
 
   /* From here on they apply to both lines and arrows */
 
@@ -56,7 +56,7 @@ static arg_item *line_args = arrow_args + 3;
 static arg_item box_args[] = {
   { US"at",          opt_at,   oo(item_box,         x), oo(item_box, y)      },
   { US"join",        opt_join, oo(item_box, joinpoint),
-                                                 oo(item_box, pointjoined) },
+                                                 oo(item_box, pointjoined)   },
   { US"width",       opt_dim,  oo(item_box, width),                       -1 },
   { US"depth",       opt_dim,  oo(item_box, depth),                       -1 },
   { US"dashed",      opt_bool, oo(item_box, dash1),                       -1 },
@@ -65,14 +65,14 @@ static arg_item box_args[] = {
   { US"colour",      opt_colour, oo(item_box, colour),                    -1 },
   { US"grey",        opt_grey, oo(item_box, colour),                      -1 },
   { US"level",       opt_int,  oo(item_box, level),                       -1 },
-  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
+  { US"rlevel",      opt_int,  oo(item_line, rlevel),                     -1 },
   { US"", 0, -1, -1 }
 };
 
 static arg_item circle_args[] = {
   { US"at",          opt_at,   oo(item_box,         x), oo(item_box, y)      },
   { US"join",        opt_join, oo(item_box, joinpoint),
-                                                 oo(item_box, pointjoined) },
+                                                 oo(item_box, pointjoined)   },
   { US"radius",      opt_dim,  oo(item_box, width),                       -1 },
   { US"dashed",      opt_bool, oo(item_box, dash1),                       -1 },
   { US"thickness",   opt_dim,  oo(item_box, thickness),                   -1 },
@@ -80,7 +80,7 @@ static arg_item circle_args[] = {
   { US"grey",        opt_grey, oo(item_box, colour),                      -1 },
   { US"filled",      opt_colgrey, oo(item_box, shapefilled),              -1 },
   { US"level",       opt_int,  oo(item_box, level),                       -1 },
-  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
+  { US"rlevel",      opt_int,  oo(item_line, rlevel),                     -1 },
   { US"", 0, -1, -1 }
 };
 
@@ -90,7 +90,7 @@ static arg_item arcarrow_args[] = {
   { US"back",        opt_bool,  oo(item_arc, arrow_start),
                                 oo(item_arc, arrow_end) },
   { US"both",        opt_bool,  oo(item_arc, arrow_start), -1 },
-  { US"filled",      opt_colgrey,  oo(item_line, arrow_filled),  -1 },
+  { US"filled",      opt_colgrey, oo(item_arc, arrow_filled), -1 },
 
   /* From here on they apply to both arcs and arcarrows */
 
@@ -111,13 +111,22 @@ static arg_item arcarrow_args[] = {
   { US"grey",        opt_grey, oo(item_arc, colour),                 -1 },
   { US"shapefilled", opt_colgrey, oo(item_arc, shapefilled),         -1 },
   { US"level",       opt_int,  oo(item_arc, level),                  -1 },
-  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
+  { US"rlevel",      opt_int,  oo(item_line, rlevel),                -1 },
   { US"", 0, -1, -1 }
 };
 
 static arg_item *arc_args = arcarrow_args + 3;
 
-static arg_item curve_args[] = {
+/* Those specific to curve arrows come at the start here. */
+
+static arg_item curvearrow_args[] = {
+  { US"back",        opt_bool,  oo(item_curve, arrow_start),
+                                oo(item_curve, arrow_end) },
+  { US"both",        opt_bool,  oo(item_curve, arrow_start), -1 },
+  { US"filled",      opt_colgrey, oo(item_curve, arrow_filled), -1 },
+
+  /* From here on they apply to both curves and curvearrows */
+
   { US"from",        opt_at,   oo(item_curve, x0), oo(item_curve,   y0) },
   { US"to",          opt_at,   oo(item_curve, x1), oo(item_curve,   y1) },
   { US"clockwise",   opt_bool, oo(item_curve, cw),                   -1 },
@@ -131,9 +140,12 @@ static arg_item curve_args[] = {
   { US"grey",        opt_grey, oo(item_curve, colour),               -1 },
   { US"shapefilled", opt_colgrey, oo(item_curve, shapefilled),       -1 },
   { US"level",       opt_int,  oo(item_curve, level),                -1 },
-  { US"rlevel",      opt_int,    oo(item_line, rlevel),                  -1 },
+  { US"rlevel",      opt_int,  oo(item_line, rlevel),                -1 },
   { US"", 0, -1, -1 }
 };
+
+static arg_item *curve_args = curvearrow_args + 3;
+
 
 
 
@@ -636,7 +648,6 @@ curve->type = i_curve;
 curve->style = item_arg1;
 curve->level = env->level;
 curve->rlevel = 0;
-
 curve->linedepth = env->linedepth;
 curve->fontdepth = env->fontdepth;
 curve->thickness = env->linethickness;
@@ -644,7 +655,11 @@ curve->dash1 = 0;
 curve->dash2 = 0;
 curve->colour = env->linecolour;
 curve->shapefilled = env->shapefilled;
-
+curve->arrow_filled = env->arrowfilled;
+curve->arrow_start = FALSE;
+curve->arrow_end = item_arg2;
+curve->arrow_x = env->arrow_x;
+curve->arrow_y = env->arrow_y;
 curve->cw = 0;
 curve->wavy = 0;
 
@@ -652,12 +667,16 @@ curve->x0 = curve->y0 = curve->x1 = curve->y1 = UNSET;
 curve->cx1 = curve->cy1 = curve->cx2 = curve->cy2 = 0;
 curve->cxs = curve->cys = 0;
 
-/* Read optional parameters */
+/* Read optional parameters and complain if any are mutually exclusive. */
 
-options((item *)curve, curve_args);
+options((item *)curve, item_arg2? curvearrow_args : curve_args);
 if (curve->dash1) { curve->dash1 = env->linedash1; curve->dash2 = env->linedash2; }
 if (curve->level > max_level) max_level = curve->level;
 if (curve->level < min_level) min_level = curve->level;
+
+if (!samecolour(curve->shapefilled, unfilled) &&
+    (curve->arrow_start || curve->arrow_end))
+  error_moan(47, "with an arrow");
 
 /* An end point must be specified. */
 
@@ -716,12 +735,12 @@ to get the correct signs for cos and sin. */
 
 if (w == 0) angle = (h > 0)? pi/2.0 : (3.0*pi)/2;
 else if (h == 0) angle = (w < 0)? pi : 0;
-else 
+else
   {
   angle = fabs(atan(h/w));
   if (h > 0) angle = (w > 0)? angle : pi - angle;
-    else angle = (w > 0)? -angle : pi + angle; 
-  } 
+    else angle = (w > 0)? -angle : pi + angle;
+  }
 
 /* flen is the basic fraction of the baseline length; ylen defaults to the same
 length but can be adjusted. */

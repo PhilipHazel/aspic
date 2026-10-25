@@ -6,7 +6,7 @@ Version 2.01  xx yy 2026
 
 1. Fix memory overrun when processing unterminated string.
 
-2. Detects and give error for overlong variable name in substitution.
+2. Detect and give error for overlong variable name in substitution.
 
 3. Merged @ronjdesusa's patches to the build system:
    . Improve clean and distclean targets
@@ -41,6 +41,8 @@ the end points was neither horizontal nor vertical and the relative width was
 negative.
 
 13. Add support for some standard colour names.
+
+14. Add support for arrows to Bezier curves (the curvearrow command).
 
 
 Version 2.00  15 October 2022

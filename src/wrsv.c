@@ -83,6 +83,14 @@ fprintf(out_file, "l %s %s\n", fixed(rnd(x)), fixed(rnd(-y)));
 }
 
 
+/* Relative move */
+static void
+rmove(int x, int y)
+{
+fprintf(out_file, "m %s %s\n", fixed(rnd(x)), fixed(rnd(-y)));
+}
+
+
 /* Relative bezier */
 
 static void
@@ -458,6 +466,13 @@ Returns:          nothing
 static void
 write_curve(item_curve *p, BOOL move_needed)
 {
+double start_angle = 0.0;
+double end_angle = 0.0;
+int ax0 = 0;  /* Adjustments for arrows */
+int ay0 = 0;
+int ax1 = 0;
+int ay1 = 0;
+
 at_x = p->x1;
 at_y = p->y1;
 
@@ -476,10 +491,64 @@ if (p->style == is_invi)
   return;
   }
 
+/* Handle arrow heads. Calculate adjustments to each end point along the line
+that joins it to the appropriate control point. */
+
+if (p->arrow_start)
+  {
+  int dx = p->x0 + p->cx1 - p->x0;
+  int dy = p->y0 + p->cy1 - p->y0;
+
+  if (dx == 0) start_angle = (dy < 0)? -pi/2 : +pi/2;
+  else if (dy == 0) start_angle = (dx < 0)? -pi : 0;
+  else start_angle = atan((double)dy / (double)dx);
+  if (dx < 0) start_angle += pi;
+
+  ax0 = (int)((double)p->arrow_x * cos(start_angle));
+  ay0 = (int)((double)p->arrow_x * sin(start_angle));
+
+  /* The start of the curve has to be adjusted. If move_needed is TRUE, this
+  will be incorporated into the call to move() below. If not, it means that a
+  path has already been started, so add a relative move here. */
+
+  if (!move_needed) rmove(ax0, ay0);
+  }
+
+if (p->arrow_end)
+  {
+  int dx = p->x0 + p->cx2 - p->x1;
+  int dy = p->y0 + p->cy2 - p->y1;
+
+  if (dx == 0) end_angle = (dy < 0)? -pi/2 : +pi/2;
+  else if (dy == 0) end_angle = (dx < 0)? -pi : 0;
+  else end_angle = atan((double)dy / (double)dx);
+  if (dx < 0) end_angle += pi;
+
+  ax1 = (int)((double)p->arrow_x * cos(end_angle));
+  ay1 = (int)((double)p->arrow_x * sin(end_angle));
+  }
+
 /* Draw the curve */
 
-if (move_needed) move(p->x0, p->y0);
-rbezier(p->cx1, p->cy1, p->cx2, p->cy2, p->x1 - p->x0, p->y1 - p->y0);
+if (move_needed) move(p->x0 + ax0, p->y0 + ay0);
+rbezier(p->cx1, p->cy1, p->cx2, p->cy2, p->x1 - p->x0 - ax0 + ax1,
+  p->y1 - p->y0 - ay0 + ay1);
+
+/* Now any arrow heads */
+
+if (p->arrow_start)
+  {
+  end_line_fillstroke((item *)p->next);
+  arrowhead(p->x0 + ax0, p->y0 + ay0, p->arrow_x, p->arrow_y, start_angle + pi,
+    p->arrow_filled);
+  }
+
+if (p->arrow_end)
+  {
+  end_line_fillstroke((item *)p->next);
+  arrowhead(p->x1 + ax1, p->y1 + ay1, p->arrow_x, p->arrow_y, end_angle + pi,
+    p->arrow_filled);
+  }
 }
 
 
@@ -548,8 +617,8 @@ int xw = p->width, yd = p->depth;
 int xx = 0, yy = 0;
 
 /* If the "gap" option has been set, do the geometric calculation to find the
-adjustments to the starting point and the width and depth. The numbers can be 
-too big for integer arithmetic and anyway, we have to use double for the square 
+adjustments to the starting point and the width and depth. The numbers can be
+too big for integer arithmetic and anyway, we have to use double for the square
 root. */
 
 if (p->gap != 0)

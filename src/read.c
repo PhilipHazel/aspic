@@ -740,6 +740,7 @@ static command_item cmdtab[] = {
   { US"circleradius",  c_env,   offsetof(environment, cirradius),     TRUE },
   { US"circlethickness", c_env, offsetof(environment, cirthickness),  TRUE },
   { US"curve",         c_curve, is_norm, FALSE },
+  { US"curvearrow",    c_curve, is_norm, TRUE },
   { US"down",          c_down,        0,     0 },
   { US"ellipse",       c_circle,is_norm, FALSE },
   { US"ellipsecolour", c_env5,  offsetof(environment, ellcolour),   FALSE },

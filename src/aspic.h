@@ -286,8 +286,8 @@ typedef struct {
   int depth;
   int via_x;
   int via_y;
-  int arrow_start;
-  int arrow_end;
+  BOOL arrow_start;
+  BOOL arrow_end;
   int arrow_x;
   int arrow_y;
   colour arrow_filled;
@@ -317,6 +317,11 @@ typedef struct {
   int orig_cxs, orig_cys;
   int cx1, cy1, cx2, cy2;
   int cxs, cys;
+  BOOL arrow_start;
+  BOOL arrow_end;
+  int arrow_x;
+  int arrow_y;
+  colour arrow_filled;
 } item_curve;
 
 /* Line item */
@@ -325,13 +330,13 @@ typedef struct {
   itemhdr;
   int width;
   int depth;
-  int gap; 
+  int gap;
   int endx;
   int endy;
   int alignx;
   int aligny;
-  int arrow_start;
-  int arrow_end;
+  BOOL arrow_start;
+  BOOL arrow_end;
   int arrow_x;
   int arrow_y;
   colour arrow_filled;

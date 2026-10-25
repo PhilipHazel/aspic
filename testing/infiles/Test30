@@ -1,0 +1,35 @@
+arrowwidth 6;
+iline right 10 "";
+L: iline down 10 "";
+line;
+curvearrow to start;
+curvearrow to start;
+iline right 20 "";
+iline down 20 "";
+
+iline left align start of L;
+iline down 14;
+line;
+curvearrow clockwise to start;
+curvearrow clockwise to start;
+iline down 20 "";
+
+iline left align start of L;
+iline down 14;
+line;
+curvearrow to start c1 (-18, 0) c2 (-18, 0);
+curvearrow to start c1 (-50, -10) c2 (-50, -10);
+iline down 30 left 70;
+
+arrowlength 20;
+arrowwidth 4;
+boundingbox 20;
+line;
+curvearrow to start;
+arrow down;
+arcarrow filled red;
+arrowlength 10;
+
+line up; line;
+curvearrow back to start filled green;
+curvearrow both to start;
