@@ -11,12 +11,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>21 October 2026</date>
+<date>25 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>21 October 2026</date>
+  <date>25 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -629,10 +629,10 @@ coordinate of &#x2018;<literal>centre of BOXA</literal>&#x2019; was used.
 </para>
 <para>
 As well as circular arcs, Aspic supports cubic B&egrave;zier curves. An end
-point must be supplied for the <emphasis role="bold">curve</emphasis> command; the start is deduced from the
-previous shape if not specified. Without any further parameters, the shape is
-almost the same as a circular arc. Like circular arcs, the default is to draw
-the curve anti-clockwise.
+point must be supplied for the <emphasis role="bold">curve</emphasis> and <emphasis role="bold">curvearrow</emphasis> commands; the start
+is deduced from the previous shape if not specified. Without any further
+parameters, the shape is almost the same as a circular arc. Like circular arcs,
+the default is to draw the curve anti-clockwise.
 </para>
 <literallayout class="monospaced">
 A: line down 20 left; line down 20 right; curve to start of A;
@@ -656,13 +656,16 @@ other control point is in a matching position at the other end of the line.
 </para>
 <para>
 The default control points give an almost circular arc, but the <emphasis role="bold">c1</emphasis> and
-<emphasis role="bold">c2</emphasis> options can be used to move the control points. Their argument is a pair
-of parenthesized dimensions. The first moves parallel to the joining line, with
-a positive value moving towards the end point. The second number moves away
-from the line, towards the curve if positive, or nearer if negative. As a
-convenience, the <emphasis role="bold">cs</emphasis> option can be used to set both to the same values, thus
-preserving the symmetry of the curve. This example shows the positions of the
-control points:
+<emphasis role="bold">c2</emphasis> options can be used to move each of the control points. Their argument
+is a pair of parenthesized dimensions. The first moves the control point
+parallel to the line joining the endpoints of the curve, with a positive value
+moving away from the associated end point, towards the middle of the line. Note
+that this means that a positive first number for <emphasis role="bold">c2</emphasis> moves in the opposite
+direction to that for <emphasis role="bold">c1</emphasis>. The second number moves perpendicular to the line
+joining the endpoints of the curve, towards the curve if positive, or towards
+the line if negative. As a convenience, the <emphasis role="bold">cs</emphasis> option can be used to set
+both to the same values, thus preserving the symmetry of the curve. This
+example shows the positions of the control points:
 </para>
 <literallayout class="monospaced">
 A: line down 20 left; B: line down 20 right; 
@@ -710,9 +713,8 @@ line; curve wavy to start;
 &#x200b;
 </para>
 <para>
-Arrowheads are not supported for B&egrave;zier curves. Because their shape can
-be so varied, the default position for any text is the middle of the line
-joining the end points.
+Because a curve&#x2019;s shape can be so varied, the default position for any 
+associated text is the middle of the line joining the end points.
 </para>
 <para>
 Aspic pictures are best specified as a sequence of shapes whose positions are
@@ -917,9 +919,8 @@ previous chapter contains several examples.
 You can specify absolute positions on the drawing plane, but it is better to
 describe a picture in terms of relative positions between the shapes that
 comprise it, because such a description is much easier to adjust while you are
-creating the picture. If the first item in a picture is specified without an
-absolute position &ndash; this is normally the case &ndash; it is positioned as
-follows:
+creating the picture. If the first item is specified without an absolute
+position &ndash; this is normally the case &ndash; it is positioned as follows:
 </para>
 <itemizedlist>
 <listitem>
@@ -974,14 +975,14 @@ guessed as one half the font size times the number of characters in the string.
 <title>Aspic input</title>
 <para>
 Aspic input consists of a sequence of commands, each of which must be
-terminated by a semicolon. Newlines and other white space may appear between
-the components of a command in the usual way. The maximum length of an input
-line is 255 bytes. If a sharp (or &#x2018;hash&#x2019;) character (#) is encountered when a
-command is expected, the remainder of the input line is ignored. This provides
-a facility for including comments in Aspic input. Each input line is processed
-for variable substitutions before any other processing takes place (see chapter
-<xref linkend="CHAPVARIABLE"/> below). This action can be disabled by the <emphasis role="bold">-nv</emphasis> command
-line option.
+terminated by a semicolon. Empty commands are ignored. Newlines and other white
+space may appear between the components of a command in the usual way. The
+maximum length of an input line is 255 bytes. If a sharp (or &#x2018;hash&#x2019;) character
+(#) is encountered when a command is expected, the remainder of the input line
+is ignored. This provides a facility for including comments in Aspic input.
+Each input line is processed for variable substitutions before any other
+processing takes place (see chapter <xref linkend="CHAPVARIABLE"/> below). This action can
+be disabled by the <emphasis role="bold">-nv</emphasis> command line option.
 </para>
 <section>
 <title>Command format</title>
@@ -1088,11 +1089,11 @@ The <emphasis role="bold">include</emphasis> command may not appear inside a mac
 <title>Aspic variables</title>
 <para>
 Aspic supports simple variables, which can be used to save repetition in the
-input. See section <xref linkend="SECTREFVAL"/> for another way of avoiding repetition. The
-use of variables can be disabled by use of the <emphasis role="bold">-nv</emphasis> command line option. If
-you are not using Aspic variables, but are making use of dollar ($) characters
-in strings, you should use <emphasis role="bold">-nv</emphasis>, because otherwise the dollars will be
-misinterpreted by Aspic.
+input. See the next chapter and section <xref linkend="SECTREFVAL"/> for other ways of
+avoiding repetition. The use of variables can be disabled by use of the <emphasis role="bold">-nv</emphasis>
+command line option. If you are not using Aspic variables, but are making use
+of dollar ($) characters in strings, you should use <emphasis role="bold">-nv</emphasis>, because otherwise
+the dollars will be misinterpreted by Aspic.
 </para>
 <para>
 When variables are not disabled, a dollar character in an input line introduces
@@ -1336,14 +1337,15 @@ is earlier in the input file.
 <section>
 <title>&lt;length&gt;*</title>
 <para>
-A non-negative number, specifying a length.
+A non-negative number, specifying a length (dimension).
 </para>
 </section>
 <section>
 <title>&lt;vector&gt;*</title>
 <para>
 A &lt;<emphasis>vector</emphasis>&gt; is two numbers separated by a comma and enclosed in
-parentheses, giving lengths in two dimensions.
+parentheses, giving lengths in two dimensions. The numbers may be positive or 
+negative.
 </para>
 </section>
 <section>
@@ -1459,7 +1461,7 @@ reference an item of the same general type unless the option being set is
 <para>
 A reference to <emphasis role="bold">level</emphasis> is treated specially. What is copied is the sum of the
 <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> values from the referenced item. That is, it is the
-actual level at which that item is drawn (see the next section below). A
+actual level at which that item is drawn, as described in the next chapter. A
 setting of <emphasis role="bold">rlevel</emphasis> on the current item can then be used to place it above or
 below the referenced item.
 </para>
@@ -1529,6 +1531,26 @@ of colour to be used. In the case of <emphasis role="bold">grey</emphasis>, a va
 is white. If no colour option is present, default values are used.
 </para>
 <para>
+Many of the commands have <emphasis role="bold">filled</emphasis> or <emphasis role="bold">shapefilled</emphasis> options. For closed
+shapes (<emphasis role="bold">box</emphasis>, <emphasis role="bold">circle</emphasis>, <emphasis role="bold">ellipse</emphasis>), <emphasis role="bold">filled</emphasis> specifies a colour with
+which to fill the shape. It can be followed by a built-in colour name, or three
+numbers to specify red, green, and blue components, or by a single number, to
+specify a grey level. For lines or arcs that start or end with arrowheads,
+<emphasis role="bold">filled</emphasis> specifies the colour with which the arrowhead is filled.
+</para>
+<para>
+The <emphasis role="bold">shapefilled</emphasis> option also takes a colour name or one or three numbers as
+its argument. It is available on commands for drawing lines, arcs, and curves.
+A sequence of such commands with the same <emphasis role="bold">shapefilled</emphasis> values, and also the
+same visibility, thickness, dash, colour, and level parameters, is interpreted
+as a closed shape that is to be filled with the appropriate colour. If the
+lines do not define a closed shape, a straight line from the end to the start
+bounds the area that is filled. This line itself is never drawn. If one such
+closed shape immediately follows another with the same characteristics, you may
+need to insert a dummy command without a <emphasis role="bold">shapefilled</emphasis> option, in order to
+terminate the first shape. A line of length zero can be used for this.
+</para>
+<para>
 The <emphasis role="bold">level</emphasis> and <emphasis role="bold">rlevel</emphasis> options are also common to all these commands
 (including <emphasis role="bold">text</emphasis>). They are useful when filled shapes are being drawn,
 because filling a shape obliterates items that are drawn &#x2018;below&#x2019; it. The
@@ -1570,26 +1592,6 @@ grey is drawn one level below the first. Note that the option <literal>level *</
 copies the final actual level (absolute plus relative) from the referenced
 item. Finally, the first box is set as the current item for any subsequent
 references.
-</para>
-<para>
-Many of the commands also have <emphasis role="bold">filled</emphasis> and <emphasis role="bold">shapefilled</emphasis> options. For
-closed shapes (<emphasis role="bold">box</emphasis>, <emphasis role="bold">circle</emphasis>, <emphasis role="bold">ellipse</emphasis>), <emphasis role="bold">filled</emphasis> specifies a colour
-with which to fill the shape. It can be followed by a built-in colour name, or
-three numbers to specify red, green, and blue components, or by a single
-number, to specify a grey level. For lines or arcs that start or end with
-arrowheads, <emphasis role="bold">filled</emphasis> specifies the colour with which the arrowhead is filled.
-</para>
-<para>
-The <emphasis role="bold">shapefilled</emphasis> option also takes a colour name or one or three numbers as
-its argument. It is available on commands for drawing lines, arcs, and curves.
-A sequence of such commands with the same <emphasis role="bold">shapefilled</emphasis> values, and also the
-same visibility, thickness, dash, colour, and level parameters, is interpreted
-as a closed shape that is to be filled with the appropriate colour. If the
-lines do not define a closed shape, a straight line from the end to the start
-bounds the area that is filled. This line itself is never drawn. If one such
-closed shape immediately follows another with the same characteristics, you may
-need to insert a dummy command without a <emphasis role="bold">shapefilled</emphasis> option, in order to
-terminate the first shape. A line of length zero can be used for this.
 </para>
 <para>
 Options may be specified in any order, and the sequence of options may be
@@ -1798,7 +1800,7 @@ degrees is drawn.
 <para>
 The initial direction of the arc can be specified by <emphasis role="bold">up</emphasis>, <emphasis role="bold">down</emphasis>,
 <emphasis role="bold">left</emphasis>, or <emphasis role="bold">right</emphasis>. If none of these are present, and the previous item was
-a line or arc, the new arc starts by continuing in the same direction.
+a line, arc, or curve, the new arc starts by continuing in the same direction.
 When an arc follows a closed shape (box, circle, or ellipse), the current
 direction is used. The direction determines the position on the closed shape
 from which the arc starts (<emphasis role="bold">up</emphasis> starts from the middle of the top of a box,
@@ -2438,13 +2440,117 @@ items are centred at the centre of the circle.
 This command draws a B&egrave;zier curve; the <emphasis role="bold">to</emphasis> option is mandatory. If
 <emphasis role="bold">from</emphasis> is not given, it is deduced from the previous item. The <emphasis role="bold">c1</emphasis> and
 <emphasis role="bold">c2</emphasis> options define adjustments to the curve&#x2019;s control points. The first
-number moves parallel to the line joining the endpoints, positive values moving
-towards the end. The second number moves in a perpendicular direction, positive
-values moving further away from the joining line, towards the curve. The <emphasis role="bold">cs</emphasis>
-option applies the same values to both control points and is cumulative with
-<emphasis role="bold">c1</emphasis> and <emphasis role="bold">c2</emphasis>. The <emphasis role="bold">wavy</emphasis> option moves the second control point to an
-equal distance on the opposite side of the base line. Text items are placed at
-the middle of the base line.
+dimension in their vector argument moves the control point parallel to the line
+joining the endpoints of the curve, with a positive value moving away from the
+associated end point, towards the middle of the line. Note that this means that
+a positive first number for <emphasis role="bold">c2</emphasis> moves in the opposite direction to that for
+<emphasis role="bold">c1</emphasis>. The second dimension moves perpendicular to the line joining the
+endpoints of the curve, towards the curve if positive, or towards the line if
+negative. The <emphasis role="bold">cs</emphasis> option applies the same values to both control points and
+is cumulative with <emphasis role="bold">c1</emphasis> and <emphasis role="bold">c2</emphasis>. The <emphasis role="bold">wavy</emphasis> option moves the default
+position of the second control point to an equal distance on the opposite side
+of the base line. Text items are placed at the middle of the base line.
+</para>
+</section>
+<section>
+<title>curvearrow</title>
+<informaltable frame="none">
+<tgroup cols="3" colsep="0" rowsep="0">
+<colspec colwidth="20" align="left"/>
+<colspec colwidth="72" align="left"/>
+<colspec colwidth="200" align="left"/>
+<tbody>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">back</emphasis></entry>
+<entry></entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">both</emphasis></entry>
+<entry></entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">c1</emphasis></entry>
+<entry>&lt;<emphasis>vector</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">c2</emphasis></entry>
+<entry>&lt;<emphasis>vector</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">clockwise</emphasis></entry>
+<entry></entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">colour</emphasis></entry>
+<entry>&lt;<emphasis>colour</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">cs</emphasis></entry>
+<entry>&lt;<emphasis>vector</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">dashed</emphasis></entry>
+<entry></entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">filled</emphasis></entry>
+<entry>&lt;<emphasis>colour</emphasis>&gt; &nbsp; | &nbsp; &lt;<emphasis>greylevel</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">from</emphasis></entry>
+<entry>&lt;<emphasis>position</emphasis>&gt; &nbsp; | &nbsp; &lt;<emphasis>label</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">grey</emphasis></entry>
+<entry>&lt;<emphasis>greylevel</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">level</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">rlevel</emphasis></entry>
+<entry>&lt;<emphasis>integer</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">thickness</emphasis></entry>
+<entry>&lt;<emphasis>length</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">to</emphasis></entry>
+<entry>&lt;<emphasis>position</emphasis>&gt;</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">wavy</emphasis></entry>
+<entry></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+<para>
+The options for <emphasis role="bold">curvearrow</emphasis> are the same as for <emphasis role="bold">curve</emphasis>, but without
+<emphasis role="bold">shapefilled</emphasis>, and with the addition of <emphasis role="bold">filled</emphasis> (specifying a filled
+arrowhead), <emphasis role="bold">both</emphasis> (which specifies a double-headed arrow) and <emphasis role="bold">back</emphasis>
+(which specifies a backwards-pointing arrow). If neither <emphasis role="bold">both</emphasis> nor <emphasis role="bold">back</emphasis>
+is given, an arrowhead is drawn at the end of the curve. Arrowheads are drawn
+within the length of the curve with their central axis along the line joining 
+the relevant end of the curve to its associated control point.
 </para>
 </section>
 <section>
@@ -2686,11 +2792,14 @@ it is part of a filled shape.
 <para>
 This command draws a straight line. The start is given by the <emphasis role="bold">from</emphasis> option;
 if it specifies a label only, the starting point on the referenced shape is its
-end point if it is a straight line, arc, or curve. Otherwise the starting point
-is determined by the direction of this line. For example, a line to the right
-from a box starts at the midpoint of the right-hand edge. The <emphasis role="bold">to</emphasis> option can
-be used to specify the end point by reference to the previous or some other
-shape. For example:
+end point if it is a straight line, arc, or curve (with or without an
+arrowhead). If the referenced shape is a box, circle, or ellipse, the starting
+point is determined by the direction of this line. For example, a line to the
+right from a box starts at the midpoint of the right-hand edge. If the <emphasis role="bold">from</emphasis>
+option is not given, the previous item is used as a reference. If there is no
+previous item, the line starts at the origin of the coordinate system. The
+<emphasis role="bold">to</emphasis> option can be used to specify the end point by reference to the previous
+or some other item. For example:
 </para>
 <literallayout class="monospaced">
 box; line from bottom right to 0.25 top;
@@ -2847,15 +2956,15 @@ A sequence of lines, arcs, and B&egrave;zier curves with the same
 <emphasis role="bold">shapefilled</emphasis> values and the same general characteristics (visibility, line
 width, colour, dash parameters, and level) is turned into a closed outline (if
 necessary) and filled. The lines, arcs, and curves themselves are drawn as
-normal, unless they are all invisible. The automatically supplied line that
-closes such a shape is not drawn. A dummy command such as:
+normal, unless they are invisible. The automatically supplied line that closes
+such a shape is never drawn. A dummy command such as:
 </para>
 <literallayout class="monospaced">
 line left 0;
 </literallayout>
 <para>
 is sometimes needed to separate two successive shapes that have the same
-characteristics. You can set a <emphasis role="bold">shapefilled</emphasis> value as a default, to save
+characteristics. You can set a shape filling value as a default, to save
 having to repeat it for all the different constituents of a shape. The ability
 to save and restore the environment (see chapter <xref linkend="CHAPSAVERESTORE"/>) can be
 helpful here:
@@ -2874,9 +2983,10 @@ pop;
 &#x200b;
 </para>
 <para>
-Arrowheads on lines and arcs are filled if the <emphasis role="bold">filled</emphasis> option is set on the
-appropriate drawing command. Alternatively, the <emphasis role="bold">arrowfill</emphasis> command can be
-used to specify a default filling colour (see chapter <xref linkend="CHAPSAVERESTORE"/>).
+Arrowheads on lines, arcs, and curves are filled if the <emphasis role="bold">filled</emphasis> option is
+set on the appropriate drawing command. Alternatively, the <emphasis role="bold">arrowfill</emphasis>
+command can be used to specify a default filling colour (see chapter
+<xref linkend="CHAPSAVERESTORE"/>).
 </para>
 <para>
 The concept of &#x2018;levels&#x2019; is important when filled shapes are being drawn,
@@ -2912,12 +3022,12 @@ set by means of the <emphasis role="bold">level</emphasis> command (see chapter 
 <chapter>
 <title>Altering the &#x2018;last drawn&#x2019; item</title>
 <para>
-Occasionally it is useful to be able to change which shape is considered to be
-the previous shape when the next shape is drawn. The <emphasis role="bold">goto</emphasis> command, which is
-followed by a label, is used to do this. It can be useful in macros. Consider a
-macro that draws a box with diagonals. When this macro is called, you may want
-subsequent shapes to be positioned relative to the box, not to the diagonal
-lines. This example shows how this can be done:
+Occasionally it is useful to be able to change which item is considered to be
+the previous one. The <emphasis role="bold">goto</emphasis> command, which is followed by a label, is used
+to do this. It can be useful in macros. Consider a macro that draws a box with
+diagonals. When this macro is called, you may want subsequent shapes to be
+positioned relative to the box, not to the diagonal lines. This example shows
+how this can be done:
 </para>
 <literallayout class="monospaced">
 macro diag {
@@ -2939,12 +3049,10 @@ diag; arrow; diag;
 <para>
 The final <emphasis role="bold">goto</emphasis> in the macro causes any subsequent shapes to be positioned
 with reference to the box. Without the final <emphasis role="bold">goto</emphasis> in the macro, the &#x2018;last
-item&#x2019; after a macro call would be the second diagonal line.
-</para>
-<para>
-If <emphasis role="bold">goto</emphasis> is followed by an asterisk instead of a label, it unsets the last
-item. Aspic then treats the next item as if it were the first. This feature is
-mostly useful for testing.
+item&#x2019; after a macro call would be the second diagonal line. If <emphasis role="bold">goto</emphasis> is
+followed by an asterisk instead of a label, it unsets the last item. Aspic then
+treats the next item as if it were the first. This feature is mostly useful for
+testing.
 </para>
 </chapter>
 
@@ -3971,6 +4079,11 @@ This is a complete list of all Aspic commands.
 <entry></entry>
 <entry><emphasis role="bold">curve</emphasis></entry>
 <entry>draw a B&egrave;zier curve</entry>
+</row>
+<row>
+<entry></entry>
+<entry><emphasis role="bold">curvearrow</emphasis></entry>
+<entry>draw a B&egrave;zier curve with arrowhead(s)</entry>
 </row>
 <row>
 <entry></entry>

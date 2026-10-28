@@ -87,12 +87,12 @@
 <bookinfo>
 <title>Aspic: A Line-Art Processor</title>
 <titleabbrev>Aspic</titleabbrev>
-<date>21 October 2026</date>
+<date>25 October 2026</date>
 <author><firstname>Philip</firstname><surname>Hazel</surname></author>
 <authorinitials>PH</authorinitials>
 <revhistory><revision>
   <revnumber>2.01</revnumber>
-  <date>21 October 2026</date>
+  <date>25 October 2026</date>
   <authorinitials>PH</authorinitials>
 </revision></revhistory>
 <copyright><year>2026</year><holder>University of Cambridge</holder></copyright>
@@ -359,10 +359,10 @@ the example above, a vertical line was specified, and so only the vertical
 coordinate of `&`centre of BOXA`&' was used.
 
 As well as circular arcs, Aspic supports cubic B&egrave;zier curves. An end
-point must be supplied for the &*curve*& command; the start is deduced from the
-previous shape if not specified. Without any further parameters, the shape is
-almost the same as a circular arc. Like circular arcs, the default is to draw
-the curve anti-clockwise.
+point must be supplied for the &*curve*& and &*curvearrow*& commands; the start
+is deduced from the previous shape if not specified. Without any further
+parameters, the shape is almost the same as a circular arc. Like circular arcs,
+the default is to draw the curve anti-clockwise.
 .pic 49
 The shape of a cubic B&egrave;zier curve is determined by two control points.
 The curve leaves the start in the direction of the first one, and approaches
@@ -373,22 +373,24 @@ point is a quarter of the way along the line and an equal distance from it. The
 other control point is in a matching position at the other end of the line.
 
 The default control points give an almost circular arc, but the &*c1*& and
-&*c2*& options can be used to move the control points. Their argument is a pair
-of parenthesized dimensions. The first moves parallel to the joining line, with
-a positive value moving towards the end point. The second number moves away
-from the line, towards the curve if positive, or nearer if negative. As a
-convenience, the &*cs*& option can be used to set both to the same values, thus
-preserving the symmetry of the curve. This example shows the positions of the
-control points:
+&*c2*& options can be used to move each of the control points. Their argument
+is a pair of parenthesized dimensions. The first moves the control point
+parallel to the line joining the endpoints of the curve, with a positive value
+moving away from the associated end point, towards the middle of the line. Note
+that this means that a positive first number for &*c2*& moves in the opposite
+direction to that for &*c1*&. The second number moves perpendicular to the line
+joining the endpoints of the curve, towards the curve if positive, or towards
+the line if negative. As a convenience, the &*cs*& option can be used to set
+both to the same values, thus preserving the symmetry of the curve. This
+example shows the positions of the control points:
 .pic 50
 If &*c1*& or &*c2*& is used with &*cs*&, the result is cumulative.
 .pic 51
 If the &*wavy*& option is given, the default position of the second control
 point is moved to the opposite side of the curve.
 .pic 52
-Arrowheads are not supported for B&egrave;zier curves. Because their shape can
-be so varied, the default position for any text is the middle of the line
-joining the end points.
+Because a curve's shape can be so varied, the default position for any 
+associated text is the middle of the line joining the end points.
 
 Aspic pictures are best specified as a sequence of shapes whose positions are
 inter-related. This makes the pictures easy to adjust as they are being
@@ -494,9 +496,8 @@ previous chapter contains several examples.
 You can specify absolute positions on the drawing plane, but it is better to
 describe a picture in terms of relative positions between the shapes that
 comprise it, because such a description is much easier to adjust while you are
-creating the picture. If the first item in a picture is specified without an
-absolute position &-- this is normally the case &-- it is positioned as
-follows:
+creating the picture. If the first item is specified without an absolute
+position &-- this is normally the case &-- it is positioned as follows:
 .ilist
 A closed shape is placed with its centre at the origin.
 .next
@@ -537,14 +538,14 @@ guessed as one half the font size times the number of characters in the string.
 
 .chapter "Aspic input"
 Aspic input consists of a sequence of commands, each of which must be
-terminated by a semicolon. Newlines and other white space may appear between
-the components of a command in the usual way. The maximum length of an input
-line is 255 bytes. If a sharp (or `hash') character (#) is encountered when a
-command is expected, the remainder of the input line is ignored. This provides
-a facility for including comments in Aspic input. Each input line is processed
-for variable substitutions before any other processing takes place (see chapter
-&<<CHAPVARIABLE>>& below). This action can be disabled by the &*-nv*& command
-line option.
+terminated by a semicolon. Empty commands are ignored. Newlines and other white
+space may appear between the components of a command in the usual way. The
+maximum length of an input line is 255 bytes. If a sharp (or `hash') character
+(#) is encountered when a command is expected, the remainder of the input line
+is ignored. This provides a facility for including comments in Aspic input.
+Each input line is processed for variable substitutions before any other
+processing takes place (see chapter &<<CHAPVARIABLE>>& below). This action can
+be disabled by the &*-nv*& command line option.
 
 .section "Command format"
 An Aspic command consists of four components:
@@ -614,11 +615,11 @@ The &*include*& command may not appear inside a macro (see chapter
 
 .chapter "Aspic variables" CHAPVARIABLE
 Aspic supports simple variables, which can be used to save repetition in the
-input. See section &<<SECTREFVAL>>& for another way of avoiding repetition. The
-use of variables can be disabled by use of the &*-nv*& command line option. If
-you are not using Aspic variables, but are making use of dollar ($) characters
-in strings, you should use &*-nv*&, because otherwise the dollars will be
-misinterpreted by Aspic.
+input. See the next chapter and section &<<SECTREFVAL>>& for other ways of
+avoiding repetition. The use of variables can be disabled by use of the &*-nv*&
+command line option. If you are not using Aspic variables, but are making use
+of dollar ($) characters in strings, you should use &*-nv*&, because otherwise
+the dollars will be misinterpreted by Aspic.
 
 When variables are not disabled, a dollar character in an input line introduces
 a variable substitution. There is, however, one exception: the special sequence
@@ -786,11 +787,12 @@ A label that identifies an existing drawing item, that is, one whose definition
 is earlier in the input file.
 
 .section <length>*
-A non-negative number, specifying a length.
+A non-negative number, specifying a length (dimension).
 
 .section <vector>*
 A <&'vector'&> is two numbers separated by a comma and enclosed in
-parentheses, giving lengths in two dimensions.
+parentheses, giving lengths in two dimensions. The numbers may be positive or 
+negative.
 
 .section <position>*
 A <&'position'&> identifies a point in the plane. It is either an absolute
@@ -870,7 +872,7 @@ reference an item of the same general type unless the option being set is
 .endlist
 A reference to &*level*& is treated specially. What is copied is the sum of the
 &*level*& and &*rlevel*& values from the referenced item. That is, it is the
-actual level at which that item is drawn (see the next section below). A
+actual level at which that item is drawn, as described in the next chapter. A
 setting of &*rlevel*& on the current item can then be used to place it above or
 below the referenced item.
 
@@ -933,6 +935,24 @@ Colour numbers lie in the range 0.0. to 1.0 inclusive. They specify the amount
 of colour to be used. In the case of &*grey*&, a value of 0.0 is black and 1.0
 is white. If no colour option is present, default values are used.
 
+Many of the commands have &*filled*& or &*shapefilled*& options. For closed
+shapes (&*box*&, &*circle*&, &*ellipse*&), &*filled*& specifies a colour with
+which to fill the shape. It can be followed by a built-in colour name, or three
+numbers to specify red, green, and blue components, or by a single number, to
+specify a grey level. For lines or arcs that start or end with arrowheads,
+&*filled*& specifies the colour with which the arrowhead is filled.
+
+The &*shapefilled*& option also takes a colour name or one or three numbers as
+its argument. It is available on commands for drawing lines, arcs, and curves.
+A sequence of such commands with the same &*shapefilled*& values, and also the
+same visibility, thickness, dash, colour, and level parameters, is interpreted
+as a closed shape that is to be filled with the appropriate colour. If the
+lines do not define a closed shape, a straight line from the end to the start
+bounds the area that is filled. This line itself is never drawn. If one such
+closed shape immediately follows another with the same characteristics, you may
+need to insert a dummy command without a &*shapefilled*& option, in order to
+terminate the first shape. A line of length zero can be used for this.
+
 The &*level*& and &*rlevel*& options are also common to all these commands
 (including &*text*&). They are useful when filled shapes are being drawn,
 because filling a shape obliterates items that are drawn `below' it. The
@@ -955,24 +975,6 @@ grey is drawn one level below the first. Note that the option &`level *`&
 copies the final actual level (absolute plus relative) from the referenced
 item. Finally, the first box is set as the current item for any subsequent
 references.
-
-Many of the commands also have &*filled*& and &*shapefilled*& options. For
-closed shapes (&*box*&, &*circle*&, &*ellipse*&), &*filled*& specifies a colour
-with which to fill the shape. It can be followed by a built-in colour name, or
-three numbers to specify red, green, and blue components, or by a single
-number, to specify a grey level. For lines or arcs that start or end with
-arrowheads, &*filled*& specifies the colour with which the arrowhead is filled.
-
-The &*shapefilled*& option also takes a colour name or one or three numbers as
-its argument. It is available on commands for drawing lines, arcs, and curves.
-A sequence of such commands with the same &*shapefilled*& values, and also the
-same visibility, thickness, dash, colour, and level parameters, is interpreted
-as a closed shape that is to be filled with the appropriate colour. If the
-lines do not define a closed shape, a straight line from the end to the start
-bounds the area that is filled. This line itself is never drawn. If one such
-closed shape immediately follows another with the same characteristics, you may
-need to insert a dummy command without a &*shapefilled*& option, in order to
-terminate the first shape. A line of length zero can be used for this.
 
 Options may be specified in any order, and the sequence of options may be
 followed by any number of strings enclosed in double quotes (with doubling for
@@ -1063,7 +1065,7 @@ degrees is drawn.
 
 The initial direction of the arc can be specified by &*up*&, &*down*&,
 &*left*&, or &*right*&. If none of these are present, and the previous item was
-a line or arc, the new arc starts by continuing in the same direction.
+a line, arc, or curve, the new arc starts by continuing in the same direction.
 When an arc follows a closed shape (box, circle, or ellipse), the current
 direction is used. The direction determines the position on the closed shape
 from which the arc starts (&*up*& starts from the middle of the top of a box,
@@ -1281,13 +1283,44 @@ items are centred at the centre of the circle.
 This command draws a B&egrave;zier curve; the &*to*& option is mandatory. If
 &*from*& is not given, it is deduced from the previous item. The &*c1*& and
 &*c2*& options define adjustments to the curve's control points. The first
-number moves parallel to the line joining the endpoints, positive values moving
-towards the end. The second number moves in a perpendicular direction, positive
-values moving further away from the joining line, towards the curve. The &*cs*&
-option applies the same values to both control points and is cumulative with
-&*c1*& and &*c2*&. The &*wavy*& option moves the second control point to an
-equal distance on the opposite side of the base line. Text items are placed at
-the middle of the base line.
+dimension in their vector argument moves the control point parallel to the line
+joining the endpoints of the curve, with a positive value moving away from the
+associated end point, towards the middle of the line. Note that this means that
+a positive first number for &*c2*& moves in the opposite direction to that for
+&*c1*&. The second dimension moves perpendicular to the line joining the
+endpoints of the curve, towards the curve if positive, or towards the line if
+negative. The &*cs*& option applies the same values to both control points and
+is cumulative with &*c1*& and &*c2*&. The &*wavy*& option moves the default
+position of the second control point to an equal distance on the opposite side
+of the base line. Text items are placed at the middle of the base line.
+
+
+.section "curvearrow"
+.otable
+.o back
+.o both
+.o c1 <&'vector'&>
+.o c2 <&'vector'&>
+.o clockwise
+.o colour <&'colour'&>
+.o cs <&'vector'&>
+.o dashed
+.o filled "<&'colour'&> &~ | &~ <&'greylevel'&>"
+.o from "<&'position'&> &~ | &~ <&'label'&>"
+.o grey <&'greylevel'&>
+.o level <&'integer'&>
+.o rlevel <&'integer'&>
+.o thickness <&'length'&>
+.o to <&'position'&>
+.o wavy
+.endtable
+The options for &*curvearrow*& are the same as for &*curve*&, but without
+&*shapefilled*&, and with the addition of &*filled*& (specifying a filled
+arrowhead), &*both*& (which specifies a double-headed arrow) and &*back*&
+(which specifies a backwards-pointing arrow). If neither &*both*& nor &*back*&
+is given, an arrowhead is drawn at the end of the curve. Arrowheads are drawn
+within the length of the curve with their central axis along the line joining 
+the relevant end of the curve to its associated control point.
 
 
 .section "ellipse"
@@ -1395,11 +1428,14 @@ it is part of a filled shape.
 .endtable
 This command draws a straight line. The start is given by the &*from*& option;
 if it specifies a label only, the starting point on the referenced shape is its
-end point if it is a straight line, arc, or curve. Otherwise the starting point
-is determined by the direction of this line. For example, a line to the right
-from a box starts at the midpoint of the right-hand edge. The &*to*& option can
-be used to specify the end point by reference to the previous or some other
-shape. For example:
+end point if it is a straight line, arc, or curve (with or without an
+arrowhead). If the referenced shape is a box, circle, or ellipse, the starting
+point is determined by the direction of this line. For example, a line to the
+right from a box starts at the midpoint of the right-hand edge. If the &*from*&
+option is not given, the previous item is used as a reference. If there is no
+previous item, the line starts at the origin of the coordinate system. The
+&*to*& option can be used to specify the end point by reference to the previous
+or some other item. For example:
 .code
 box; line from bottom right to 0.25 top;
 .endd
@@ -1479,20 +1515,21 @@ A sequence of lines, arcs, and B&egrave;zier curves with the same
 &*shapefilled*& values and the same general characteristics (visibility, line
 width, colour, dash parameters, and level) is turned into a closed outline (if
 necessary) and filled. The lines, arcs, and curves themselves are drawn as
-normal, unless they are all invisible. The automatically supplied line that
-closes such a shape is not drawn. A dummy command such as:
+normal, unless they are invisible. The automatically supplied line that closes
+such a shape is never drawn. A dummy command such as:
 .code
 line left 0;
 .endd
 is sometimes needed to separate two successive shapes that have the same
-characteristics. You can set a &*shapefilled*& value as a default, to save
+characteristics. You can set a shape filling value as a default, to save
 having to repeat it for all the different constituents of a shape. The ability
 to save and restore the environment (see chapter &<<CHAPSAVERESTORE>>&) can be
 helpful here:
 .pic 41 nospace
-Arrowheads on lines and arcs are filled if the &*filled*& option is set on the
-appropriate drawing command. Alternatively, the &*arrowfill*& command can be
-used to specify a default filling colour (see chapter &<<CHAPSAVERESTORE>>&).
+Arrowheads on lines, arcs, and curves are filled if the &*filled*& option is
+set on the appropriate drawing command. Alternatively, the &*arrowfill*&
+command can be used to specify a default filling colour (see chapter
+&<<CHAPSAVERESTORE>>&).
 
 The concept of `levels' is important when filled shapes are being drawn,
 because filling a shape obliterates anything that is underneath it, even if the
@@ -1516,20 +1553,19 @@ set by means of the &*level*& command (see chapter &<<CHAPENV>>&).
 
 
 .chapter "Altering the `last drawn' item"
-Occasionally it is useful to be able to change which shape is considered to be
-the previous shape when the next shape is drawn. The &*goto*& command, which is
-followed by a label, is used to do this. It can be useful in macros. Consider a
-macro that draws a box with diagonals. When this macro is called, you may want
-subsequent shapes to be positioned relative to the box, not to the diagonal
-lines. This example shows how this can be done:
+Occasionally it is useful to be able to change which item is considered to be
+the previous one. The &*goto*& command, which is followed by a label, is used
+to do this. It can be useful in macros. Consider a macro that draws a box with
+diagonals. When this macro is called, you may want subsequent shapes to be
+positioned relative to the box, not to the diagonal lines. This example shows
+how this can be done:
 .pic 43
 The final &*goto*& in the macro causes any subsequent shapes to be positioned
 with reference to the box. Without the final &*goto*& in the macro, the `last
-item' after a macro call would be the second diagonal line.
-
-If &*goto*& is followed by an asterisk instead of a label, it unsets the last
-item. Aspic then treats the next item as if it were the first. This feature is
-mostly useful for testing.
+item' after a macro call would be the second diagonal line. If &*goto*& is
+followed by an asterisk instead of a label, it unsets the last item. Aspic then
+treats the next item as if it were the first. This feature is mostly useful for
+testing.
 
 
 
@@ -1972,6 +2008,7 @@ This is a complete list of all Aspic commands.
 .o circleradius      "set default radius for circles"
 .o circlethickness   "set thickness of lines for circles"
 .o curve             "draw a B&egrave;zier curve"
+.o curvearrow        "draw a B&egrave;zier curve with arrowhead(s)"
 .o down              "set current direction"
 .o ellipse           "draw an ellipse"
 .o ellipsecolour     "set default colour for ellipses"
